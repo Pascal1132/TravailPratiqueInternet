@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class BalanceHistory extends Migration
+class CreateRefTypesTransactionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class BalanceHistory extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('ref_types_transaction', function (Blueprint $table){
+            $table->increments('id');
+            $table->string('type')->index();
+        });
     }
 
     /**
@@ -23,6 +26,6 @@ class BalanceHistory extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('ref_types_transaction');
     }
 }

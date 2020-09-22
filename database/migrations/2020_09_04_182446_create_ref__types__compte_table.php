@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Clients extends Migration
+class CreateRefTypesCompteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,11 @@ class Clients extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('ref_types_compte', function (Blueprint $table){
+            $table->increments('id');
+            $table->string('type')->index();
+
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class Clients extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('ref_types_compte');
     }
 }
