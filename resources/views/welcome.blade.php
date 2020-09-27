@@ -83,8 +83,15 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
+                    <form action="{{route('inscription')}}" method="post">
+                        {{csrf_field()}}
+                        <input type="text" name="no_carte" placeholder="No de carte"/>
+                        <input type="text" name="nom" placeholder="Nom"/>
+                        <input type="password" name="mot_de_passe" placeholder="Mot de passe"/>
+                        <input type="email" name="courriel" placeholder="Courriel"/>
+                        <input type="submit">
+
+                    </form>
                     
                 </div>
             </div>

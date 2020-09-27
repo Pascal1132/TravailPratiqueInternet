@@ -14,5 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/insc/', 'Auth\RegisterController@register')->name('inscription');
+Route::post('/conn/', 'Auth\LoginController@login')->name('connexion');
+Route::post('/decon/', 'Auth\LoginController@logout')->name('deconnexion');
 
-
+Route::get('/home', 'HomeController@index')->name('home');
