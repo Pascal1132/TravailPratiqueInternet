@@ -12,10 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(Route('vueConnexion'));
 });
+//Pages de connexion
+Route::get('/insc/', function (){
+    return view('inscription');
+})->name('vueInscription');
+Route::get('/conn/', function (){
+    return view('connexion');
+})->name('vueConnexion');
+
+//Validations de connexion
 Route::post('/insc/', 'Auth\RegisterController@register')->name('inscription');
 Route::post('/conn/', 'Auth\LoginController@login')->name('connexion');
-Route::post('/decon/', 'Auth\LoginController@logout')->name('deconnexion');
+Route::get('/decon/', 'Auth\LoginController@logout')->name('deconnexion');
 
 Route::get('/home', 'HomeController@index')->name('home');

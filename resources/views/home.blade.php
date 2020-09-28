@@ -1,23 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.base_menus')
+@section('sidebar_contenu')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <a class="menu-item menu-item-selected w-100" >Accueil</a>
 @endsection
+@section('navbar_droite', Auth::user()->nom)
+@section('titre_page')Bienvenue {{ Auth::user()->nom }} @endsection
+@section('content_page')
+    <h6 style="text-color:gray; font-weight: normal">Voici ce que nous avons réservé pour vous aujourd'hui... </h6>
+
+    <div>
+
+
+
+
+
+
+    </div>
+
+
+
+@endsection
+

@@ -32,4 +32,16 @@ class Utilisateur extends Authenticatable
     protected $hidden=[
         'mot_de_passe', 'remember_token'
     ];
+
+    public function compte(){
+        return $this->hasMany('App\Models\Compte', 'user_id');
+    }
+    public function getAuthPassword()
+    {
+        return $this->mot_de_passe;
+    }
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }
