@@ -21,7 +21,8 @@ class Utilisateur extends Authenticatable
         'no_carte',
         'nom',
         'mot_de_passe',
-        'courriel'
+        'courriel',
+        'role_id'
     ];
 
     /**
@@ -34,7 +35,10 @@ class Utilisateur extends Authenticatable
     ];
 
     public function compte(){
-        return $this->hasMany('App\Models\Compte', 'user_id');
+        return $this->hasMany('App\Models\Compte', 'utilisateur_id');
+    }
+    public function role(){
+        return $this->belongsTo('App\Models\RefRoleUtilisateur', 'role_id');
     }
     public function getAuthPassword()
     {

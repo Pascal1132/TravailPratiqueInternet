@@ -16,10 +16,10 @@ class CreateComptesTable extends Migration
         Schema::create('comptes', function (Blueprint $table){
             $table->increments('id');
             $table->unsignedInteger('type_compte_id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('utilisateur_id');
 
-            $table->foreign('user_id')
-                ->references('id')->on('users')
+            $table->foreign('utilisateur_id')
+                ->references('id')->on('utilisateurs')
                 ->onDelete('cascade');
             $table->foreign('type_compte_id')->references('id')->on('ref_types_compte');
 

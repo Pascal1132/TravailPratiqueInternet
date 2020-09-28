@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRefRolesUtilisateursTable extends Migration
+class CreateRefRolesUtilisateurTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRefRolesUtilisateursTable extends Migration
      */
     public function up()
     {
-        Schema::create('ref_roles_utilisateurs', function (Blueprint $table){
+        Schema::create('ref_roles_utilisateur', function (Blueprint $table){
             $table->increments('id');
             $table->string('type')->index();
         });
@@ -26,6 +26,6 @@ class CreateRefRolesUtilisateursTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ref_roles_utilisateurs');
+        Schema::dropIfExists('ref_roles_utilisateur');
     }
 }

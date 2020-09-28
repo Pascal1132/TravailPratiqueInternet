@@ -10,7 +10,7 @@
 
     <div>
 
-
+        {{Auth::user()->compte}}
 
 
 
