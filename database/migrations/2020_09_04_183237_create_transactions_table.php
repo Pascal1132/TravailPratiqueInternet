@@ -19,6 +19,7 @@ class CreateTransactionsTable extends Migration
 
             $table->unsignedInteger('type_transaction_id');
             $table->string('description');
+            $table->double('montant');
 
 
             $table->foreign('compte_id')

@@ -1,3 +1,7 @@
+@import "segoe_ui.css";
+*{
+    font-family: SegoeUI;
+}
 .bg-blue{
     background: #2c6ed5;
 }
@@ -11,3 +15,9 @@ label {
     margin-right: 5px;
 
 }​
+
+ .txt-sm{
+
+
+
+ }

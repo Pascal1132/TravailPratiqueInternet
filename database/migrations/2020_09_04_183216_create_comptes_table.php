@@ -17,6 +17,7 @@ class CreateComptesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('type_compte_id');
             $table->unsignedInteger('utilisateur_id');
+            $table->string('nom');
 
             $table->foreign('utilisateur_id')
                 ->references('id')->on('utilisateurs')

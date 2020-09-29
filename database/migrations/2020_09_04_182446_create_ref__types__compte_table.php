@@ -15,7 +15,7 @@ class CreateRefTypesCompteTable extends Migration
     {
         Schema::create('ref_types_compte', function (Blueprint $table){
             $table->increments('id');
-            $table->string('type')->index();
+            $table->string('type');
 
         });
     }

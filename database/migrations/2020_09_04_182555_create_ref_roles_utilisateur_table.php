@@ -15,7 +15,7 @@ class CreateRefRolesUtilisateurTable extends Migration
     {
         Schema::create('ref_roles_utilisateur', function (Blueprint $table){
             $table->increments('id');
-            $table->string('type')->index();
+            $table->string('type');
         });
     }
 

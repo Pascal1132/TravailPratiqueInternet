@@ -27,4 +27,6 @@ Route::post('/insc/', 'Auth\RegisterController@register')->name('inscription');
 Route::post('/conn/', 'Auth\LoginController@login')->name('connexion');
 Route::get('/decon/', 'Auth\LoginController@logout')->name('deconnexion');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'UtilisateurController@index')->name('home');
+Route::get('/comptes', 'UtilisateurController@listeComptes')->name('comptes');
+Route::get('/compte', 'UtilisateurController@afficherCompte')->name('afficherCompte');

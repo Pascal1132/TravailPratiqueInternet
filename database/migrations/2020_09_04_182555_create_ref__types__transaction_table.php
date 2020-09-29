@@ -15,7 +15,8 @@ class CreateRefTypesTransactionTable extends Migration
     {
         Schema::create('ref_types_transaction', function (Blueprint $table){
             $table->increments('id');
-            $table->string('type')->index();
+            $table->string('type');
+            $table->boolean('estMontantNegatif');
         });
     }
 

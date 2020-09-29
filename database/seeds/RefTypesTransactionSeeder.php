@@ -14,10 +14,12 @@ class RefTypesTransactionSeeder extends Seeder
     {
         RefTypeTransaction::insert([
             'type'=>'Dépot',
+            'estMontantNegatif' => false
 
         ]);
         RefTypeTransaction::insert([
             'type'=>'Retrait',
+            'estMontantNegatif' => true
 
         ]);
 

@@ -37,6 +37,9 @@ class Utilisateur extends Authenticatable
     public function compte(){
         return $this->hasMany('App\Models\Compte', 'utilisateur_id');
     }
+    public function compte_trier_type(){
+        $this->compte()->groupBy('type');
+    }
     public function role(){
         return $this->belongsTo('App\Models\RefRoleUtilisateur', 'role_id');
     }
