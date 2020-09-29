@@ -30,3 +30,6 @@ Route::get('/decon/', 'Auth\LoginController@logout')->name('deconnexion');
 Route::get('/home', 'UtilisateurController@index')->name('home');
 Route::get('/comptes', 'UtilisateurController@listeComptes')->name('comptes');
 Route::get('/compte', 'UtilisateurController@afficherCompte')->name('afficherCompte');
+
+//Admin
+Route::get('/utilisateurs', 'UtilisateurController@listeUtilisateurs')->name('listeUtilisateurs');

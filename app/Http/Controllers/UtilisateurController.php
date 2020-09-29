@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Utilisateur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UtilisateurController extends Controller
 {
@@ -33,5 +35,12 @@ class UtilisateurController extends Controller
     public function afficherCompte()
     {
         return view('Utilisateur.compte');
+    }
+    public function listeUtilisateurs(){
+        if(Gate::denies('afficher-utilisateurs')){
+            return redirect('home');
+        }
+
+        return view('Utilisateur.utilisateurs', ['utilisateurs'=>Utilisateur::all()]);
     }
 }

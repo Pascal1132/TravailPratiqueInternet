@@ -18,7 +18,7 @@ class CreateComptesTable extends Migration
             $table->unsignedInteger('type_compte_id');
             $table->unsignedInteger('utilisateur_id');
             $table->string('nom');
-
+            $table->timestamps();
             $table->foreign('utilisateur_id')
                 ->references('id')->on('utilisateurs')
                 ->onDelete('cascade');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\RefRoleUtilisateur;
 use App\Models\Utilisateur;
 
 use App\Http\Controllers\Controller;
@@ -66,12 +67,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Utilisateur::create([
+        $adminRole = RefRoleUtilisateur::where('type', 'admin')->first();
+        $caissierRole = RefRoleUtilisateur::where('type', 'caissier')->first();
+        $standardRole = RefRoleUtilisateur::where('type', 'standard')->first();
+        $utilisateur = Utilisateur::create([
             'nom' => $data['nom'],
             'courriel' => $data['courriel'],
             'no_carte' => $data['no_carte'],
             'mot_de_passe' => bcrypt($data['mot_de_passe']),
-            'role_id'=>'1'
+
         ]);
+        $utilisateur->roles()->attach($adminRole);
+        return $utilisateur;
     }
 }

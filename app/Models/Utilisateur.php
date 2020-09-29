@@ -51,4 +51,13 @@ class Utilisateur extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+    public function roles(){
+        return $this->belongsToMany('App\Models\RefRoleUtilisateur', 'roles_assignations');
+    }
+    public function hasAnyRoles($roles){
+        return $this->roles()->whereIn('type', $roles)->first();
+    }
+    public function hasRole($roles){
+        return $this->roles()->where('type', $roles)->first();
+    }
 }

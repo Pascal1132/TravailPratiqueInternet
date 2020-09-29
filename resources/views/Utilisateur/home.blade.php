@@ -3,6 +3,9 @@
 
     <a class="menu-item menu-item-selected w-100" >Accueil</a>
     <a class="menu-item w-100" href="{{route('comptes')}}" >Vos comptes</a>
+    @can('afficher-utilisateurs')
+        <a class="menu-item w-100" href="{{route('listeUtilisateurs')}}" >Utilisateurs</a>
+    @endcan
 @endsection
 @section('navbar_droite', Auth::user()->nom)
 @section('titre_page')Bienvenue {{ Auth::user()->nom }} @endsection

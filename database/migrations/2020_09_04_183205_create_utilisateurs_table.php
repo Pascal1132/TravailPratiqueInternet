@@ -19,13 +19,11 @@ class CreateUtilisateursTable extends Migration
             $table->String('nom');
             $table->String('mot_de_passe');
             $table->String('courriel')->unique();
-            $table->unsignedInteger('role_id');
+
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('role_id')
-                ->references('id')->on('ref_roles_utilisateur')
-                ->onDelete('cascade');
+
 
 
 

@@ -15,7 +15,8 @@ class CreateBalanceHistoriqueTable extends Migration
     {
         Schema::create('balance_historique', function (Blueprint $table){
             $table->unsignedInteger('compte_id');
-
+            $table->double('balance');
+            $table->timestamps();
             $table->foreign('compte_id')->references('id')->on('comptes');
         });
     }
