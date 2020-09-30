@@ -9,6 +9,7 @@
 
 
             <form action="{{route('inscription')}}" method="post">
+
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="no_carte">@lang('app.card_no') : </label>
@@ -18,6 +19,7 @@
                     <label for="nom">@lang('app.name') : </label>
                     <input type="text" id="nom" name="nom" placeholder="@lang('app.name')"/>
                 </div>
+
                 <div class="form-group">
                     <label for="courriel">@lang('app.email') : </label>
                     <input type="email" id="courriel" name="courriel" placeholder="@lang('app.email')"/>

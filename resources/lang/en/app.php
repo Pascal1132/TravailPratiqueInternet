@@ -47,6 +47,10 @@ return [
         'roles' => 'Roles',
         'edit' => 'Edit',
         'erase' => 'Erase',
+        'update'=>'Update',
+
+         //UPDATE
+        'leave_empty'=>'Leave blank to keep the password',
 
 
 

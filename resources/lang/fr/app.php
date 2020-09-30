@@ -44,7 +44,10 @@ return [
     'roles' => 'Rôles',
     'edit' => 'Modifier',
     'erase' => 'Effacer',
+    'update' => 'Mettre à jour',
 
+    //UPDATE
+    'leave_empty'=>'Laisser vide pour conserver',
 
 
 
