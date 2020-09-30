@@ -31,6 +31,7 @@ Route::group(['middleware'=>'all'], function (){
     Route::get('/index', 'UtilisateurController@index')->name('utilisateur.index');
     Route::get('/comptes', 'UtilisateurController@listeComptes')->name('comptes');
     Route::get('/compte', 'UtilisateurController@afficherCompte')->name('afficherCompte');
+    Route::get('/modifier', 'UtilisateurController@modifier')->name('modifier');
 
 //Changement de langue
     Route::get('/chgLang', 'Controller@chgLang')->name('changer_langue');

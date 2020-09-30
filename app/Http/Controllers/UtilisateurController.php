@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Utilisateur;
+use Hamcrest\Util;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class UtilisateurController extends Controller
@@ -42,5 +44,15 @@ class UtilisateurController extends Controller
         }
 
         return view('Utilisateur.utilisateurs', ['utilisateurs'=>Utilisateur::all()]);
+    }
+    public function modifier(Request $request){
+        $id = $request->get('id');
+
+        if(Gate::denies('modifier-utilisateurs') || !$request->has('id')){
+            $id = Auth::user()->id;
+        }
+        $utilisateur = Utilisateur::where('id',$id)->first();
+
+        return view('Utilisateur.modifier', ['utilisateur'=>$utilisateur]);
     }
 }

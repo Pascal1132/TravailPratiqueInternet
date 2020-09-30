@@ -95,7 +95,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
             @if(Auth::check())
 
-                <a class="dropdown-item" href="@yield('lien_modifier')">@lang('app.edit_user') <span class="iconify" data-icon="ant-design:edit-outlined" data-inline="false"></span></a>
+                <a class="dropdown-item" href="{{route('modifier')}}">@lang('app.edit_user') <span class="iconify" data-icon="ant-design:edit-outlined" data-inline="false"></span></a>
                 <a class="dropdown-item" href="@yield('lien_deconnexion', route('deconnexion'))">@lang('app.logout') <span class="iconify" data-icon="icomoon-free:exit" data-inline="false"></span></a>
 
 
