@@ -25,7 +25,7 @@ class UtilisateurController extends Controller
      */
     public function index()
     {
-        return view('Utilisateur.home');
+        return view('Utilisateur.index');
     }
 
     public function listeComptes()

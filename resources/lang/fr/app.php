@@ -44,10 +44,8 @@ return [
     'roles' => 'Rôles',
     'edit' => 'Modifier',
     'erase' => 'Effacer',
-    /* (BD) */
-    'admin'=>'Admin',
-    'caissier'=>'Caissier',
-    'client' =>  'Client',
+
+
 
 
 ];

@@ -28,7 +28,7 @@ Route::group(['middleware'=>'all'], function (){
     Route::post('/conn/', 'Auth\LoginController@login')->name('connexion');
     Route::get('/decon/', 'Auth\LoginController@logout')->name('deconnexion');
 
-    Route::get('/home', 'UtilisateurController@index')->name('home');
+    Route::get('/index', 'UtilisateurController@index')->name('utilisateur.index');
     Route::get('/comptes', 'UtilisateurController@listeComptes')->name('comptes');
     Route::get('/compte', 'UtilisateurController@afficherCompte')->name('afficherCompte');
 

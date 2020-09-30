@@ -1,7 +1,7 @@
 @extends('layouts.base_menus')
 @section('sidebar_contenu')
 
-<a class="menu-item w-100" href="{{route('home')}}">@lang('app.home')</a>
+<a class="menu-item w-100" href="{{route('utilisateur.index')}}">@lang('app.home')</a>
 <a class="menu-item w-100" href="{{route('comptes')}}" >@lang('app.your_accounts')</a>
 
 <a class="menu-item menu-item-selected w-100" href="{{route('listeUtilisateurs')}}" >@lang('app.users')</a>
@@ -34,7 +34,7 @@
             <td>{{$utilisateur->courriel}}</td>
             <td>
                 @foreach($utilisateur->roles as $roles)
-                    {{__('app.' . $roles->type)}}
+                    {{__('db.' . $roles->type)}}
                     @if(!$loop->last)
                         ,
                     @endif

@@ -116,6 +116,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'mot_de_passe'=>'password',
+        'courriel' => 'email',
+        'no_carte' => 'card number',
+        'nom' => 'name'
+    ],
 
 ];
