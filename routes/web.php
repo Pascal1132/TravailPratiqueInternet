@@ -11,25 +11,30 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect(Route('vueConnexion'));
-});
+Route::group(['middleware'=>'all'], function (){
+    Route::get('/', function () {
+        return redirect(Route('vueConnexion'));
+    });
 //Pages de connexion
-Route::get('/insc/', function (){
-    return view('inscription');
-})->name('vueInscription');
-Route::get('/conn/', function (){
-    return view('connexion');
-})->name('vueConnexion');
+    Route::get('/insc/', function (){
+        return view('inscription');
+    })->name('vueInscription');
+    Route::get('/conn/', function (){
+        return view('connexion');
+    })->name('vueConnexion');
 
 //Validations de connexion
-Route::post('/insc/', 'Auth\RegisterController@register')->name('inscription');
-Route::post('/conn/', 'Auth\LoginController@login')->name('connexion');
-Route::get('/decon/', 'Auth\LoginController@logout')->name('deconnexion');
+    Route::post('/insc/', 'Auth\RegisterController@register')->name('inscription');
+    Route::post('/conn/', 'Auth\LoginController@login')->name('connexion');
+    Route::get('/decon/', 'Auth\LoginController@logout')->name('deconnexion');
 
-Route::get('/home', 'UtilisateurController@index')->name('home');
-Route::get('/comptes', 'UtilisateurController@listeComptes')->name('comptes');
-Route::get('/compte', 'UtilisateurController@afficherCompte')->name('afficherCompte');
+    Route::get('/home', 'UtilisateurController@index')->name('home');
+    Route::get('/comptes', 'UtilisateurController@listeComptes')->name('comptes');
+    Route::get('/compte', 'UtilisateurController@afficherCompte')->name('afficherCompte');
+
+//Changement de langue
+    Route::get('/chgLang', 'Controller@chgLang')->name('changer_langue');
 
 //Admin
-Route::get('/utilisateurs', 'UtilisateurController@listeUtilisateurs')->name('listeUtilisateurs');
+    Route::get('/utilisateurs', 'UtilisateurController@listeUtilisateurs')->name('listeUtilisateurs');
+});

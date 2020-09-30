@@ -92,19 +92,23 @@
                     7.515,11.542,8.137 M15.435,12.629c-0.214-1.273-1.323-2.246-2.657-2.246s-2.431,0.973-2.644
                     ,2.246H15.435z"></path></svg>
             </a>
-            @if(Auth::check())
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="@yield('lien_modifier')">Modifier le compte <span class="iconify" data-icon="ant-design:edit-outlined" data-inline="false"></span></a>
-                <a class="dropdown-item" href="@yield('lien_deconnexion', route('deconnexion'))">Se déconnecter <span class="iconify" data-icon="icomoon-free:exit" data-inline="false"></span></a>
+            @if(Auth::check())
 
-            </div>
+                <a class="dropdown-item" href="@yield('lien_modifier')">@lang('app.edit_user') <span class="iconify" data-icon="ant-design:edit-outlined" data-inline="false"></span></a>
+                <a class="dropdown-item" href="@yield('lien_deconnexion', route('deconnexion'))">@lang('app.logout') <span class="iconify" data-icon="icomoon-free:exit" data-inline="false"></span></a>
+
+
             @else
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="@yield('lien_connexion',  route('vueConnexion'))">Se connecter <span class="iconify" data-icon="icomoon-free:enter" data-inline="false"></span></a>
-                    <a class="dropdown-item" href="@yield('lien_inscription', route('vueInscription'))">S'inscrire <span class="iconify" data-icon="ic:outline-create" data-inline="false"></span></a>
 
-                </div>
+                    <a class="dropdown-item" href="@yield('lien_connexion',  route('vueConnexion'))">@lang('app.login') <span class="iconify" data-icon="icomoon-free:enter" data-inline="false"></span></a>
+                    <a class="dropdown-item" href="@yield('lien_inscription', route('vueInscription'))">@lang('app.signin') <span class="iconify" data-icon="ic:outline-create" data-inline="false"></span></a>
+
+
             @endif
+                <a class="dropdown-item" href="{{route('changer_langue')}}">@lang('app.language')
+                    <span class="iconify" data-icon="ion:language" data-inline="false"></span></a>
+            </div>
         </div>
 
 

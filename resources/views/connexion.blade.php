@@ -1,10 +1,10 @@
 @extends('layouts.base_menus')
 @section('sidebar_contenu')
-    <a class="menu-item menu-item-selected w-100" >Connexion</a>
-    <a class="menu-item w-100" href="{{route('vueInscription')}}" >Inscription</a>
+    <a class="menu-item menu-item-selected w-100" >@lang('app.login')</a>
+    <a class="menu-item w-100" href="{{route('vueInscription')}}" >@lang('app.signin')</a>
 @endsection
-@section('navbar_droite', 'Non connecté')
-@section('titre_page', 'Connexion')
+@section('navbar_droite', __('app.not_logged'))
+@section('titre_page', __('app.login'))
 @section('content_page')
 
 
@@ -12,12 +12,12 @@
                 {{csrf_field()}}
 
                 <div class="form-group">
-                    <label for="courriel">Courriel : </label>
-                    <input type="email" id="courriel" name="courriel" placeholder="Courriel"/>
+                    <label for="courriel">@lang('app.email') : </label>
+                    <input type="email" id="courriel" name="courriel" placeholder="@lang('app.email')"/>
                 </div>
                 <div class="form-group">
-                    <label for="pwd">Mot de passe : </label>
-                    <input type="password" id="pwd" name="password" placeholder="Mot de passe"/>
+                    <label for="pwd">@lang('app.password') : </label>
+                    <input type="password" id="pwd" name="password" placeholder="@lang('app.password')"/>
                 </div>
 
                 <div class="text-danger mb-1">
