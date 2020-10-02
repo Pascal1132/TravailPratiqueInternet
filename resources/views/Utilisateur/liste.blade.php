@@ -7,7 +7,7 @@
 <a class="menu-item menu-item-selected w-100" href="{{route('listeUtilisateurs')}}" >@lang('app.users')</a>
 
 @endsection
-@section('navbar_droite', Auth::user()->nom)
+
 @section('titre_page')@lang('app.users_list') <span class="float-right h5" style="padding-top: 7px;">
        </span>@endsection
 @section('content_page')

@@ -40,9 +40,7 @@ class Utilisateur extends Authenticatable
     public function compte_trier_type(){
         $this->compte()->groupBy('type');
     }
-    public function role(){
-        return $this->belongsTo('App\Models\RefRoleUtilisateur', 'role_id');
-    }
+
     public function getAuthPassword()
     {
         return $this->mot_de_passe;
@@ -53,6 +51,9 @@ class Utilisateur extends Authenticatable
     }
     public function roles(){
         return $this->belongsToMany('App\Models\RefRoleUtilisateur', 'roles_assignations');
+    }
+    public function getFirstRole(){
+        return $this->roles()->first();
     }
     public function hasAnyRoles($roles){
         return $this->roles()->whereIn('type', $roles)->first();

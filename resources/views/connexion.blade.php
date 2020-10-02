@@ -3,7 +3,7 @@
     <a class="menu-item menu-item-selected w-100" >@lang('app.login')</a>
     <a class="menu-item w-100" href="{{route('vueInscription')}}" >@lang('app.signin')</a>
 @endsection
-@section('navbar_droite', __('app.not_logged'))
+
 @section('titre_page', __('app.login'))
 @section('content_page')
 

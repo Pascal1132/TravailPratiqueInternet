@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Banque') }}</title>
+    <title>{{ config('app.name', 'TheBankOfShawinigan') }}</title>
 
     <!-- Bootstrap core CSS -->
 

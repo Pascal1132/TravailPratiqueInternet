@@ -73,11 +73,12 @@
 
 
     <nav class="navbar navbar-fixed-top navbar-dark bg-dark text-light position-relative" style="border-bottom: 2px solid lightgray">
-        <span><span class="iconify" style="margin-bottom: 1px" data-icon="mdi:bank" data-inline="true"></span> TheBankOfShawinigan</span>
+        <span><span class="iconify" style="margin-bottom: 1px" data-icon="mdi:bank" data-inline="true"></span> {{ config('app.name', 'TheBankOfShawinigan') }}</span>
         <span>@yield('navbar_centre')</span>
         <div class="dropdown">
             <a class="text-light text-decoration-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                @yield('navbar_droite', 'navbar_droite') <svg class="svg-icon " style="width: 1.5em; fill: cornflowerblue" viewBox="0 0 20 20">
+                @if(Auth::check())
+                {{__('db.'.Auth::user()->getFirstRole()->type) . " : ". Auth::user()->nom}} <svg class="svg-icon " style="width: 1.5em; fill: cornflowerblue; margin-top: -4px" viewBox="0 0 20 20">
                     <path d="M8.749,9.934c0,0.247-0.202,0.449-0.449,0.449H4.257c-0.247,0-0.449-0.202-0.449-0.449S4.01,
                     9.484,4.257,9.484H8.3C8.547,9.484,8.749,9.687,8.749,9.934 M7.402,12.627H4.257c-0.247,0-0.449,
                     0.202-0.449,0.449s0.202,0.449,0.449,0.449h3.145c0.247,0,0.449-0.202,0.449-0.449S7.648,12.627,
@@ -91,6 +92,9 @@
                     8.137c0,0.622,0.539,1.348,1.235,1.348s1.235-0.726,1.235-1.348c0-0.622-0.539-1.348-1.235-1.348S11.542,
                     7.515,11.542,8.137 M15.435,12.629c-0.214-1.273-1.323-2.246-2.657-2.246s-2.431,0.973-2.644
                     ,2.246H15.435z"></path></svg>
+                @else
+                    Non connecté
+                @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="{{route('changer_langue')}}">@lang('app.nextLanguage')

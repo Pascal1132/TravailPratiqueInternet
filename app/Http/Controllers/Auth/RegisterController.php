@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 
+/**
+ * Class RegisterController
+ * @package App\Http\Controllers\Auth
+ */
 class RegisterController extends Controller
 {
     /*
@@ -54,7 +58,6 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'nom' => 'required|string|max:255',
             'courriel' => 'required|string|email|max:255|unique:utilisateurs',
-            'no_carte' => 'required|string|max:16|unique:utilisateurs',
             'mot_de_passe' => 'required|string',
         ]);
     }
@@ -69,14 +72,34 @@ class RegisterController extends Controller
     {
 
         $standardRole = RefRoleUtilisateur::where('type', 'client')->first();
+
         $utilisateur = Utilisateur::create([
             'nom' => $data['nom'],
             'courriel' => $data['courriel'],
-            'no_carte' => $data['no_carte'],
+            'no_carte' => self::genererCarteId(),
             'mot_de_passe' => bcrypt($data['mot_de_passe']),
 
         ]);
         $utilisateur->roles()->attach($standardRole);
         return $utilisateur;
+    }
+
+    /**
+     * Permet de générer une valeur aléatoire de 16 entiers unique à la table Utilisateur
+     * @return int
+     * @throws \Exception
+     */
+    public static function genererCarteId(){
+        $i = 0;
+        do{
+            $carteNo = 7489;
+            for ($j=0; $j<12; $j++){
+                $carteNo .= rand(0,9);
+            }
+
+            $i++;
+        }while (Utilisateur::where('no_carte', $carteNo)->exists() && $i<900000000000000);
+        if($i==900000000000000)throw new \Exception('Aucune carte ne peut être générée');
+        return $carteNo;
     }
 }

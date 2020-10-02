@@ -8,7 +8,7 @@
     <a class="menu-item menu-item-selected w-100" href="{{route('listeUtilisateurs')}}" >@lang('app.users')</a>
     @endcan
 @endsection
-@section('navbar_droite', Auth::user()->nom)
+
 @section('titre_page'){{$utilisateur->nom}}
  <span class="float-right h5" style="padding-top: 7px;">
        </span>
@@ -49,15 +49,17 @@
 
 
         @can('modifier-utilisateurs')
-                <label class="align-right">@lang('app.role') : </label>
+            <label class="align-right">@lang('app.role') <span class="text-danger">*</span> : </label>
                 @foreach($listeRoles as $role)
                 <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" class="custom-control-input" @if($utilisateur->hasRole($role->type)) checked @endif id="input-{{$role->type}}" name="role" value="{{$role->id}}">
                     <label class="custom-control-label" for="input-{{$role->type}}">{{__('db.'.$role->type)}}</label>
                 </div>
                 @endforeach
-
-
+                @if($utilisateur->nom === Auth::user()->nom) <br>
+            <span class="mt-0 text-danger" style="font-size: 13px">
+                * Si vous modifier votre rôle, vous ne pourrez plus le modifier par la suite.
+            </span><br>@endif
         @endcan
 
         <br>

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class UtilisateurController extends Controller
+class CompteController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -28,36 +28,17 @@ class UtilisateurController extends Controller
      */
     public function index()
     {
-        return view('Utilisateur.index');
-    }
-
-    public function listeComptes()
-    {
         return view('Compte.index');
     }
     public function afficherCompte()
     {
         return view('Compte.modifier');
     }
-    public function listeUtilisateurs(){
-        if(Gate::denies('afficher-utilisateurs')){
-            return redirect('home');
-        }
-
-        return view('Utilisateur.liste', ['utilisateurs'=>Utilisateur::all()]);
+    public function nouveauCompte()
+    {
+        return view('Compte.ajouter');
     }
-    public function modifier(Request $request){
-        $id = $request->get('id');
-        $listeRoles = RefRoleUtilisateur::all();
 
-        if(Gate::denies('modifier-utilisateurs') || !$request->has('id')){
-
-            $id = Auth::user()->id;
-        }
-        $utilisateur = Utilisateur::where('id',$id)->first();
-
-        return view('Utilisateur.modifier', ['utilisateur'=>$utilisateur, 'listeRoles'=>$listeRoles]);
-    }
     public function validationMoifier(){
         return back()->withErrors(['msg'=>__('app.'.'updated') . ' !']);
     }

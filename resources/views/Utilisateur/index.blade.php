@@ -7,7 +7,7 @@
         <a class="menu-item w-100" href="{{route('listeUtilisateurs')}}" >@lang('app.users')</a>
     @endcan
 @endsection
-@section('navbar_droite', Auth::user()->nom)
+
 @section('titre_page') @lang('app.welcome') {{ Auth::user()->nom }}
 
 
