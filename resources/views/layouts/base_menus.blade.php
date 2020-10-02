@@ -93,6 +93,8 @@
                     ,2.246H15.435z"></path></svg>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{route('changer_langue')}}">@lang('app.nextLanguage')
+                    <span class="iconify" data-icon="ion:language" data-inline="false"></span></a>
             @if(Auth::check())
 
                 <a class="dropdown-item" href="{{route('modifier')}}">@lang('app.edit_user') <span class="iconify" data-icon="ant-design:edit-outlined" data-inline="false"></span></a>
@@ -106,8 +108,7 @@
 
 
             @endif
-                <a class="dropdown-item" href="{{route('changer_langue')}}">@lang('app.language')
-                    <span class="iconify" data-icon="ion:language" data-inline="false"></span></a>
+
             </div>
         </div>
 

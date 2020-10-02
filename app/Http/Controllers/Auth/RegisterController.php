@@ -67,9 +67,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $adminRole = RefRoleUtilisateur::where('type', 'admin')->first();
-        $caissierRole = RefRoleUtilisateur::where('type', 'caissier')->first();
-        $standardRole = RefRoleUtilisateur::where('type', 'standard')->first();
+
+        $standardRole = RefRoleUtilisateur::where('type', 'client')->first();
         $utilisateur = Utilisateur::create([
             'nom' => $data['nom'],
             'courriel' => $data['courriel'],
@@ -77,7 +76,7 @@ class RegisterController extends Controller
             'mot_de_passe' => bcrypt($data['mot_de_passe']),
 
         ]);
-        $utilisateur->roles()->attach($adminRole);
+        $utilisateur->roles()->attach($standardRole);
         return $utilisateur;
     }
 }

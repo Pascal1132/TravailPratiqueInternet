@@ -18,7 +18,7 @@
         <th scope="col">@lang('app.name')</th>
         <th scope="col">@lang('app.email')</th>
 
-        <th scope="col">@lang('app.roles')</th>
+        <th scope="col">@lang('app.role')</th>
 
 
         @if(Gate::check('modifier-utilisateurs') || Gate::check('effacer-utilisateurs'))

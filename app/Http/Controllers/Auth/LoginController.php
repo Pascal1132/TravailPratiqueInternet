@@ -41,6 +41,14 @@ class LoginController extends Controller
     {
         return 'courriel';
     }
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        return redirect('/');
+    }
 
 
 }

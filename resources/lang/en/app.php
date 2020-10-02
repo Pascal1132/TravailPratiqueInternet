@@ -14,7 +14,7 @@ return [
     //WELCOME
         'login' => 'Log in',
         'signin' => 'Sign in',
-        'language'=> 'English',
+        'nextLanguage'=> 'Français',
         'not_logged'=>'Not logged',
         'password'=>'Password',
         'submit'=>'Submit',
@@ -51,6 +51,7 @@ return [
 
          //UPDATE
         'leave_empty'=>'Leave blank to keep the password',
+        'updated'=>'Updated',
 
 
 

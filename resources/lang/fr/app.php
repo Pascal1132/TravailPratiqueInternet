@@ -13,7 +13,7 @@ return [
     'login' => 'Connexion',
     'signin' => 'Inscription',
     'not_logged'=>'Non connecté',
-    'language'=> 'Français',
+    'nextLanguage'=> 'English',
     'password'=>'Mot de passe',
     'submit'=>'Envoyer',
     'card_no'=>'Numéro de carte',
@@ -41,13 +41,14 @@ return [
     //USERS
     'users_list'=>'Liste des utilisateurs',
     'email'=>'Courriel',
-    'roles' => 'Rôles',
+    'role' => 'Rôle',
     'edit' => 'Modifier',
     'erase' => 'Effacer',
     'update' => 'Mettre à jour',
 
     //UPDATE
     'leave_empty'=>'Laisser vide pour conserver',
+    'updated'=>'Mise à jour effectuée',
 
 
 

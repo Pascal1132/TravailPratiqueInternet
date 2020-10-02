@@ -12,20 +12,20 @@
 
                 {{csrf_field()}}
                 <div class="form-group">
-                    <label for="no_carte">@lang('app.card_no') : </label>
+                    <label class="align-right" for="no_carte">@lang('app.card_no') : </label>
                     <input type="text" id="no_carte" name="no_carte" placeholder="@lang('app.card_no')"/>
                 </div>
                 <div class="form-group">
-                    <label for="nom">@lang('app.name') : </label>
+                    <label class="align-right" for="nom">@lang('app.name') : </label>
                     <input type="text" id="nom" name="nom" placeholder="@lang('app.name')"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="courriel">@lang('app.email') : </label>
+                    <label class="align-right" for="courriel">@lang('app.email') : </label>
                     <input type="email" id="courriel" name="courriel" placeholder="@lang('app.email')"/>
                 </div>
                 <div class="form-group">
-                    <label for="pwd">@lang('app.password') : </label>
+                    <label class="align-right" for="pwd">@lang('app.password') : </label>
                     <input type="password" id="pwd" name="mot_de_passe" placeholder="@lang('app.password')"/>
                 </div>
                 <div class="text-danger mb-1">

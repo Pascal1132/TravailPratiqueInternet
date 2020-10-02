@@ -12,11 +12,11 @@
                 {{csrf_field()}}
 
                 <div class="form-group">
-                    <label for="courriel">@lang('app.email') : </label>
+                    <label class="align-right" for="courriel">@lang('app.email') : </label>
                     <input type="email" id="courriel" name="courriel" placeholder="@lang('app.email')"/>
                 </div>
                 <div class="form-group">
-                    <label for="pwd">@lang('app.password') : </label>
+                    <label class="align-right" for="pwd">@lang('app.password') : </label>
                     <input type="password" id="pwd" name="password" placeholder="@lang('app.password')"/>
                 </div>
 

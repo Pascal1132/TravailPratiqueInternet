@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RefRoleUtilisateur;
 use App\Models\Utilisateur;
 use Hamcrest\Util;
 use Illuminate\Http\Request;
@@ -47,12 +48,18 @@ class UtilisateurController extends Controller
     }
     public function modifier(Request $request){
         $id = $request->get('id');
+        $listeRoles = RefRoleUtilisateur::all();
 
         if(Gate::denies('modifier-utilisateurs') || !$request->has('id')){
+
             $id = Auth::user()->id;
         }
         $utilisateur = Utilisateur::where('id',$id)->first();
 
-        return view('Utilisateur.modifier', ['utilisateur'=>$utilisateur]);
+        return view('Utilisateur.modifier', ['utilisateur'=>$utilisateur, 'listeRoles'=>$listeRoles]);
     }
+    public function validationMoifier(){
+        return back()->withErrors(['msg'=>__('app.'.'updated') . ' !']);
+    }
+
 }

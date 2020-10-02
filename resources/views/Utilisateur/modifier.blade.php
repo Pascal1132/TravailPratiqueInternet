@@ -11,42 +11,56 @@
 @section('navbar_droite', Auth::user()->nom)
 @section('titre_page'){{$utilisateur->nom}}
  <span class="float-right h5" style="padding-top: 7px;">
-       </span>@endsection
+       </span>
+
+
+@endsection
 @section('content_page')
-    <form action="{{route('inscription')}}" method="post">
+    @foreach ($errors->getMessages() as $key => $error )
+
+
+        <div style="margin-left: -16px; margin-right: -24px;">
+            <div class="main__content notice-flash">
+                <div class="notification @if($key=='msg') green @else red @endif">
+                    <b>Note : </b>{{ $error[0] }}</div>
+            </div>
+        </div>
+    @endforeach
+    <form action="{{route('valModifierUtilisateur')}}" method="post">
         {{csrf_field()}}
         <div class="form-group">
-            <label for="no_carte">@lang('app.card_no') : </label>
+            <label class="align-right" for="no_carte">@lang('app.card_no') : </label>
             <input type="text" id="no_carte" name="no_carte" value="{{$utilisateur->no_carte}}" placeholder="@lang('app.card_no')"/>
         </div>
         <div class="form-group">
-            <label for="nom">@lang('app.name') : </label>
+            <label class="align-right" for="nom">@lang('app.name') : </label>
             <input type="text" id="nom" name="nom" value="{{$utilisateur->nom}}" placeholder="@lang('app.name')"/>
         </div>
         <input id="username" style="opacity: 0;position: absolute;" type="text" name="fakeusernameremembered">
         <input id="password" style="opacity: 0;position: absolute;" class="cp-password_stub" type="password" name="fakepasswordremembered">
         <div class="form-group">
-            <label for="courriel">@lang('app.email') : </label>
+            <label class="align-right" for="courriel">@lang('app.email') : </label>
             <input type="email" id="courriel" name="courriel" value="{{$utilisateur->courriel}}" placeholder="@lang('app.email')"/>
         </div>
         <div class="form-group">
-            <label for="pwd">@lang('app.password') : </label>
+            <label class="align-right" for="pwd">@lang('app.password') : </label>
             <input type="password" id="pwd" name="mot_de_passe" autocomplete="disabled" placeholder="@lang('app.leave_empty')"/>
         </div>
 
+
         @can('modifier-utilisateurs')
-            @forelse($utilisateur->roles as $role)
-                {{$role->type}}
-            @empty
-
-            @endforelse
-        @endcan
-                <div class="text-danger mb-1">
-                    @foreach ($errors->all() as $error)
-                        {{ $error }} <br>
-                    @endforeach
+                <label class="align-right">@lang('app.role') : </label>
+                @foreach($listeRoles as $role)
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" @if($utilisateur->hasRole($role->type)) checked @endif id="input-{{$role->type}}" name="role" value="{{$role->id}}">
+                    <label class="custom-control-label" for="input-{{$role->type}}">{{__('db.'.$role->type)}}</label>
                 </div>
+                @endforeach
 
+
+        @endcan
+
+        <br>
         <button type="submit" class="btn btn-primary">@lang('app.update')</button>
     </form>
 
