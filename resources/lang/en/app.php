@@ -38,6 +38,7 @@ return [
         'create_new_account'=> 'Create new account',
         'accounts_list'=>'List of your accounts',
         'name' => 'Name',
+        'account_name' => 'Account name',
         'type' => 'Type',
         'amount' => 'Amount',
 

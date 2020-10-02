@@ -58,7 +58,7 @@ class UtilisateurController extends Controller
 
         return view('Utilisateur.modifier', ['utilisateur'=>$utilisateur, 'listeRoles'=>$listeRoles]);
     }
-    public function validationMoifier(){
+    public function validationModifier(){
         return back()->withErrors(['msg'=>__('app.'.'updated') . ' !']);
     }
 

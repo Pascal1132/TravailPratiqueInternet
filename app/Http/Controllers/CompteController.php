@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RefRoleUtilisateur;
+use App\Models\RefTypeCompte;
 use App\Models\Utilisateur;
 use Hamcrest\Util;
 use Illuminate\Http\Request;
@@ -36,10 +37,11 @@ class CompteController extends Controller
     }
     public function nouveauCompte()
     {
-        return view('Compte.ajouter');
+        $typesCompte =  RefTypeCompte::all();
+        return view('Compte.ajouter', ['typesCompte'=>$typesCompte]);
     }
 
-    public function validationMoifier(){
+    public function validationModifier(){
         return back()->withErrors(['msg'=>__('app.'.'updated') . ' !']);
     }
 

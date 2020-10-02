@@ -98,8 +98,8 @@ class RegisterController extends Controller
             }
 
             $i++;
-        }while (Utilisateur::where('no_carte', $carteNo)->exists() && $i<900000000000000);
-        if($i==900000000000000)throw new \Exception('Aucune carte ne peut être générée');
+        }while (Utilisateur::where('no_carte', $carteNo)->exists() && $i<90000000000);
+        if($i==90000000000)throw new \Exception('Aucune carte ne peut être générée');
         return $carteNo;
     }
 }

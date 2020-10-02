@@ -35,6 +35,7 @@ return [
     'create_new_account'=> 'Créer un nouveau compte',
     'accounts_list'=>'Liste de vos comptes',
     'name' => 'Nom',
+    'account_name' => 'Nom du compte',
     'type' => 'Type',
     'amount' => 'Montant',
 

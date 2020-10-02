@@ -13,6 +13,22 @@
 
 
 
+    <form action="/action_page.php">
+        <label>@lang('app.type') : </label>
+        @foreach($typesCompte as $typeCompte)
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" id="input-{{$typeCompte->type}}" name="type" value="{{$typeCompte->id}}">
+                    <label class="custom-control-label" for="input-{{$typeCompte->type}}">{{__('db.'.$typeCompte->type)}}</label>
+                </div>
+        @endforeach
+        <div class="form-group">
+            <label for="nomCompte">@lang('app.account_name') :</label>
+            <input type="text" class="form-control" id="nomCompte" placeholder="@lang('app.account_name')" name="email">
+        </div>
+        <button type="submit" class="btn btn-primary">@lang('app.submit')</button>
+    </form>
+    </div>
+
 
 
 
