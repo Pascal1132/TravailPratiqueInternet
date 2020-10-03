@@ -25,6 +25,7 @@
     <tbody>
     @forelse(Auth::user()->comptes as $compte)
     <tr class="ligne-milieu" id="compte-{{$compte->id}}" onclick="window.location='{{route('afficherCompte', ['id'=>$compte->id])}}'">
+
         <td scope="row">{{$compte->nom}}</td>
         <td> {{$compte->type_compte->type}}</td>
         <td>{{$compte->getMontant()}} $</td>
@@ -33,6 +34,7 @@
     @empty
     <tr>
         <td colspan="6" class="text-center pt-3" style="font-family: Bahnschrift"> @lang('app.no_account') <a style="font-family: Bahnschrift" href="{{route('nouveauCompte')}}">@lang('app.create_new_account')!</a></td>
+
     </tr>
     @endforelse
 

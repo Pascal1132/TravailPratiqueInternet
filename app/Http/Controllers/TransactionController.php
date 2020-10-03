@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class CompteController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -32,16 +32,11 @@ class CompteController extends Controller
     {
         return view('Compte.index');
     }
-    public function afficher(Request $request)
-    {
-        $compte = Compte::where('id',$request->input('id'))->where('utilisateur_id', Auth::user()->id)->first();
 
-        return view('Compte.afficher', ['compte'=> $compte]);
-    }
     public function ajouter()
     {
-        $typesCompte =  RefTypeCompte::all();
-        return view('Compte.ajouter', ['typesCompte'=>$typesCompte]);
+
+        return view('Transaction.ajouter');
     }
 
     public function validationModifier(){
