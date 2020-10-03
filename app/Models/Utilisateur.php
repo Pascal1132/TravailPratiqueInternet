@@ -34,12 +34,13 @@ class Utilisateur extends Authenticatable
         'mot_de_passe', 'remember_token'
     ];
 
-    public function compte(){
+    public function comptes(){
         return $this->hasMany('App\Models\Compte', 'utilisateur_id');
     }
     public function compte_trier_type(){
         $this->compte()->groupBy('type');
     }
+
 
     public function getAuthPassword()
     {

@@ -24,7 +24,7 @@
             </div>
         </div>
     @endforeach
-    <h6 style="text-color:gray; font-weight: normal">@lang('app.home_welcome_message')</h6>
+    <h6  style="text-color:gray; font-weight: normal">@lang('app.home_welcome_message')</h6>
     <br>
 
 
@@ -35,15 +35,15 @@
             <ul class="list-group p-0 ">
                 <li class="list-group-item bg-dark text-light titre-liste"><h4>@lang('app.overview_accounts')</h4></li>
 
-                <li class="list-group-item bg-dark titre-liste">
+                <li class="list-group-item bg-dark titre-liste text-left">
 
-                    @forelse(Auth::user()->compte as $compte)
+                    @forelse(Auth::user()->comptes as $compte)
 
-                        <div class="card" style="width: 18rem;">
+                        <div class="card d-inline-block m-1 p-2" style="width: 15rem;line-height: 25px">
                             <div class=""> <a href="">{{$compte->nom}}</a></div>
-                            <div class="">@lang('app.type') : {{$compte->type_compte->type}}</div>
+                            <div class="float-left">@lang('app.type') : {{__('db.'.$compte->type_compte->type)}}</div>
 
-                            <div class="">@lang('app.amount') : {{$compte->getMontant()}}$</div>
+                            <div class="float-right">@lang('app.amount') : {{$compte->getMontant()}}$</div>
                         </div>
 
                     @empty

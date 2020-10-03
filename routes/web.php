@@ -34,8 +34,9 @@ Route::group(['middleware'=>'all'], function (){
     Route::get('/index', 'UtilisateurController@index')->name('utilisateur.index');
 
     Route::get('/compte/index', 'CompteController@index')->name('comptes');
-    Route::get('/compte/modifier', 'CompteController@afficherCompte')->name('afficherCompte');
-    Route::get('/compte/ajouter', 'CompteController@nouveauCompte')->name('nouveauCompte');
+    Route::get('/compte/modifier', 'CompteController@afficher')->name('afficherCompte');
+    Route::get('/compte/ajouter', 'CompteController@ajouter')->name('nouveauCompte');
+    Route::post('/compte/ajouter', 'CompteController@validationAjouter')->name('ajouterCompte');
 
 
     Route::get('/modifier', 'UtilisateurController@modifier')->name('modifier');

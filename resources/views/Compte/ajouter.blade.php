@@ -13,7 +13,8 @@
 
 
 
-    <form action="/action_page.php">
+    <form action="{{route('ajouterCompte')}}" method="post">
+        {{csrf_field()}}
         <label>@lang('app.type') : </label>
         @foreach($typesCompte as $typeCompte)
                 <div class="custom-control custom-radio custom-control-inline">
@@ -23,7 +24,7 @@
         @endforeach
         <div class="form-group">
             <label for="nomCompte">@lang('app.account_name') :</label>
-            <input type="text" class="form-control" id="nomCompte" placeholder="@lang('app.account_name')" name="email">
+            <input type="text" class="form-control" id="nomCompte" placeholder="@lang('app.account_name')" name="nom">
         </div>
         <button type="submit" class="btn btn-primary">@lang('app.submit')</button>
     </form>

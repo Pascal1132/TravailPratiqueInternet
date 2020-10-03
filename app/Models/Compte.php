@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Compte extends Model
 {
     public $table="comptes";
+    protected $fillable=[
+        'type_compte_id',
+        'nom',
+        'utilisateur_id',
+    ];
     public function type_compte(){
         return $this->belongsTo('App\Models\RefTypeCompte','type_compte_id');
     }

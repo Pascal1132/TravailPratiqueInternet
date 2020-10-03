@@ -131,7 +131,7 @@
 
             </div>
             <div class="col-12 col-md-10 col-xl-10 py-md-3 pl-md-5 bd-content" style="overflow-y: auto">
-                <h3>@yield('titre_page', 'Titre de la page')</h3>
+                <h3 style="margin-top: 15px;">@yield('titre_page', 'Titre de la page')</h3>
                 <hr>
                 @yield('content_page', 'content_page')
 

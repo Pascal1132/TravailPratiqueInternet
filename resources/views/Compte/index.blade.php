@@ -23,7 +23,7 @@
     </tr>
     </thead>
     <tbody>
-    @forelse(Auth::user()->compte as $compte)
+    @forelse(Auth::user()->comptes as $compte)
     <tr class="ligne-milieu" id="compte-{{$compte->id}}" onclick="window.location='{{route('afficherCompte', ['id'=>$compte->id])}}'">
         <td scope="row">{{$compte->nom}}</td>
         <td> {{$compte->type_compte->type}}</td>

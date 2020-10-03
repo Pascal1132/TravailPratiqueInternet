@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Compte;
 use App\Models\RefRoleUtilisateur;
 use App\Models\RefTypeCompte;
 use App\Models\Utilisateur;
@@ -31,11 +32,11 @@ class CompteController extends Controller
     {
         return view('Compte.index');
     }
-    public function afficherCompte()
+    public function afficher()
     {
         return view('Compte.modifier');
     }
-    public function nouveauCompte()
+    public function ajouter()
     {
         $typesCompte =  RefTypeCompte::all();
         return view('Compte.ajouter', ['typesCompte'=>$typesCompte]);
@@ -43,6 +44,23 @@ class CompteController extends Controller
 
     public function validationModifier(){
         return back()->withErrors(['msg'=>__('app.'.'updated') . ' !']);
+    }
+    public function validationAjouter(Request $request){
+        $typeCompte =  RefTypeCompte::where('id',$request->input('type'))->first();
+        $nomType = $typeCompte->type;
+        $nbCompteType = Auth::user()->comptes->where('type_compte_id', $request->input('type'))->count();
+        if( empty($request->input('nom'))) {
+            $nomCompte = $nomType . " " . $nbCompteType;
+        }else {
+            $nomCompte = $request->input('nom');
+        }
+        $compte = Compte::create([
+            'type_compte_id'=> $request->input('type'),
+            'utilisateur_id'=> Auth::user()->id,
+            'nom'=>$nomCompte,
+        ]);
+        return redirect(route('comptes'))->withMessages(['msg'=>'success']);
+
     }
 
 }
