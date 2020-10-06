@@ -12,6 +12,7 @@
 @section('content_page')
 
 
+    @if(Auth::user()->confirme)
 
     <form action="{{route('ajouterCompte')}}" method="post">
         {{csrf_field()}}
@@ -29,6 +30,10 @@
         <button type="submit" class="btn btn-primary">@lang('app.submit')</button>
     </form>
     </div>
+    @else
+        <h6>Pour créer un compte, vous devez préalablement confirmer votre courriel</h6>
+        <a class="text-danger" href="{{route('utilisateur.confirmer')}}">Confirmer l'adresse courriel</a>
+    @endif
 
 
 

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ConfirmationCourriel;
 use App\Models\RefRoleUtilisateur;
 use App\Models\Utilisateur;
 use Hamcrest\Util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 
 class UtilisateurController extends Controller
 {
@@ -18,7 +20,9 @@ class UtilisateurController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except([
+            'confirmer'
+        ]);
     }
 
     /**
@@ -59,7 +63,31 @@ class UtilisateurController extends Controller
         return view('Utilisateur.modifier', ['utilisateur'=>$utilisateur, 'listeRoles'=>$listeRoles]);
     }
     public function validationModifier(){
-        return back()->withErrors(['msg'=>__('app.'.'updated') . ' !']);
+        return back()->with('succes',__('app.'.'updated') . ' !');
+    }
+    public function confirmer(Request $request){
+        if($request->has('token')){
+
+            if(Utilisateur::where('confirmation_token', urldecode($request->input('token')))->exists()){
+                $utilisateur = Utilisateur::where('confirmation_token', urldecode($request->input('token')))->first();
+                $utilisateur->confirme = true;
+                $utilisateur->save();
+                if(Auth::check())
+                return redirect('/index')->with('succes',__('email.email_confirmed'));
+                else return redirect('/conn')->with('succes',__('email.email_confirmed'));
+            }
+            if(Auth::check())
+                return redirect('/index')->withErrors([ __('email.invalid_token')]);
+            else return redirect('/conn')->withErrors([__('email.invalid_token')]);
+
+        }
+        return view('Utilisateur.confirmer');
+    }
+    public function envoiCourrielConfirmation(){
+
+        $courriel = new ConfirmationCourriel();
+        Mail::to(Auth::user()->courriel)->send($courriel);
+        return back()->with('succes','Le courriel a bien été envoyé!');
     }
 
 }

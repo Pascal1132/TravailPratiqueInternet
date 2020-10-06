@@ -12,6 +12,7 @@ return [
 
 
     //WELCOME
+    'logout_message'=> 'You\'ve been disconnected !',
         'login' => 'Log in',
         'signin' => 'Sign in',
         'nextLanguage'=> 'Français',
@@ -49,6 +50,7 @@ return [
         'edit' => 'Edit',
         'erase' => 'Erase',
         'update'=>'Update',
+        'email_confirmation'=>'Email confirmation',
 
          //UPDATE
         'leave_empty'=>'Leave blank to keep the password',

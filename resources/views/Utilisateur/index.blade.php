@@ -14,16 +14,7 @@
 
 @endsection
 @section('content_page')
-    @foreach ($errors->all() as $error)
 
-
-        <div style="margin-left: -16px; margin-right: -24px;">
-            <div class="main__content notice-flash">
-                <div class="notification green">
-                    <b>Note:</b>{{ $error }}</div>
-            </div>
-        </div>
-    @endforeach
     <h6  style="text-color:gray; font-weight: normal">@lang('app.home_welcome_message')</h6>
     <br>
 

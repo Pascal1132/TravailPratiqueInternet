@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\ConfirmationCourriel;
 use App\Models\RefRoleUtilisateur;
 use App\Models\Utilisateur;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -71,16 +74,20 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $standardRole = RefRoleUtilisateur::where('type', 'client')->first();
+        $standardRole = RefRoleUtilisateur::where('type', 'client')->firstOrFail();
 
         $utilisateur = Utilisateur::create([
             'nom' => $data['nom'],
             'courriel' => $data['courriel'],
             'no_carte' => self::genererCarteId(),
             'mot_de_passe' => bcrypt($data['mot_de_passe']),
-
+            'confirmation_token' => bcrypt($data['courriel'] . $data['nom'] . self::genererCarteId()),
         ]);
+
+
         $utilisateur->roles()->attach($standardRole);
+
+
         return $utilisateur;
     }
 
@@ -101,5 +108,11 @@ class RegisterController extends Controller
         }while (Utilisateur::where('no_carte', $carteNo)->exists() && $i<90000000000);
         if($i==90000000000)throw new \Exception('Aucune carte ne peut être générée');
         return $carteNo;
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $courriel = new ConfirmationCourriel();
+        Mail::to($user->courriel)->send($courriel);
     }
 }

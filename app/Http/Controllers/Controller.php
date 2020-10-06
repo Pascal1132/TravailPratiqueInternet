@@ -14,21 +14,5 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function chgLang(){
-        $prochaineLangue = '';
-        switch (Config::get('app.locale')){
-            case 'fr':
-                $prochaineLangue = 'en';
-                break;
-            case 'en':
-                $prochaineLangue = 'fr';
-                break;
-        }
 
-
-            Session::put('language',$prochaineLangue);
-            App::setLocale($prochaineLangue);
-
-        return back();
-    }
 }

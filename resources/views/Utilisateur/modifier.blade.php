@@ -16,16 +16,7 @@
 
 @endsection
 @section('content_page')
-    @foreach ($errors->getMessages() as $key => $error )
 
-
-        <div style="margin-left: -16px; margin-right: -24px;">
-            <div class="main__content notice-flash">
-                <div class="notification @if($key=='msg') green @else red @endif">
-                    <b>Note : </b>{{ $error[0] }}</div>
-            </div>
-        </div>
-    @endforeach
     <form action="{{route('valModifierUtilisateur')}}" method="post">
         {{csrf_field()}}
         <div class="form-group">

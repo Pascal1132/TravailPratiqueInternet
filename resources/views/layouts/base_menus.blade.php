@@ -74,7 +74,7 @@
 
     <nav class="navbar navbar-fixed-top navbar-dark bg-dark text-light position-relative" style="border-bottom: 2px solid lightgray">
         <span><span class="iconify" style="margin-bottom: 1px" data-icon="mdi:bank" data-inline="true"></span> {{ config('app.name', 'TheBankOfShawinigan') }}</span>
-        <span>@yield('navbar_centre')</span>
+        <span>@if(Auth::check() && !Auth::user()->confirme) <a class="btn btn-sm btn-danger font-weight-bold pl-2 pr-2" href="{{route('utilisateur.confirmer')}}"> Vous devez confirmer votre courriel</a> @endif</span>
         <div class="dropdown">
             <a class="text-light text-decoration-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @if(Auth::check())
@@ -131,6 +131,25 @@
 
             </div>
             <div class="col-12 col-md-10 col-xl-10 py-md-3 pl-md-5 pr-md-5 bd-content" style="overflow-y: auto">
+                @foreach ($errors->all() as $error)
+
+
+                    <div style="margin-left: -16px; margin-right: -24px;">
+                        <div class="main__content notice-flash">
+                            <div class="notification red">
+                                <b>Erreur : </b>{{ $error }}</div>
+                        </div>
+                    </div>
+                @endforeach
+                    @if (\Session::has('succes'))
+
+                        <div style="margin-left: -16px; margin-right: -24px;">
+                            <div class="main__content notice-flash">
+                                <div class="notification green">
+                                    <b>Note: </b> {!! \Session::get('succes') !!}</div>
+                            </div>
+                        </div>
+                    @endif
                 <h3 style="margin-top: 15px;">@yield('titre_page', 'Titre de la page')</h3>
                 <hr>
                 @yield('content_page', 'content_page')

@@ -47,4 +47,7 @@ Route::group(['middleware'=>'all'], function (){
 
 //Admin
     Route::get('/utilisateurs', 'UtilisateurController@listeUtilisateurs')->name('listeUtilisateurs');
+
+    Route::get('/confirmer', 'UtilisateurController@confirmer')->name('utilisateur.confirmer');
+    Route::get('/envoiCourrielConfirmation', 'UtilisateurController@envoiCourrielConfirmation')->name('envoiCourrielConfirmation');
 });

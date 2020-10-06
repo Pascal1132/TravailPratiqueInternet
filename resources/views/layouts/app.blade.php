@@ -21,8 +21,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-
-   <!-- Styles -->
+    <!-- Styles -->
     <link rel="stylesheet" href="{{ URL::asset('public/css/style.css') }}" type="text/css">
 
 </head>

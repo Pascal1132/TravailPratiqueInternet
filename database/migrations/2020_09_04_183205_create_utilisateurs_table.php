@@ -19,7 +19,8 @@ class CreateUtilisateursTable extends Migration
             $table->String('nom');
             $table->String('mot_de_passe');
             $table->String('courriel')->unique();
-
+            $table->boolean('confirme')->default(false);
+            $table->String('confirmation_token');
             $table->rememberToken();
             $table->timestamps();
 

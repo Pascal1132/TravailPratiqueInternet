@@ -21,9 +21,7 @@
                 </div>
 
                 <div class="text-danger mb-1">
-                    @foreach ($errors->all() as $error)
-                        {{ $error }} <br>
-                    @endforeach
+
                 </div>
 
 

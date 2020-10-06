@@ -22,7 +22,7 @@ class Utilisateur extends Authenticatable
         'nom',
         'mot_de_passe',
         'courriel',
-        'role_id'
+        'confirmation_token'
     ];
 
     /**
@@ -40,7 +40,9 @@ class Utilisateur extends Authenticatable
     public function compte_trier_type(){
         $this->compte()->groupBy('type');
     }
-
+    public function hasCompte($id){
+        return $this->comptes()->where('id', $id)->exists();
+    }
 
     public function getAuthPassword()
     {

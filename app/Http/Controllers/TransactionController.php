@@ -33,10 +33,16 @@ class TransactionController extends Controller
         return view('Compte.index');
     }
 
-    public function ajouter()
+    public function ajouter(Request $request)
     {
+        if(Auth::user()->hasCompte($request->input('id'))){
+            $compte = Compte::where('id', $request->input('id'))->first();
+            return view('Transaction.ajouter', ['compte'=>$compte]);
+        }else{
+            return redirect('/');
+        }
 
-        return view('Transaction.ajouter');
+
     }
 
     public function validationModifier(){
@@ -56,7 +62,7 @@ class TransactionController extends Controller
             'utilisateur_id'=> Auth::user()->id,
             'nom'=>$nomCompte,
         ]);
-        return redirect(route('comptes'))->withMessages(['msg'=>'success']);
+        return redirect(route('comptes'))->with(['succes'=>'success']);
 
     }
 

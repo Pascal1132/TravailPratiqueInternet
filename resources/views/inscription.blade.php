@@ -26,9 +26,7 @@
                     <input type="password" id="pwd" name="mot_de_passe" placeholder="@lang('app.password')"/>
                 </div>
                 <div class="text-danger mb-1">
-                    @foreach ($errors->all() as $error)
-                        {{ $error }} <br>
-                    @endforeach
+
                 </div>
 
 

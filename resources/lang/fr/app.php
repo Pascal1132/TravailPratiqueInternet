@@ -11,6 +11,7 @@ return [
     */
     //WELCOME
     'login' => 'Connexion',
+    'logout_message'=> 'Vous avez été déconnecté !',
     'signin' => 'Inscription',
     'not_logged'=>'Non connecté',
     'nextLanguage'=> 'English',
@@ -46,6 +47,7 @@ return [
     'edit' => 'Modifier',
     'erase' => 'Effacer',
     'update' => 'Mettre à jour',
+    'email_confirmation'=>'Confirmation du courriel',
 
     //UPDATE
     'leave_empty'=>'Laisser vide pour conserver',
