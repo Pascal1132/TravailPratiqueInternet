@@ -8,7 +8,7 @@
     @endcan
 @endsection
 
-@section('titre_page') @lang('app.new_operation')| <a href="{{ URL::previous() }}">@lang('app.back')</a>@endsection
+@section('titre_page') @lang('app.new_operation') | <a href="{{ route('afficherCompte', ['id'=>$compte->id]) }}">@lang('app.back')</a>@endsection
 @section('content_page')
     <script>
         $( document ).ready(function() {
@@ -20,18 +20,25 @@
 
     </script>
 
-    <form id="formulaireAjoutOperation">
-        <label for="type_operation">Type d'opération : </label>
+    <form id="formulaireAjoutOperation" method="post" action="{{route('validationAjouterTransaction')}}" enctype="multipart/form-data">
+        {{csrf_field()}}
+        <label for="type_operation">@lang('app.operation_type') : </label>
         <br>
-        <select form="formulaireAjoutOperation" class="form-control" id="type_operation">
-            <option value="1">Virement entre comptes</option>
-            <option value="2">Dépot par chèque</option>
+        <select form="formulaireAjoutOperation" name="type_operation" class="form-control" id="type_operation">
+            <option value="depot_cheque">@lang('app.check_deposit')</option>
+            <option value="virement_entre_comptes">@lang('app.account_transfer')</option>
         </select>
         <br>
         <label>@lang('app.account_name') : </label>
         <input class="form-control" type="text" disabled value="{{$compte->nom}}"/><br>
+        <label class="">@lang('app.amount') : </label>
+        <div class="input-group">
+            <input class="form-control" type="text" name="montant"/>
+        </div>
+        <input type="hidden" value="{{$compte->id}}" name="compte_id" />
+        <br>
         <label class="input-virement" style="display: none">@lang('app.destination_account') : </label>
-        <select form="formulaireAjoutOperation" style="display: none" class="form-control input-virement" id="compte_destination">
+        <select form="formulaireAjoutOperation" name="compte_destination" style="display: none" class="form-control input-virement" id="compte_destination">
             @forelse($comptesDestination as $compteDestination)
                 <option value="{{$compteDestination->id}}">{{$compteDestination->nom}} </option>
             @empty
@@ -40,17 +47,26 @@
 
         </select>
         <br style="display: none" class="input-virement">
+
         <label class="input-cheque">@lang('app.check') : </label>
+
         <div class="input-cheque input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupFileAddon01">@lang('app.upload')</span>
             </div>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                <input name="image_cheque" type="file" class="custom-file-input" id="inputGroupFile01"
                        aria-describedby="inputGroupFileAddon01" value="@lang('app.browse')">
                 <label class="custom-file-label" for="inputGroupFile01">@lang('app.choose_file')</label>
             </div>
+            <br>
         </div>
+        <br class="input-cheque">
+        <label >Description : </label>
+        <textarea form="formulaireAjoutOperation" class="form-control" name="description" id="" cols="10" rows="2"></textarea>
+        <br>
+
+        <input type="submit" class="btn btn-primary" value="@lang('app.submit')" />
     </form>
 
 

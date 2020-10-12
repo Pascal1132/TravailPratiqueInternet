@@ -48,6 +48,7 @@ return [
     //USERS
     'users_list'=>'Liste des utilisateurs',
     'email'=>'Courriel',
+
     'role' => 'Rôle',
     'edit' => 'Modifier',
     'erase' => 'Effacer',
@@ -58,6 +59,6 @@ return [
     'leave_empty'=>'Laisser vide pour conserver',
     'updated'=>'Mise à jour effectuée',
 
-
+    'unauthorized' => 'Non permis',
 
 ];

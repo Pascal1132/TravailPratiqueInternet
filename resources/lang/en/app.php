@@ -47,6 +47,21 @@ return [
         'amount' => 'Amount',
         'bad_id'=> 'The identifier passed as a parameter is not associated with any record in the database',
 
+        //TRANSACTIONS
+        'modify_account'=> 'Modify account',
+        'new_operation'=>'New operation',
+        'no_transaction'=> 'The account doesn\'t have any transaction',
+        'back'=>'Back',
+        'check'=>'Check',
+        'upload'=>'Upload',
+        'choose_file'=>'Choose a file',
+        'destination_account'=>'Destination account',
+        'operation_type'=>'Operation type',
+        'account_transfer'=>'Transfer between accounts',
+        'check_deposit'=>'Deposit by check',
+
+
+
         //USERS
         'users_list'=>'Users list',
         'email'=>'Email',
@@ -60,6 +75,8 @@ return [
          //UPDATE
         'leave_empty'=>'Leave blank to keep the password',
         'updated'=>'Updated',
+
+    'unauthorized' => 'Unauthorized',
 
 
 

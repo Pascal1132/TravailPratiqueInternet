@@ -81,6 +81,7 @@ class UtilisateurController extends Controller
             else return redirect('/conn')->withErrors([__('email.invalid_token')]);
 
         }
+        if(Auth::user()->confirme) return redirect('/index')->with('succes',__('email.email_already_confirmed'));
         return view('Utilisateur.confirmer');
     }
     public function envoiCourrielConfirmation(){

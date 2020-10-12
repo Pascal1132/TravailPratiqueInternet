@@ -39,6 +39,7 @@ Route::group(['middleware'=>'all'], function (){
     Route::post('/compte/ajouter', 'CompteController@validationAjouter')->name('ajouterCompte');
 
     Route::get('/transaction/ajouter', 'TransactionController@ajouter')->name('ajouterTransaction');
+    Route::post('/transaction/ajouter', 'TransactionController@validationAjouter')->name('validationAjouterTransaction');
 
     Route::get('/modifier', 'UtilisateurController@modifier')->name('modifier');
     Route::post('/val/mod/util', 'UtilisateurController@validationMoifier')->name('valModifierUtilisateur');

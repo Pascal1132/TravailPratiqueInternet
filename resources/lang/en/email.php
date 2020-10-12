@@ -6,5 +6,6 @@ return [
     'confirm'=>'Confirm',
     'sincerly'=>'Sincerly',
     'email_confirmed'=>'The email has been confirmed!',
-    'invalid_token' =>'Invalid token'
+    'invalid_token' =>'Invalid token',
+    'email_already_confirmed'=>'Email already confirmed!',
 ];
