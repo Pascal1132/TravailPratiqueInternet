@@ -61,9 +61,10 @@ class TransactionController extends Controller
                     $this->ajouterDepotCheque($request);
                     break;
                 case 'virement_entre_comptes':
-                    //$this->ajouterVirementCompte();
+                    $this->ajouterVirementCompte($request);
                     break;
             }
+            return redirect(route('comptes'));
         }else{
             return back()->withErrors(['msg'=>__('app.unauthorized').' !']);
         }
@@ -74,7 +75,7 @@ class TransactionController extends Controller
         $typeTransaction = "Dépot";
         $typeTransactionId = (RefTypeTransaction::getIdFromType($typeTransaction)->first())->id;
         $validatedData = $req->validate([
-            'image_cheque' => 'mimes:jpeg,jpg,png,gif|max:100000',
+            'image_cheque' => 'required|mimes:jpeg,jpg,png,gif|max:100000',
             'montant' => 'required|numeric',
             'description'=> 'required|string',
         ]);
@@ -87,8 +88,32 @@ class TransactionController extends Controller
         ]);
         $req->file('image_cheque')->storeAs('cheques', $transaction->id.".".$req->file('image_cheque')->extension());
     }
-    public function ajouterVirementCompte(){
+    public function ajouterVirementCompte($req){
 
+
+        $typeTransactionProvenance = (RefTypeTransaction::getIdFromType("Retrait")->first())->id;
+        $typeTransactionDestination = (RefTypeTransaction::getIdFromType("Dépot")->first())->id;
+        if(Auth::user()->hasCompte($req->input('compte_destination'))){
+            $validatedData = $req->validate([
+                'montant' => 'required|numeric',
+                'description'=> 'required|string',
+            ]);
+            $transactionProvenance = Transaction::create([
+                'compte_id'=>$req->input('compte_id'),
+                'type_transaction_id'=>$typeTransactionProvenance,
+                'description'=>$validatedData['description'],
+                'montant'=>$validatedData['montant']
+
+            ]);
+            $transactionDestination = Transaction::create([
+                'compte_id'=>$req->input('compte_destination'),
+                'type_transaction_id'=>$typeTransactionDestination,
+                'description'=>$validatedData['description'],
+                'montant'=>$validatedData['montant']
+            ]);
+        }else{
+            return back()->withErrors(['msg'=>__('app.unauthorized').' !']);
+        }
     }
 
 

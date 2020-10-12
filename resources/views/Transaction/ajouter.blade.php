@@ -15,6 +15,7 @@
             $("#type_operation").change(function(){
                 $(".input-cheque").toggle();
                 $(".input-virement").toggle();
+                $("#description_textarea").val($("#type_operation option:selected").text());
             });
         });
 
@@ -63,7 +64,7 @@
         </div>
         <br class="input-cheque">
         <label >Description : </label>
-        <textarea form="formulaireAjoutOperation" class="form-control" name="description" id="" cols="10" rows="2"></textarea>
+        <textarea form="formulaireAjoutOperation" class="form-control" name="description" id="description_textarea" cols="10" rows="2">@lang('app.check_deposit')</textarea>
         <br>
 
         <input type="submit" class="btn btn-primary" value="@lang('app.submit')" />

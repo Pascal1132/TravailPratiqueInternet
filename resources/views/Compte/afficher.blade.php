@@ -30,7 +30,7 @@
             <td>{{$transaction->created_at}}</td>
             <td>{{$transaction->type_transaction->type}}</td>
             <td>{{$transaction->description}}</td>
-            <td>{{$transaction->montant}} $</td>
+            <td>@money($transaction->montant) $</td>
         </tr>
         @empty
             <tr><td class="text-center" colspan="4"><span  style="font-size: smaller; color:gray"> @lang('app.no_transaction')</span></td></tr>
