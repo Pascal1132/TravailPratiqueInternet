@@ -15,7 +15,7 @@
     @if(Auth::check())
     @if(!Auth::user()->confirme)
 
-
+            <p>Vous devez confirmer votre adresse courriel pour pouvoir créer un nouveau compte.</p>
             <a class="btn btn-secondary" href="{{route('envoiCourrielConfirmation')}}">Réenvoyer le courriel à {{Auth::user()->courriel}} ?</a>
 
 

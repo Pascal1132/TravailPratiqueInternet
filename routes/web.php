@@ -43,11 +43,14 @@ Route::group(['middleware'=>'all'], function (){
     Route::get('/modifier', 'UtilisateurController@modifier')->name('modifier');
     Route::post('/val/mod/util', 'UtilisateurController@validationMoifier')->name('valModifierUtilisateur');
 //Changement de langue
-    Route::get('/chgLang', 'Controller@chgLang')->name('changer_langue');
+    Route::get('/chgLang', 'LangueController@chgLang')->name('changer_langue');
 
 //Admin
     Route::get('/utilisateurs', 'UtilisateurController@listeUtilisateurs')->name('listeUtilisateurs');
 
     Route::get('/confirmer', 'UtilisateurController@confirmer')->name('utilisateur.confirmer');
     Route::get('/envoiCourrielConfirmation', 'UtilisateurController@envoiCourrielConfirmation')->name('envoiCourrielConfirmation');
+    Route::get("/apropos", function(){
+       return View("apropos");
+    })->name("apropos");
 });

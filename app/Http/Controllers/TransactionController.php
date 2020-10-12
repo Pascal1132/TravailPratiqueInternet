@@ -37,9 +37,10 @@ class TransactionController extends Controller
     {
         if(Auth::user()->hasCompte($request->input('id'))){
             $compte = Compte::where('id', $request->input('id'))->first();
-            return view('Transaction.ajouter', ['compte'=>$compte]);
+            $comptesDestination = Compte::where('id', '!=', $request->input('id'))->get();
+            return view('Transaction.ajouter', ['compte'=>$compte, 'comptesDestination'=>$comptesDestination]);
         }else{
-            return redirect('/');
+            return redirect(route('comptes'))->withErrors([__('app.bad_id')]);
         }
 
 
@@ -49,19 +50,7 @@ class TransactionController extends Controller
         return back()->withErrors(['msg'=>__('app.'.'updated') . ' !']);
     }
     public function validationAjouter(Request $request){
-        $typeCompte =  RefTypeCompte::where('id',$request->input('type'))->first();
-        $nomType = $typeCompte->type;
-        $nbCompteType = Auth::user()->comptes->where('type_compte_id', $request->input('type'))->count();
-        if( empty($request->input('nom'))) {
-            $nomCompte = $nomType . " " . $nbCompteType;
-        }else {
-            $nomCompte = $request->input('nom');
-        }
-        $compte = Compte::create([
-            'type_compte_id'=> $request->input('type'),
-            'utilisateur_id'=> Auth::user()->id,
-            'nom'=>$nomCompte,
-        ]);
+
         return redirect(route('comptes'))->with(['succes'=>'success']);
 
     }

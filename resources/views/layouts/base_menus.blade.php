@@ -73,7 +73,7 @@
 
 
     <nav class="navbar navbar-fixed-top navbar-dark bg-dark text-light position-relative" style="border-bottom: 2px solid lightgray">
-        <span><span class="iconify" style="margin-bottom: 1px" data-icon="mdi:bank" data-inline="true"></span> {{ config('app.name', 'TheBankOfShawinigan') }}</span>
+        <span><span class="iconify" style="margin-bottom: 1px" data-icon="mdi:bank" data-inline="true"></span> <a class="text-light" href="{{route("apropos")}}">{{ config('app.name', 'TheBankOfShawinigan') }}</a></span>
         <span>@if(Auth::check() && !Auth::user()->confirme) <a class="btn btn-sm btn-danger font-weight-bold pl-2 pr-2" href="{{route('utilisateur.confirmer')}}"> Vous devez confirmer votre courriel</a> @endif</span>
         <div class="dropdown">
             <a class="text-light text-decoration-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -158,6 +158,7 @@
         </div>
 
     </div>
+
 
 
 

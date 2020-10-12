@@ -35,7 +35,7 @@ class CompteController extends Controller
     public function afficher(Request $request)
     {
         $compte = Compte::where('id',$request->input('id'))->where('utilisateur_id', Auth::user()->id)->first();
-
+        if(empty($compte))return redirect(route('comptes'))->withErrors([__('app.bad_id')]);
         return view('Compte.afficher', ['compte'=> $compte]);
     }
     public function ajouter()

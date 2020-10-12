@@ -21,6 +21,9 @@ return [
         'submit'=>'Submit',
         'card_no'=>'Card number',
 
+    //ABOUT
+    "about"=> "About",
+
 
     //HOME
         'app_name' => 'Bank',
@@ -42,6 +45,7 @@ return [
         'account_name' => 'Account name',
         'type' => 'Type',
         'amount' => 'Amount',
+        'bad_id'=> 'The identifier passed as a parameter is not associated with any record in the database',
 
         //USERS
         'users_list'=>'Users list',
@@ -51,6 +55,7 @@ return [
         'erase' => 'Erase',
         'update'=>'Update',
         'email_confirmation'=>'Email confirmation',
+        'no_account_destination'=>'You have no account available for the transfer',
 
          //UPDATE
         'leave_empty'=>'Leave blank to keep the password',

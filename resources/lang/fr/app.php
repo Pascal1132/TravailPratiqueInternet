@@ -19,6 +19,9 @@ return [
     'submit'=>'Envoyer',
     'card_no'=>'Numéro de carte',
 
+    //ABOUT
+    "about"=> "A propos",
+
     //HOME
     'app_name' => 'Banque',
     'home' => 'Accueil',
@@ -39,6 +42,8 @@ return [
     'account_name' => 'Nom du compte',
     'type' => 'Type',
     'amount' => 'Montant',
+    'bad_id'=> 'L\'identifiant passé en paramètre n\'est associé à aucun enregistrement dans la base de données',
+    'no_account_destination'=>'Vous n\'avez aucun compte disponible pour le virement',
 
     //USERS
     'users_list'=>'Liste des utilisateurs',
