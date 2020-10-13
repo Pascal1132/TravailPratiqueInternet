@@ -18,6 +18,9 @@ class Compte extends Model
     public function transactions(){
         return $this->hasMany('App\Models\Transaction','compte_id');
     }
+    public function utilisateur(){
+        return $this->belongsTo('App\Models\Utilisateur', 'utilisateur_id');
+    }
     public function getMontant(){
         $montant = 0;
         $transactions = $this->transactions()->get();

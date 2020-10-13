@@ -59,6 +59,7 @@ return [
         'operation_type'=>'Operation type',
         'account_transfer'=>'Transfer between accounts',
         'check_deposit'=>'Deposit by check',
+        'transactions'=>'Transactions',
 
 
 

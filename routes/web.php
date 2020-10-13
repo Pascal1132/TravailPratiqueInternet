@@ -40,6 +40,7 @@ Route::group(['middleware'=>'all'], function (){
 
     Route::get('/transaction/ajouter', 'TransactionController@ajouter')->name('ajouterTransaction');
     Route::post('/transaction/ajouter', 'TransactionController@validationAjouter')->name('validationAjouterTransaction');
+    Route::get('/transaction/index', 'TransactionController@index')->name('transaction.index');
 
     Route::get('/modifier', 'UtilisateurController@modifier')->name('modifier');
     Route::post('/val/mod/util', 'UtilisateurController@validationMoifier')->name('valModifierUtilisateur');

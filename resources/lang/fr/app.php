@@ -45,6 +45,9 @@ return [
     'bad_id'=> 'L\'identifiant passé en paramètre n\'est associé à aucun enregistrement dans la base de données',
     'no_account_destination'=>'Vous n\'avez aucun compte disponible pour le virement',
 
+    //TRANSACTIONS
+    'transactions'=>'Transactions',
+
     //USERS
     'users_list'=>'Liste des utilisateurs',
     'email'=>'Courriel',

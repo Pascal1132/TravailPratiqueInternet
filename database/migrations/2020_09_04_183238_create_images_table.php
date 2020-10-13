@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBalanceHistoriqueTable extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateBalanceHistoriqueTable extends Migration
      */
     public function up()
     {
-        Schema::create('balance_historique', function (Blueprint $table){
-            $table->unsignedInteger('compte_id');
-            $table->double('balance');
+        Schema::create('images', function (Blueprint $table){
+            $table->unsignedInteger('transaction_id');
+            $table->string('fichier');
             $table->timestamps();
-            $table->foreign('compte_id')->references('id')->on('comptes');
+
+            $table->foreign('transaction_id')
+                ->references('id')->on('transactions')
+                ->onDelete('cascade');
+
         });
     }
 
@@ -28,6 +32,6 @@ class CreateBalanceHistoriqueTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('balance_historique');
+        Schema::dropIfExists('images');
     }
 }

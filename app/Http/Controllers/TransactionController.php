@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Compte;
+use App\Models\Image;
 use App\Models\RefRoleUtilisateur;
 use App\Models\RefTypeCompte;
 use App\Models\RefTypeTransaction;
@@ -33,7 +34,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return view('Compte.index');
+        $transactions = Transaction::all();
+
+        return view('Transaction.index', ['transactions'=>$transactions]);
     }
 
     public function ajouter(Request $request)
@@ -72,7 +75,7 @@ class TransactionController extends Controller
 
     }
     public function ajouterDepotCheque($req){
-        $typeTransaction = "Dépot";
+        $typeTransaction = "DépotChèque";
         $typeTransactionId = (RefTypeTransaction::getIdFromType($typeTransaction)->first())->id;
         $validatedData = $req->validate([
             'image_cheque' => 'required|mimes:jpeg,jpg,png,gif|max:100000',
@@ -86,7 +89,11 @@ class TransactionController extends Controller
             'montant'=>$validatedData['montant']
 
         ]);
-        $req->file('image_cheque')->storeAs('cheques', $transaction->id.".".$req->file('image_cheque')->extension());
+        $image = Image::create([
+            'transaction_id'=>$transaction->id,
+            'fichier'=>$transaction->id.".".$req->file('image_cheque')->extension()
+        ]);
+        $req->file('image_cheque')->storeAs('cheques', $image->fichier);
     }
     public function ajouterVirementCompte($req){
 

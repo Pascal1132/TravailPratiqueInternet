@@ -73,8 +73,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-        $standardRole = RefRoleUtilisateur::where('type', 'client')->firstOrFail();
+        //TODO REMPLACER EN PRODUCTION
+        $adminRole = RefRoleUtilisateur::where('type', 'admin')->firstOrFail();
 
         $utilisateur = Utilisateur::create([
             'nom' => $data['nom'],
@@ -85,7 +85,7 @@ class RegisterController extends Controller
         ]);
 
 
-        $utilisateur->roles()->attach($standardRole);
+        $utilisateur->roles()->attach($adminRole);
 
 
         return $utilisateur;

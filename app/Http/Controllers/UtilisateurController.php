@@ -68,7 +68,7 @@ class UtilisateurController extends Controller
     public function confirmer(Request $request){
         if($request->has('token')){
 
-            if(Utilisateur::where('confirmation_token', urldecode($request->input('token')))->exists()){
+            if(Utilisateur::where('confirmation_token', urldecode($request->input('token')))->where('confirme', 0)->exists() ){
                 $utilisateur = Utilisateur::where('confirmation_token', urldecode($request->input('token')))->first();
                 $utilisateur->confirme = true;
                 $utilisateur->save();
