@@ -41,5 +41,17 @@
     margin-bottom: 24px;
     margin-right: 24px;
 }
+.transaction-row:hover{
+    background: #eeeeee;
+}
+.comptes-card{
+    transition: box-shadow 0.3s ease-in-out;
 
+}
+.comptes-card:hover{
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
+}
 

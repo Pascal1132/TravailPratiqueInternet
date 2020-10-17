@@ -1,67 +1,57 @@
 <?php
 
-return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Application Language Lines
-    |--------------------------------------------------------------------------
-    |
-    |
-    */
-    //WELCOME
-    'login' => 'Connexion',
-    'logout_message'=> 'Vous avez été déconnecté !',
-    'signin' => 'Inscription',
-    'not_logged'=>'Non connecté',
-    'nextLanguage'=> 'English',
-    'password'=>'Mot de passe',
-    'submit'=>'Envoyer',
-    'card_no'=>'Numéro de carte',
-
-    //ABOUT
-    "about"=> "A propos",
-
-    //HOME
-    'app_name' => 'Banque',
-    'home' => 'Accueil',
-    'your_accounts' => 'Vos comptes',
-    'overview_accounts'=>'Aperçu de vos comptes',
-    'no_account'=>'Vous n\'avez aucun compte...',
-    'home_welcome_message'=>'Voici ce que nous avons réservé pour vous aujourd\'hui...',
-    'welcome'=> 'Bienvenue',
-    'edit_user' => 'Modifier l\'utilisateur',
-    'logout'=> 'Se déconnecter',
-    'users'=>'Utilisateurs',
-
-    //ACCOUNTS
-    'new_account'=> 'Nouveau compte',
-    'create_new_account'=> 'Créer un nouveau compte',
-    'accounts_list'=>'Liste de vos comptes',
-    'name' => 'Nom',
-    'account_name' => 'Nom du compte',
-    'type' => 'Type',
-    'amount' => 'Montant',
-    'bad_id'=> 'L\'identifiant passé en paramètre n\'est associé à aucun enregistrement dans la base de données',
-    'no_account_destination'=>'Vous n\'avez aucun compte disponible pour le virement',
-
-    //TRANSACTIONS
-    'transactions'=>'Transactions',
-
-    //USERS
-    'users_list'=>'Liste des utilisateurs',
-    'email'=>'Courriel',
-
-    'role' => 'Rôle',
-    'edit' => 'Modifier',
-    'erase' => 'Effacer',
-    'update' => 'Mettre à jour',
-    'email_confirmation'=>'Confirmation du courriel',
-
-    //UPDATE
-    'leave_empty'=>'Laisser vide pour conserver',
-    'updated'=>'Mise à jour effectuée',
-
-    'unauthorized' => 'Non permis',
-
-];
+return array (
+  'about' => 'A propos',
+  'account_name' => 'Nom du compte',
+  'account_transfer' => 'Virement entre comptes',
+  'accounts_list' => 'Liste de vos comptes',
+  'amount' => 'Montant',
+  'app_name' => 'Banque',
+  'back' => 'Retour',
+  'bad_id' => 'L\'identifiant passé en paramètre n\'est associé à aucun enregistrement dans la base de données',
+  'card_no' => 'Numéro de carte',
+  'check' => 'Chèque',
+  'check_deposit' => 'Dépot par chèque',
+  'choose_file' => 'Choisir un fichier',
+  'create_new_account' => 'Créer un nouveau compte',
+  'delete_success' => 'La suppression a bien été effectuée',
+  'destination_account' => 'Compte de destination',
+  'edit' => 'Modifier',
+  'edit_user' => 'Modifier l\'utilisateur',
+  'email' => 'Courriel',
+  'email_confirmation' => 'Confirmation du courriel',
+  'erase' => 'Effacer',
+  'home' => 'Accueil',
+  'home_welcome_message' => 'Voici ce que nous avons réservé pour vous aujourd\'hui...',
+  'leave_empty' => 'Laisser vide pour conserver',
+  'login' => 'Connexion',
+  'logout' => 'Se déconnecter',
+  'logout_message' => 'Vous avez été déconnecté !',
+  'modify_account' => 'Modifier le compte',
+  'modify_transactions' => 'Modifier la transaction',
+  'name' => 'Nom',
+  'new_account' => 'Nouveau compte',
+  'new_operation' => 'Nouvelle opération',
+  'nextLanguage' => 'English',
+  'no_account' => 'Vous n\'avez aucun compte...',
+  'no_account_destination' => 'Vous n\'avez aucun compte disponible pour le virement',
+  'no_transaction' => 'Il n\'y a pas de transaction',
+  'not_logged' => 'Non connecté',
+  'operation_type' => 'Type d\'opération',
+  'overview_accounts' => 'Aperçu de vos comptes',
+  'password' => 'Mot de passe',
+  'role' => 'Rôle',
+  'roles' => '',
+  'signin' => 'Inscription',
+  'submit' => 'Envoyer',
+  'transactions' => 'Transactions',
+  'type' => 'Type',
+  'unauthorized' => 'Non permis',
+  'update' => 'Mettre à jour',
+  'updated' => 'Mise à jour effectuée',
+  'upload' => 'Téléverser',
+  'users' => 'Utilisateurs',
+  'users_list' => 'Liste des utilisateurs',
+  'welcome' => 'Bienvenue',
+  'your_accounts' => 'Vos comptes',
+);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Mail\ConfirmationCourriel;
 use App\Models\RefRoleUtilisateur;
 use App\Models\Utilisateur;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class UtilisateurController extends Controller
 {
@@ -62,7 +64,44 @@ class UtilisateurController extends Controller
 
         return view('Utilisateur.modifier', ['utilisateur'=>$utilisateur, 'listeRoles'=>$listeRoles]);
     }
-    public function validationModifier(){
+    public function validationModifier(Request $request){
+
+
+        $validatedData=  $request->validate( [
+            'nom' => 'required|string|max:255',
+            'courriel' => 'required|string|email|max:255|unique:utilisateurs,courriel,'.$request->input('id'),
+            'mot_de_passe' => 'sometimes',
+            'role'=> 'sometimes|integer',
+        ]);
+
+
+
+        $utilisateur = Utilisateur::find($request->input('id'));
+        $utilisateur->nom = $validatedData['nom'];
+        if(!is_null($request->input('mot_de_passe'))) $utilisateur->mot_de_passe =  bcrypt($validatedData['mot_de_passe']);
+
+        if(!($validatedData['courriel']==$utilisateur->courriel)){
+            $utilisateur->courriel = $validatedData['courriel'];
+            $utilisateur->confirmation_token = bcrypt($validatedData['courriel'] . $utilisateur->nom . RegisterController::genererCarteId());
+            $utilisateur->confirme = 0;
+
+        }
+
+
+        if(!is_null($request->input('role'))){
+            $role = RefRoleUtilisateur::where('id',$validatedData['role'])->firstOrFail();
+            $roleAvant = RefRoleUtilisateur::where('id',(Utilisateur::find($request->input('id'))->first())->getFirstRole()->id)->firstOrFail();
+            $utilisateur->roles()->detach($roleAvant);
+            $utilisateur->roles()->attach($role);
+        }
+
+        $utilisateur->save();
+        $courriel = new ConfirmationCourriel();
+        if(!($validatedData['courriel']==$utilisateur->courriel)) Mail::to($utilisateur->courriel)->send($courriel);
+
+
+
+
         return back()->with('succes',__('app.'.'updated') . ' !');
     }
     public function confirmer(Request $request){

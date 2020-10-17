@@ -2,6 +2,7 @@
 @section('sidebar_contenu')
     <a class="menu-item w-100" href="{{route('vueConnexion')}}" >@lang('app.login')</a>
     <a class="menu-item w-100" href="{{route('vueInscription')}}" >@lang('app.signin')</a>
+    <a class="menu-item w-100 menu-item-selected" href="{{route('apropos')}}" >@lang('app.about')</a>
 @endsection
 
 @section('titre_page', __('app.about'))
@@ -19,9 +20,9 @@
         <dt class="col-sm-3 text-truncate">Vos comptes</dt>
         <dd class="col-sm-9">Affiche les différents comptes bancaires, permet la création d'un compte, sa modification et sa supression.</dd>
         <dt class="col-sm-3">Transactions</dt>
-        <dd class="col-sm-9">Permet d'afficher les dernières transactions du compte ainsi que la modification de ses transaction et la supression. </dd>
+        <dd class="col-sm-9">Permet d'afficher les dernières transactions du compte ainsi que la modification de ses transactions et la suppression. </dd>
         <dt class="col-sm-3 text-truncate">Utilisateurs</dt>
-        <dd class="col-sm-9">Affiche les différents utilisateurs, permet la création d'un utilisateur, sa modification et sa supression.</dd>
+        <dd class="col-sm-9">Affiche les différents utilisateurs, permet la création d'un utilisateur, sa modification et sa suppression.</dd>
     </dl>
     </p>
     <p><h5>Voici les différents rôles de l'application:</h5><br>
@@ -39,7 +40,7 @@
         <dd class="col-sm-9">Possède les mêmes privilèges que le client, mais aussi il
             <ul>
                 <li>Peut accèder à la liste des utilisateurs</li>
-                <li>Peut ajouter une transaction sur n'importe quel compte, sa modification et sa supression</li>
+                <li>Peut ajouter une transaction sur n'importe quel compte, sa modification et sa suppression</li>
             </ul>
         </dd>
         <dt class="col-sm-3 mb-2">Admin</dt>

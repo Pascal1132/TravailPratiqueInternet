@@ -25,7 +25,7 @@
     <tr class="ligne-milieu" id="compte-{{$compte->id}}" onclick="window.location='{{route('afficherCompte', ['id'=>$compte->id])}}'">
 
         <td scope="row">{{$compte->nom}}</td>
-        <td> {{$compte->type_compte->type}}</td>
+        <td> @lang('types_compte.'.$compte->type_compte->type)</td>
         <td>@money($compte->getMontant()) $</td>
         <td ><span class="iconify" data-icon="fa-chevron-right" data-inline="false"></span></td>
     </tr>

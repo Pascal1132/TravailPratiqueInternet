@@ -33,7 +33,7 @@
             <td>{{$utilisateur->courriel}}</td>
             <td>
                 @foreach($utilisateur->roles as $roles)
-                    {{__('db.' . $roles->type)}}
+                    {{__('types_role.' . $roles->type)}}
                     @if(!$loop->last)
                         ,
                     @endif

@@ -18,7 +18,7 @@
         @foreach($typesCompte as $typeCompte)
                 <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" class="custom-control-input" id="input-{{$typeCompte->type}}" name="type" value="{{$typeCompte->id}}">
-                    <label class="custom-control-label" for="input-{{$typeCompte->type}}">{{__('db.'.$typeCompte->type)}}</label>
+                    <label class="custom-control-label" for="input-{{$typeCompte->type}}">{{__('types_compte.'.$typeCompte->type)}}</label>
                 </div>
         @endforeach
         <div class="form-group">

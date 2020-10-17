@@ -18,7 +18,7 @@
         {{csrf_field()}}
         <div class="form-group">
             <label class="align-right" for="no_carte">@lang('app.card_no') : </label>
-            <input type="text" id="no_carte" name="no_carte" value="{{$utilisateur->no_carte}}" placeholder="@lang('app.card_no')"/>
+            <input type="text" id="no_carte" disabled name="no_carte" value="{{$utilisateur->no_carte}}" placeholder="@lang('app.card_no')"/>
         </div>
         <div class="form-group">
             <label class="align-right" for="nom">@lang('app.name') : </label>
@@ -26,6 +26,7 @@
         </div>
         <input id="username" style="opacity: 0;position: absolute;" type="text" name="fakeusernameremembered">
         <input id="password" style="opacity: 0;position: absolute;" class="cp-password_stub" type="password" name="fakepasswordremembered">
+        <input type="hidden" value="{{$utilisateur->id}}" name="id"/>
         <div class="form-group">
             <label class="align-right" for="courriel">@lang('app.email') : </label>
             <input type="email" id="courriel" name="courriel" value="{{$utilisateur->courriel}}" placeholder="@lang('app.email')"/>
@@ -41,7 +42,7 @@
                 @foreach($listeRoles as $role)
                 <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" class="custom-control-input" @if($utilisateur->hasRole($role->type)) checked @endif id="input-{{$role->type}}" name="role" value="{{$role->id}}">
-                    <label class="custom-control-label" for="input-{{$role->type}}">{{__('db.'.$role->type)}}</label>
+                    <label class="custom-control-label" for="input-{{$role->type}}">{{__('types_role.'.$role->type)}}</label>
                 </div>
                 @endforeach
                 @if($utilisateur->nom === Auth::user()->nom) <br>

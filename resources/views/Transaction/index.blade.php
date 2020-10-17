@@ -8,6 +8,20 @@
 
 @section('titre_page') @lang('app.transactions')@endsection
 @section('content_page')
+    <script>
+        $( document ).ready(function() {
+            $('.bouton-options').hide();
+            $(".transaction-row").hover(function(){
+                $(".dropdown-menu").removeClass('show');
+                $(this).find('.bouton-options').fadeIn(150);
+
+            }, function(){
+                $(".dropdown-menu").removeClass('show');
+                $(this).find('.bouton-options').fadeOut(150);
+            });
+        });
+
+    </script>
 
     <table class="table w-100">
 
@@ -20,11 +34,12 @@
             <th>Description</th>
             <th>@lang('app.amount')</th>
             <th>Photo cheque</th>
+            <th ></th>
         </tr>
         </thead>
         <tbody>
         @forelse($transactions as $transaction)
-            <tr>
+            <tr class="transaction-row">
                 <td>{{$transaction->compte->utilisateur->nom}}</td>
                 <td>{{$transaction->compte->id}}, {{$transaction->compte->type_compte->type}}</td>
                 <td>{{$transaction->created_at}}</td>
@@ -36,12 +51,28 @@
                 @else
                     <td>Non applicable</td>
                 @endif
+                <td style="vertical-align: middle; min-width: 70px">
+
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown bouton-options btn-sm " style="display: none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ●●●
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="btn dropdown-item" href="{{route('transaction.modifier',['id'=>$transaction->id])}}">Modifier</a>
+                            <a class="btn btn-outline-danger dropdown-item" href="{{route('transaction.supprimer',['id'=>$transaction->id])}}">Supprimer</a>
+
+                        </div>
+                    </div>
+
+                </td>
             </tr>
         @empty
-            <tr><td class="text-center" colspan="4"><span  style="font-size: smaller; color:gray"> @lang('app.no_transaction')</span></td></tr>
+            <tr><td class="text-center" colspan="8"><span  style="font-size: smaller; color:gray"> @lang('app.no_transaction')</span></td></tr>
         @endforelse
         </tbody>
     </table>
+
 
 
 

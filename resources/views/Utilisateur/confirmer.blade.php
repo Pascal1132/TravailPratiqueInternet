@@ -2,7 +2,7 @@
 @section('sidebar_contenu')
     @component('layouts.menu_principal')
     @endcomponent
-
+@endsection
 @section('titre_page') @lang('app.email_confirmation')
 @endsection
 @section('content_page')

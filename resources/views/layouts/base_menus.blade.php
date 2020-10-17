@@ -74,11 +74,11 @@
 
     <nav class="navbar navbar-fixed-top navbar-dark bg-dark text-light position-relative" style="border-bottom: 2px solid lightgray">
         <span><span class="iconify" style="margin-bottom: 1px" data-icon="mdi:bank" data-inline="true"></span> <a class="text-light" href="{{route("apropos")}}">{{ config('app.name', 'TheBankOfShawinigan') }}</a></span>
-        <span>@if(Auth::check() && !Auth::user()->confirme) <a class="btn btn-sm btn-danger font-weight-bold pl-2 pr-2" href="{{route('utilisateur.confirmer')}}"> Vous devez confirmer votre courriel</a> @endif</span>
+        <span>@if(Auth::check() && !Auth::user()->confirme) <a class="btn btn-sm btn-danger font-weight-bold pl-2 pr-2" href="{{route('utilisateur.confirmer')}}"> @lang('email.confirm_needed')</a> @endif</span>
         <div class="dropdown">
             <a class="text-light text-decoration-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @if(Auth::check())
-                {{__('db.'.Auth::user()->getFirstRole()->type) . " : ". Auth::user()->nom}} <svg class="svg-icon " style="width: 1.5em; fill: cornflowerblue; margin-top: -4px" viewBox="0 0 20 20">
+                {{__('types_role.'.Auth::user()->getFirstRole()->type) . " : ". Auth::user()->nom}} <svg class="svg-icon " style="width: 1.5em; fill: cornflowerblue; margin-top: -4px" viewBox="0 0 20 20">
                     <path d="M8.749,9.934c0,0.247-0.202,0.449-0.449,0.449H4.257c-0.247,0-0.449-0.202-0.449-0.449S4.01,
                     9.484,4.257,9.484H8.3C8.547,9.484,8.749,9.687,8.749,9.934 M7.402,12.627H4.257c-0.247,0-0.449,
                     0.202-0.449,0.449s0.202,0.449,0.449,0.449h3.145c0.247,0,0.449-0.202,0.449-0.449S7.648,12.627,

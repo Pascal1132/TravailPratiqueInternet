@@ -6,7 +6,7 @@
     @endcomponent
 @endsection
 
-@section('titre_page') {{$compte->nom}} <span class="float-right h5" style="padding-top: 17px; font-size: medium"><a href="" class="text-dark " >
+@section('titre_page') {{$compte->nom}} <span class="float-right h5" style="padding-top: 17px; font-size: medium"><a href="{{route('compte.modifier',['id'=>$compte->id])}}" class="text-dark " >
         @lang('app.modify_account') <span class="iconify" data-icon="ant-design:edit-outlined" data-inline="false"></span></a> | <a href="{{route('ajouterTransaction',['id'=>$compte->id])}}" class="text-dark" >
         @lang('app.new_operation') <span class="iconify" data-icon="ant-design:file-add-outlined" data-inline="false"></span></a></span>@endsection
 @section('content_page')

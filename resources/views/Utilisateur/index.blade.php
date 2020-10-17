@@ -27,12 +27,15 @@
 
                     @forelse(Auth::user()->comptes as $compte)
 
-                        <div class="card d-inline-block m-1 p-2" style="width: 16rem;line-height: 25px">
+                        <div class="card d-inline-block m-1 p-2 comptes-card" style="width: 16rem;line-height: 25px" onclick="window.location='{{route('afficherCompte',['id'=>$compte->id])}}'">
+
                             <div class=""> <a href="{{route('afficherCompte',['id'=>$compte->id])}}">{{$compte->nom}}</a></div>
-                            <div class="float-left">@lang('app.type') : {{__('db.'.$compte->type_compte->type)}}</div>
+                            <div class="float-left">@lang('app.type') : {{__('types_compte.'.$compte->type_compte->type)}}</div>
 
                             <div class="float-right">@money($compte->getMontant()) $</div>
+
                         </div>
+
 
                     @empty
                                 <span style="font-size: smaller; color:gray"> @lang('app.no_account')</span>

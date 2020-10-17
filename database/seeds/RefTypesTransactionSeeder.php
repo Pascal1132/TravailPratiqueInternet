@@ -13,17 +13,17 @@ class RefTypesTransactionSeeder extends Seeder
     public function run()
     {
         RefTypeTransaction::insert([
-            'type'=>'Dépot',
+            'type'=>'deposit',
             'estMontantNegatif' => false
 
         ]);
         RefTypeTransaction::insert([
-            'type'=>'DépotChèque',
+            'type'=>'check_deposit',
             'estMontantNegatif' => false
 
         ]);
         RefTypeTransaction::insert([
-            'type'=>'Retrait',
+            'type'=>'withdrawal',
             'estMontantNegatif' => true
 
         ]);

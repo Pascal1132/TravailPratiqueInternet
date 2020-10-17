@@ -13,11 +13,11 @@ class RefRolesUtilisateurSeeder extends Seeder
     public function run()
     {
         RefRoleUtilisateur::insert([
-            'type'=>'client',
+            'type'=>'customer',
 
         ]);
         RefRoleUtilisateur::insert([
-            'type'=>'caissier',
+            'type'=>'cashier',
 
         ]);
         RefRoleUtilisateur::insert([

@@ -13,19 +13,19 @@ class RefTypesCompteSeeder extends Seeder
     public function run()
     {
         RefTypeCompte::insert([
-            'type'=>'Chèque',
+            'type'=>'check',
 
         ]);
         RefTypeCompte::insert([
-            'type'=>'Épargne',
+            'type'=>'saving',
 
         ]);
         RefTypeCompte::insert([
-            'type'=>'CELI',
+            'type'=>'tfsa',
 
         ]);
         RefTypeCompte::insert([
-            'type'=>'RÉER',
+            'type'=>'rrsp',
 
         ]);
     }

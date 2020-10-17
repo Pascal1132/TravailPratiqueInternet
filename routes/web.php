@@ -37,13 +37,17 @@ Route::group(['middleware'=>'all'], function (){
     Route::get('/compte/afficher', 'CompteController@afficher')->name('afficherCompte');
     Route::get('/compte/ajouter', 'CompteController@ajouter')->name('nouveauCompte');
     Route::post('/compte/ajouter', 'CompteController@validationAjouter')->name('ajouterCompte');
+    Route::get('/compte/modifier', 'CompteController@modifier')->name('compte.modifier');
+    Route::post('/compte/modifier', 'CompteController@validationModifier')->name('compte.modifier');
 
     Route::get('/transaction/ajouter', 'TransactionController@ajouter')->name('ajouterTransaction');
     Route::post('/transaction/ajouter', 'TransactionController@validationAjouter')->name('validationAjouterTransaction');
     Route::get('/transaction/index', 'TransactionController@index')->name('transaction.index');
+    Route::get('/transaction/modifier', 'TransactionController@modifier')->name('transaction.modifier');
+    Route::get('/transaction/supprimer', 'TransactionController@supprimer')->name('transaction.supprimer');
 
     Route::get('/modifier', 'UtilisateurController@modifier')->name('modifier');
-    Route::post('/val/mod/util', 'UtilisateurController@validationMoifier')->name('valModifierUtilisateur');
+    Route::post('/val/mod/util', 'UtilisateurController@validationModifier')->name('valModifierUtilisateur');
 //Changement de langue
     Route::get('/chgLang', 'LangueController@chgLang')->name('changer_langue');
 

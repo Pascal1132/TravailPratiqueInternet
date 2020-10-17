@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RefRolesUtilisateurSeeder::class);
         $this->call(RefTypesCompteSeeder::class);
         $this->call(RefTypesTransactionSeeder::class);
+        $this->call(LanguagesSeeder::class);
+        $this->call(TranslationsSeeder::class);
     }
 }

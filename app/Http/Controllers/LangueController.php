@@ -21,6 +21,9 @@ class LangueController extends Controller
                 $prochaineLangue = 'en';
                 break;
             case 'en':
+                $prochaineLangue = 'es';
+                break;
+            case 'es':
                 $prochaineLangue = 'fr';
                 break;
         }

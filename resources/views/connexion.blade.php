@@ -2,6 +2,7 @@
 @section('sidebar_contenu')
     <a class="menu-item menu-item-selected w-100" >@lang('app.login')</a>
     <a class="menu-item w-100" href="{{route('vueInscription')}}" >@lang('app.signin')</a>
+    <a class="menu-item w-100" href="{{route('apropos')}}" >@lang('app.about')</a>
 @endsection
 
 @section('titre_page', __('app.login'))

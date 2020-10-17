@@ -34,6 +34,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        if(Gate::denies('gerer-toutes-transactions')){
+            return redirect(route('utilisateur.index'))->withErrors([__('app.unauthorized')]);
+        }
         $transactions = Transaction::all();
 
         return view('Transaction.index', ['transactions'=>$transactions]);
@@ -123,5 +126,22 @@ class TransactionController extends Controller
         }
     }
 
+    public function modifier(){
+        if(Gate::denies('gerer-toutes-transactions')){
+            return redirect(route('utilisateur.index'))->withErrors([__('app.unauthorized')]);
+        }
+        return View('Transaction.modifier');
+    }
+    public function supprimer(Request $request)
+    {
+        if (Gate::denies('gerer-toutes-transactions')) {
+            return redirect(route('utilisateur.index'))->withErrors([__('app.unauthorized')]);
+        }
+        if (!Transaction::where('id', $request->input('id'))->exists()) {
+            return redirect(route('utilisateur.index'))->withErrors([__('app.bad_id')]);
+        }
+        Transaction::find($request->input('id'))->delete();
+        return back()->with('succes', __('app.delete_success'));
 
+    }
 }
