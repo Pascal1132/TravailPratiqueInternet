@@ -7,6 +7,7 @@ use App\Models\RefRoleUtilisateur;
 use App\Models\RefTypeCompte;
 use App\Models\Utilisateur;
 use Hamcrest\Util;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -35,8 +36,8 @@ class CompteController extends Controller
     }
     public function afficher(Request $request)
     {
-        $compte = Compte::where('id',$request->input('id'))->where('utilisateur_id', Auth::user()->id)->first();
-        if(empty($compte))return redirect(route('comptes'))->withErrors([__('app.bad_id')]);
+        $compte = Compte::where('id',$request->input('id'))->first();
+        if(!Auth::user()->hasCompte($request->input('id')) && Gate::denies('gerer-tous-comptes'))return redirect(route('comptes'))->withErrors([__('app.bad_id')]);
         return view('Compte.afficher', ['compte'=> $compte]);
     }
     public function ajouter()
@@ -65,13 +66,17 @@ class CompteController extends Controller
     }
     public function modifier(Request $request){
         $typesCompte =  RefTypeCompte::all();
-        if(!Auth::user()->hasCompte($request->input('id')))return redirect(route('comptes'))->withErrors([__('app.bad_id')]);
+        $compte = Compte::where('id',$request->input('id'))->first();
+        if(!Auth::user()->hasCompte($request->input('id')) && Gate::denies('gerer-tous-comptes'))return redirect(route('comptes'))->withErrors([__('app.bad_id')]);
+
         $compte = Compte::find($request->input('id'))->first();
         return view('Compte.modifier',['compte'=>$compte, 'typesCompte'=>$typesCompte]);
     }
     public function validationModifier(Request $request){
         $id = $request->input('id');
-        if(!Auth::user()->hasCompte($id))return redirect(route('comptes'))->withErrors([__('app.bad_id')]);
+        $compte = Compte::where('id',$request->input('id'))->first();
+        if(!Auth::user()->hasCompte($request->input('id')) && Gate::denies('gerer-tous-comptes'))return redirect(route('comptes'))->withErrors([__('app.bad_id')]);
+
         $typeCompte =  RefTypeCompte::where('id',$request->input('type'))->firstOrFail();
         $nomType = $typeCompte->type;
 
@@ -88,7 +93,8 @@ class CompteController extends Controller
         return back()->with('succes',__('app.'.'updated') . ' !');
     }
     public function supprimer(Request $request){
-        if(!Auth::user()->hasCompte($request->input('id')) && Gate::denies('gerer-tous-comptes'))return redirect(route('comptes'))->withErrors([__('app.unauthorized') ." !"]);
+        $compte = Compte::where('id',$request->input('id'))->first();
+        if(!Auth::user()->hasCompte($request->input('id')) && Gate::denies('gerer-tous-comptes'))return redirect(route('comptes'))->withErrors([__('app.bad_id')]);
         Compte::find($request->input('id'))->delete();
         return redirect(route('comptes'))->with('succes', __('app.delete_success'));
     }
