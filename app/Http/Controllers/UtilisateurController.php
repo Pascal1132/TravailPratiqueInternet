@@ -135,6 +135,7 @@ class UtilisateurController extends Controller
             return redirect('/')->withErrors([ __('app.unauthorized') . " !"]);
         }
         Utilisateur::find($request->input('id'))->delete();
+        RefRoleUtilisateur::where('utilisateur_id', $request->input('id'))->delete();
         return back()->with('succes', __('app.delete_success'));
     }
 
