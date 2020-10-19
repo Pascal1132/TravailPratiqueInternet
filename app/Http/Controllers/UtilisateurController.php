@@ -138,4 +138,5 @@ class UtilisateurController extends Controller
         return back()->with('succes', __('app.delete_success'));
     }
 
+
 }

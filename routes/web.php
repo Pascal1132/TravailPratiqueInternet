@@ -59,6 +59,7 @@ Route::group(['middleware'=>'all'], function (){
 
     Route::get('/confirmer', 'UtilisateurController@confirmer')->name('utilisateur.confirmer');
     Route::get('/envoiCourrielConfirmation', 'UtilisateurController@envoiCourrielConfirmation')->name('envoiCourrielConfirmation');
+    Route::post('/envoiCourrielCommentaires', 'CommentaireController@index')->name('commentaire');
     Route::get("/apropos", function(){
        return View("apropos");
     })->name("apropos");

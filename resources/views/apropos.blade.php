@@ -193,4 +193,11 @@
     </div>
     <br>
     <h5>Si vous êtes en local, notez que ce site est disponible à l'adresse suivante : <a href="http://tp1.pascalparent.ca">tp1.pascalparent.ca</a></h5>
+    <h5>Pour des questions ou pour des critères que vous jugez non atteint avec cette application Web, veuillez m'en informer avec le formulaire ci-dessous, merci.</h5>
+        <form id="formCommentaire" method="post" action="{{route('commentaire')}}">
+            {{csrf_field()}}
+            <textarea class="form-control" cols="25" rows="8" form="formCommentaire" name="commentaire" required></textarea>
+            <br>
+            <input class="form-control btn-outline-primary" type="submit" />
+        </form>
 @endsection
