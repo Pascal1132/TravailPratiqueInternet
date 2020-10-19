@@ -39,6 +39,7 @@ Route::group(['middleware'=>'all'], function (){
     Route::post('/compte/ajouter', 'CompteController@validationAjouter')->name('ajouterCompte');
     Route::get('/compte/modifier', 'CompteController@modifier')->name('compte.modifier');
     Route::post('/compte/modifier', 'CompteController@validationModifier')->name('compte.modifier');
+    Route::get('/compte/supprimer', 'CompteController@supprimer')->name('compte.supprimer');
 
     Route::get('/transaction/ajouter', 'TransactionController@ajouter')->name('ajouterTransaction');
     Route::post('/transaction/ajouter', 'TransactionController@validationAjouter')->name('validationAjouterTransaction');

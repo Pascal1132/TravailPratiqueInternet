@@ -87,5 +87,10 @@ class CompteController extends Controller
         $compte->save();
         return back()->with('succes',__('app.'.'updated') . ' !');
     }
+    public function supprimer(Request $request){
+        if(!Auth::user()->hasCompte($request->input('id')) && Gate::denies('gerer-tous-comptes'))return redirect(route('comptes'))->withErrors([__('app.unauthorized') ." !"]);
+        Compte::find($request->input('id'))->delete();
+        return redirect(route('comptes'))->with('succes', __('app.delete_success'));
+    }
 
 }
