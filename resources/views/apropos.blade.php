@@ -44,13 +44,13 @@
                     <p><br>
                     <dl class="row">
                         <dt class="col-sm-3">Accueil</dt>
-                        <dd class="col-sm-9">Affiche le sommaire bancaires de l'utilisateur.</dd>
+                        <dd class="col-sm-9">Affiche le sommaire bancaire de l'utilisateur.</dd>
                         <dt class="col-sm-3 text-truncate">Vos comptes</dt>
-                        <dd class="col-sm-9">Affiche les différents comptes bancaires, permet la création d'un compte, sa modification et sa suppression.</dd>
+                        <dd class="col-sm-9">Affiche les différents comptes bancaires, permets la création d'un compte, sa modification et sa suppression.</dd>
                         <dt class="col-sm-3">Transactions</dt>
-                        <dd class="col-sm-9">Permet d'afficher les dernières transactions du compte ainsi que la modification de ses transactions et la suppression. </dd>
+                        <dd class="col-sm-9">Permets d'afficher les dernières transactions du compte ainsi que la modification de ses transactions et la suppression. </dd>
                         <dt class="col-sm-3 text-truncate">Utilisateurs</dt>
-                        <dd class="col-sm-9">Affiche les différents utilisateurs, permet la création d'un utilisateur, sa modification et sa suppression.</dd>
+                        <dd class="col-sm-9">Affiche les différents utilisateurs, permets la création d'un utilisateur, sa modification et sa suppression.</dd>
                     </dl>
                     </p>
                 </div>
@@ -71,7 +71,7 @@
                         <dt class="col-sm-3">Client</dt>
                         <dd class="col-sm-9">
                             <ul>
-                                <li>Peut accèder à la page d'accueil</li>
+                                <li>Peut accéder à la page d'accueil</li>
                                 <li>Peut voir ses comptes, en créer un, les modifier et les supprimer</li>
                                 <li>Peut voir et ajouter une transaction sur son compte uniquement (seulement virement et dépôt par chèque)</li>
                             </ul>
@@ -80,7 +80,7 @@
                         <dt class="col-sm-3 text-truncate">Caissier</dt>
                         <dd class="col-sm-9">Possède les mêmes privilèges que le client, mais aussi il
                             <ul>
-                                <li>Peut accèder à la liste des utilisateurs</li>
+                                <li>Peut accéder à la liste des utilisateurs</li>
                                 <li>Peut ajouter une transaction sur n'importe quel compte, sa modification et sa suppression</li>
                             </ul>
                         </dd>
@@ -98,7 +98,7 @@
             <div class="card-header" id="headingThree">
                 <h5 class="mb-0">
                     <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                       Étapes pour la mise en place du projet avec le dépot github
+                       Étapes pour la mise en place du projet avec le dépôt github
                     </button>
                 </h5>
             </div>
@@ -108,21 +108,21 @@
 
                         <br>
                     <ol>
-                        <li>Installations des paquets nécéssaires.</li>
+                        <li>Installations des paquets nécessaires.</li>
                         <ul>
                             <li>Récupérer le dossier du projet et le déposer dans le répertoire du serveur web.</li>
                             <li>Dézipper le répertoire.</li>
                             <li>Exécuter la commande <code>composer install</code> afin d'installer les dépendances de composer.</li>
                             <li>Dupliquer .env.example avec comme nom .env afin de créer le fichier d'environnement.</li>
                         </ul>
-                        <li>Génerer la clé d'encryption.</li>
+                        <li>Générer la clé de cryptage.</li>
                         <ul><li>Exécuter la commande <code>php artisan key:generate</code>.</li></ul>
                         <li>Modifier les variables d'environnement dans le fichier .env.</li>
                         <ul>
-                            <li>Remplir le champs DB_HOST dans le fichier par l'adresse de la base de données (naturellement en local : 127.0.0.1). </li>
-                            <li>Remplir le champs DB_PORT dans le fichier par le port utilisé pour la base de données. </li>
-                            <li>Remplir le champs DB_DATABASE dans le fichier par le nom de la base de données que vous aller importer. </li>
-                            <li>Remplir le champs DB_USERNAME et le champs DB_PASSWORD dans le fichier par l'identifiant et le mot de passe pour la base de données (respectivement) .</li>
+                            <li>Remplir le champ DB_HOST dans le fichier par l'adresse de la base de données (naturellement en local : 127.0.0.1). </li>
+                            <li>Remplir le champ DB_PORT dans le fichier par le port utilisé pour la base de données. </li>
+                            <li>Remplir le champ DB_DATABASE dans le fichier par le nom de la base de données que vous aller importer. </li>
+                            <li>Remplir le champ DB_USERNAME et le champ DB_PASSWORD dans le fichier par l'identifiant et le mot de passe pour la base de données (respectivement) .</li>
                         </ul>
                         <li>Importer la base de données.</li>
                         <li>Vérifier si la page de connexion s'affiche correctement.</li>
@@ -146,7 +146,7 @@
                 <div class="card-body">
                     <p><br>
                     <dl class="row">
-                        <dt class="col-sm-3">Controlleurs</dt>
+                        <dt class="col-sm-3">Contrôleurs</dt>
                         <dd class="col-sm-9">
                             App\Http\Controllers\
                         </dd>
@@ -193,7 +193,7 @@
     </div>
     <br>
     <h5>Si vous êtes en local, notez que ce site est disponible à l'adresse suivante : <a href="http://tp1.pascalparent.ca">tp1.pascalparent.ca</a></h5>
-    <h5>Pour des questions ou pour des critères que vous jugez non atteint avec cette application Web, veuillez m'en informer avec le formulaire ci-dessous, merci.</h5>
+    <h5>Pour des questions ou pour des critères que vous jugez non atteints avec cette application Web, veuillez m'en informer avec le formulaire ci-dessous, merci.</h5>
         <form id="formCommentaire" method="post" action="{{route('commentaire')}}">
             {{csrf_field()}}
             <textarea class="form-control" cols="25" rows="8" form="formCommentaire" name="commentaire" required></textarea>
