@@ -136,6 +136,47 @@
             </div>
         </div>
         <div class="card">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Étapes pour la mise en place du projet avec le dépôt github
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                    <p>
+
+                        <br>
+                    <ol>
+                        <li>Installations des paquets nécessaires.</li>
+                        <ul>
+                            <li>Récupérer le dossier du projet et le déposer dans le répertoire du serveur web.</li>
+                            <li>Dézipper le répertoire.</li>
+                            <li>Exécuter la commande <code>composer install</code> afin d'installer les dépendances de composer.</li>
+                            <li>Dupliquer .env.example avec comme nom .env afin de créer le fichier d'environnement.</li>
+                        </ul>
+                        <li>Générer la clé de cryptage.</li>
+                        <ul><li>Exécuter la commande <code>php artisan key:generate</code>.</li></ul>
+                        <li>Modifier les variables d'environnement dans le fichier .env.</li>
+                        <ul>
+                            <li>Remplir le champ DB_HOST dans le fichier par l'adresse de la base de données (naturellement en local : 127.0.0.1). </li>
+                            <li>Remplir le champ DB_PORT dans le fichier par le port utilisé pour la base de données. </li>
+                            <li>Remplir le champ DB_DATABASE dans le fichier par le nom de la base de données que vous aller importer. </li>
+                            <li>Remplir le champ DB_USERNAME et le champ DB_PASSWORD dans le fichier par l'identifiant et le mot de passe pour la base de données (respectivement) .</li>
+                            <li>Il est nécessaire de remplir les champs débutants par MAIL afin de permettre l'envoi de courriels</li>
+                        </ul>
+                        <li>Importer la base de données.</li>
+                        <li>Vérifier si la page de connexion s'affiche correctement.</li>
+
+
+
+                    </ol>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
             <div class="card-header" id="headingFour">
                 <h5 class="mb-0">
                     <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -170,6 +211,7 @@
                     </p>
                 </div>
             </div>
+        </div>
             <div class="card">
                 <div class="card-header" id="headingFive">
                     <h5 class="mb-0">
@@ -191,6 +233,23 @@
                     </div>
                 </div>
         </div>
+            <div class="card">
+                <div class="card-header" id="headingSix">
+                    <h5 class="mb-0">
+                        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseFive">
+                            Diagrammes de la bd
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <h5>Diagramme de provenance</h5>
+                        <a href="http://www.databaseanswers.org/data_models/online_banking/index.htm"><img width="550px" src="{{asset('/storage/app/public/online_banking_model.gif')}}" ></a>
+                        <h5>Diagramme actuel</h5>
+                        <img width="850px" src="{{asset('/storage/app/public/banque.png')}}" >
+                    </div>
+                </div>
+            </div>
     </div>
     <br>
     <h5>Si vous êtes en local, notez que ce site est disponible à l'adresse suivante : <a href="http://tp1.pascalparent.ca">tp1.pascalparent.ca</a></h5>
