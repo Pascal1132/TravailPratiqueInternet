@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : lun. 19 oct. 2020 à 15:18
+-- Généré le : lun. 19 oct. 2020 à 18:01
 -- Version du serveur :  10.3.24-MariaDB-2
 -- Version de PHP : 7.4.10
 
@@ -42,9 +42,7 @@ CREATE TABLE `comptes` (
 --
 
 INSERT INTO `comptes` (`id`, `type_compte_id`, `utilisateur_id`, `nom`, `created_at`, `updated_at`) VALUES
-(6, 3, 3, 'CELI 0', '2020-10-19 20:31:35', '2020-10-19 20:31:35'),
-(7, 3, 3, 'TFSA 1', '2020-10-19 20:31:50', '2020-10-19 20:31:50'),
-(8, 4, 3, 'RRSP 0', '2020-10-19 20:32:00', '2020-10-19 20:32:00');
+(9, 1, 4, 'Chèque 0', '2020-10-20 01:59:10', '2020-10-20 01:59:10');
 
 -- --------------------------------------------------------
 
@@ -58,6 +56,13 @@ CREATE TABLE `images` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `images`
+--
+
+INSERT INTO `images` (`transaction_id`, `fichier`, `created_at`, `updated_at`) VALUES
+(6, '6.jpeg', '2020-10-20 02:00:27', '2020-10-20 02:00:27');
 
 -- --------------------------------------------------------
 
@@ -210,10 +215,7 @@ CREATE TABLE `roles_assignations` (
 --
 
 INSERT INTO `roles_assignations` (`id`, `ref_role_utilisateur_id`, `utilisateur_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, NULL, NULL),
-(2, 2, 2, NULL, NULL),
-(3, 3, 3, NULL, NULL),
-(4, 3, 3, NULL, NULL);
+(5, 3, 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -230,6 +232,13 @@ CREATE TABLE `transactions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `compte_id`, `type_transaction_id`, `description`, `montant`, `created_at`, `updated_at`) VALUES
+(6, 9, 2, 'Dépot par chèque', 515.15, '2020-10-20 02:00:27', '2020-10-20 02:00:27');
 
 -- --------------------------------------------------------
 
@@ -1137,8 +1146,7 @@ CREATE TABLE `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`id`, `no_carte`, `nom`, `mot_de_passe`, `courriel`, `confirme`, `confirmation_token`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, '7489277745698532', 'Pascal Parent', '$2y$10$lFN/gzQsu.4BYrMfeiK8aOOo12HhW1JtK8Yzg0OtiBndSQWHT/KUe', 'pas.parent@outlook.com', 1, '$2y$10$FfiZoPGPco2btHS531SvXOcdUE3zBe82v4JM9axgVPHIdUsXNJlMS', 'mbQ96RyMtWTpkOdU4rt779Es8r0OnfVDUEJxoNB1Us5txpk1eSHSCpinePDn', '2020-10-19 19:10:00', '2020-10-19 19:11:42'),
-(3, '7489321091397780', 'Test test', '$2y$10$wam9My.zQK/Qdqay.0Cvcu2pMu7Zox.N.9XTcQgRnG3AoqbHuAmXe', 'pas.pas@icloud.com', 1, '$2y$10$MZ1.9zqBeq/614f0bv8DmudrIg/MY9p1OitJuu.qgmk.ND98mJtGa', '6TzJqinjFRkmrXs9VZPRaUQHZsxSb8BH2xDWhw2IDih4HOIX3CGTMuB7T8sA', '2020-10-19 20:09:56', '2020-10-19 20:11:25');
+(4, '7489058389729078', 'Pascal Parent', '$2y$10$4OOoDJ9kbzTRkzXKHliDhek9UABsiqYsIfxikxTOx6EDmN5Pj64xC', 'pas.parent@outlook.com', 1, '$2y$10$99nZJTyWN8y8HqvpkpGB5ON.T4zjOj5AnI5Zr4uzMxsXvzlwjuXV6', NULL, '2020-10-20 01:58:40', '2020-10-20 01:58:54');
 
 --
 -- Index pour les tables déchargées
@@ -1198,7 +1206,9 @@ ALTER TABLE `ref_types_transaction`
 -- Index pour la table `roles_assignations`
 --
 ALTER TABLE `roles_assignations`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `utilisateur_fk` (`utilisateur_id`),
+  ADD KEY `role_fk` (`ref_role_utilisateur_id`);
 
 --
 -- Index pour la table `transactions`
@@ -1231,7 +1241,7 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `comptes`
 --
 ALTER TABLE `comptes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `languages`
@@ -1267,13 +1277,13 @@ ALTER TABLE `ref_types_transaction`
 -- AUTO_INCREMENT pour la table `roles_assignations`
 --
 ALTER TABLE `roles_assignations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `translations`
@@ -1285,7 +1295,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
@@ -1303,6 +1313,13 @@ ALTER TABLE `comptes`
 --
 ALTER TABLE `images`
   ADD CONSTRAINT `images_transaction_id_foreign` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `roles_assignations`
+--
+ALTER TABLE `roles_assignations`
+  ADD CONSTRAINT `role_fk` FOREIGN KEY (`ref_role_utilisateur_id`) REFERENCES `ref_roles_utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `utilisateur_fk` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `transactions`
