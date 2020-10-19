@@ -39,7 +39,7 @@
                 @endforeach
             </td>
             @can('modifier-utilisateurs') <td class="text-right"><a class="btn-sm btn-primary" href="{{route('modifier', ['id'=>$utilisateur->id])}}">@lang('app.edit')</a>@endcan
-                @can('effacer-utilisateurs')<a class="btn-sm btn-secondary">@lang('app.erase')</a> @endcan </td>
+                @can('effacer-utilisateurs')<a class="btn-sm btn-secondary" href="{{route('utilisateur.supprimer', ['id'=>$utilisateur->id])}}">@lang('app.erase')</a> @endcan </td>
 
         </tr>
         @empty

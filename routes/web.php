@@ -49,6 +49,7 @@ Route::group(['middleware'=>'all'], function (){
     Route::get('/transaction/supprimer', 'TransactionController@supprimer')->name('transaction.supprimer');
 
     Route::get('/modifier', 'UtilisateurController@modifier')->name('modifier');
+    Route::get('/utilisateur/supprimer', 'UtilisateurController@supprimer')->name('utilisateur.supprimer');
     Route::post('/val/mod/util', 'UtilisateurController@validationModifier')->name('valModifierUtilisateur');
 //Changement de langue
     Route::get('/chgLang', 'LangueController@chgLang')->name('changer_langue');

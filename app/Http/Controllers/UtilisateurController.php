@@ -130,5 +130,12 @@ class UtilisateurController extends Controller
         Mail::to(Auth::user()->courriel)->send($courriel);
         return back()->with('succes','Le courriel a bien été envoyé!');
     }
+    public function supprimer(Request $request){
+        if(Gate::denies('modifier-utilisateurs')){
+            return redirect('/')->withErrors([ __('app.unauthorized') . " !"]);
+        }
+        Utilisateur::find($request->input('id'))->delete();
+        return back()->with('succes', __('app.delete_success'));
+    }
 
 }
