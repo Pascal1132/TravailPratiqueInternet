@@ -204,6 +204,8 @@
                         <dd class="col-sm-9">Database\migrations</dd>
                         <dt class="col-sm-3">Seeds</dt>
                         <dd class="col-sm-9">Database\seeds</dd>
+                        <dt class="col-sm-3">Docs</dt>
+                        <dd class="col-sm-9">Contient la sauvegarde de la base de données</dd>
                         <dt class="col-sm-3">Autres questions ?</dt>
                         <dd class="col-sm-9"><a href="https://laravel.com/docs/5.8/structure">https://laravel.com/docs/5.8/structure</a></dd>
 
