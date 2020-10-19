@@ -123,6 +123,7 @@
                             <li>Remplir le champ DB_PORT dans le fichier par le port utilisé pour la base de données. </li>
                             <li>Remplir le champ DB_DATABASE dans le fichier par le nom de la base de données que vous aller importer. </li>
                             <li>Remplir le champ DB_USERNAME et le champ DB_PASSWORD dans le fichier par l'identifiant et le mot de passe pour la base de données (respectivement) .</li>
+                            <li>Il est nécessaire de remplir les champs débutants par MAIL afin de permettre l'envoi de courriels</li>
                         </ul>
                         <li>Importer la base de données.</li>
                         <li>Vérifier si la page de connexion s'affiche correctement.</li>
