@@ -52,7 +52,7 @@ class CompteController extends Controller
         $nomType = $typeCompte->type;
         $nbCompteType = Auth::user()->comptes->where('type_compte_id', $request->input('type'))->count();
         if( empty($request->input('nom'))) {
-            $nomCompte = $nomType . " " . $nbCompteType;
+            $nomCompte = __('types_compte.'.$nomType) . " " . $nbCompteType;
         }else {
             $nomCompte = $request->input('nom');
         }
