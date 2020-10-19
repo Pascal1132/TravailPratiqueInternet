@@ -8,6 +8,6 @@ class RefTypeTransaction extends Model
 {
     public $table="ref_types_transaction";
     public static function getIdFromType($type){
-        return RefTypeTransaction::select(['id'])->where('type', $type)->get();
+        return RefTypeTransaction::select(['id'])->where('type', $type)->first();
     }
 }

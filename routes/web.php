@@ -31,7 +31,7 @@ Route::group(['middleware'=>'all'], function (){
     });
     Route::get('/decon/', 'Auth\LoginController@logout')->name('deconnexion');
 
-    Route::get('/index', 'UtilisateurController@index')->name('utilisateur.index');
+    Route::get('/index', 'UtilisateurController@accueil')->name('utilisateur.accueil');
 
     Route::get('/compte/index', 'CompteController@index')->name('comptes');
     Route::get('/compte/afficher', 'CompteController@afficher')->name('afficherCompte');
@@ -44,6 +44,7 @@ Route::group(['middleware'=>'all'], function (){
     Route::post('/transaction/ajouter', 'TransactionController@validationAjouter')->name('validationAjouterTransaction');
     Route::get('/transaction/index', 'TransactionController@index')->name('transaction.index');
     Route::get('/transaction/modifier', 'TransactionController@modifier')->name('transaction.modifier');
+    Route::post('/transaction/modifier', 'TransactionController@validerModifier')->name('transaction.modifier');
     Route::get('/transaction/supprimer', 'TransactionController@supprimer')->name('transaction.supprimer');
 
     Route::get('/modifier', 'UtilisateurController@modifier')->name('modifier');
@@ -52,7 +53,7 @@ Route::group(['middleware'=>'all'], function (){
     Route::get('/chgLang', 'LangueController@chgLang')->name('changer_langue');
 
 //Admin
-    Route::get('/utilisateurs', 'UtilisateurController@listeUtilisateurs')->name('listeUtilisateurs');
+    Route::get('/utilisateurs/index', 'UtilisateurController@index')->name('utilisateur.index');
 
     Route::get('/confirmer', 'UtilisateurController@confirmer')->name('utilisateur.confirmer');
     Route::get('/envoiCourrielConfirmation', 'UtilisateurController@envoiCourrielConfirmation')->name('envoiCourrielConfirmation');

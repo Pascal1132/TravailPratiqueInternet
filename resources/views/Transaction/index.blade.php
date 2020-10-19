@@ -43,10 +43,10 @@
                 <td>{{$transaction->compte->utilisateur->nom}}</td>
                 <td>{{$transaction->compte->id}}, {{$transaction->compte->type_compte->type}}</td>
                 <td>{{$transaction->created_at}}</td>
-                <td>{{$transaction->type_transaction->type}}</td>
+                <td>{{__('types_transaction.'.$transaction->type_transaction->type)}}</td>
                 <td>{{$transaction->description}}</td>
                 <td>@money($transaction->montant) $</td>
-                @if($transaction->type_transaction->type == "DépotChèque")
+                @if($transaction->type_transaction->type == "check_deposit")
                     <td><img width="200px" src="{{asset('storage/app/cheques/'.$transaction->image->fichier)}}" alt="Chèque" /></td>
                 @else
                     <td>Non applicable</td>

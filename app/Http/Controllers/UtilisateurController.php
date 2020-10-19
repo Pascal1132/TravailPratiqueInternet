@@ -32,25 +32,26 @@ class UtilisateurController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function accueil()
     {
-        return view('Utilisateur.index');
+        return view('Utilisateur.accueil');
     }
 
     public function listeComptes()
     {
-        return view('Compte.index');
+        return view('Compte.accueil');
     }
     public function afficherCompte()
     {
         return view('Compte.modifier');
     }
-    public function listeUtilisateurs(){
+    public function index(){
         if(Gate::denies('afficher-utilisateurs')){
             return redirect('home');
         }
 
-        return view('Utilisateur.liste', ['utilisateurs'=>Utilisateur::all()]);
+
+        return view('Utilisateur.index', ['utilisateurs'=>Utilisateur::all()]);
     }
     public function modifier(Request $request){
         $id = $request->get('id');

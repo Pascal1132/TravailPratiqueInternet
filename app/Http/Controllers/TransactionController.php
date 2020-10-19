@@ -78,8 +78,8 @@ class TransactionController extends Controller
 
     }
     public function ajouterDepotCheque($req){
-        $typeTransaction = "DépotChèque";
-        $typeTransactionId = (RefTypeTransaction::getIdFromType($typeTransaction)->first())->id;
+        $typeTransaction = "check_deposit";
+        $typeTransactionId = (RefTypeTransaction::getIdFromType($typeTransaction))->id;
         $validatedData = $req->validate([
             'image_cheque' => 'required|mimes:jpeg,jpg,png,gif|max:100000',
             'montant' => 'required|numeric',
@@ -126,22 +126,58 @@ class TransactionController extends Controller
         }
     }
 
-    public function modifier(){
-        if(Gate::denies('gerer-toutes-transactions')){
-            return redirect(route('utilisateur.index'))->withErrors([__('app.unauthorized')]);
+    public function modifier(Request $request){
+        if (Gate::denies('gerer-toutes-transactions')) {
+            return redirect(route('utilisateur.index'))->withErrors([__('app.unauthorized'). "!"]);
         }
-        return View('Transaction.modifier');
+        if (!Transaction::where('id', $request->input('id'))->exists()) {
+            return redirect(route('transaction.index'))->withErrors([__('app.bad_id')]);
+        }
+        $comptes = Compte::all();
+        $transaction = Transaction::find($request->input('id'));
+        return View('Transaction.modifier',['transaction'=>$transaction, 'comptes'=>$comptes]);
     }
     public function supprimer(Request $request)
     {
         if (Gate::denies('gerer-toutes-transactions')) {
-            return redirect(route('utilisateur.index'))->withErrors([__('app.unauthorized')]);
+            return redirect(route('utilisateur.index'))->withErrors([__('app.unauthorized'). "!"]);
         }
         if (!Transaction::where('id', $request->input('id'))->exists()) {
-            return redirect(route('utilisateur.index'))->withErrors([__('app.bad_id')]);
+            return redirect(route('transaction.index'))->withErrors([__('app.bad_id')]);
         }
         Transaction::find($request->input('id'))->delete();
         return back()->with('succes', __('app.delete_success'));
 
+    }
+    public function validerModifier(Request $request){
+        if (Gate::denies('gerer-toutes-transactions')) {
+            return redirect(route('utilisateur.index'))->withErrors([__('app.unauthorized'). "!"]);
+        }
+        if (!Transaction::where('id', $request->input('id'))->exists()) {
+            return redirect(route('transaction.index'))->withErrors([__('app.bad_id')]);
+        }
+
+        $validatedData = $request->validate([
+            'compte_id'=>'required|integer',
+            'image_cheque' => 'nullable|mimes:jpeg,jpg,png,gif|max:100000',
+            'montant' => 'required|numeric',
+            'description'=> 'required|string',
+        ]);
+        $transaction = Transaction::find($request->input('id'));
+        $transaction->montant = $validatedData['montant'];
+        $transaction->description = $validatedData['description'];
+        if($request->has('image_cheque')){
+            Image::where('transaction_id',$transaction->id)->delete();
+            $image = Image::create([
+                'transaction_id'=>$transaction->id,
+                'fichier'=>$transaction->id.".".$request->file('image_cheque')->extension()
+            ]);
+
+
+            $request->file('image_cheque')->storeAs('cheques', $image->fichier);
+        }
+        $transaction->compte_id = $validatedData['compte_id'];
+        $transaction->save();
+        return redirect(route('transaction.index'));
     }
 }

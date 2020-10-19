@@ -1,48 +1,54 @@
 @extends('layouts.base_menus')
 @section('sidebar_contenu')
+
     @component('layouts.menu_principal')
-        @push('accueil', 'menu-item-selected')
+        @push('utilisateurs', 'menu-item-selected')
     @endcomponent
-@endsection
-
-@section('titre_page') @lang('app.welcome') {{ Auth::user()->nom }}
-
-
 
 @endsection
+
+@section('titre_page')@lang('app.users_list') <span class="float-right h5" style="padding-top: 7px;">
+       </span>@endsection
 @section('content_page')
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">@lang('app.name')</th>
+        <th scope="col">@lang('app.email')</th>
 
-    <h6  style="text-color:gray; font-weight: normal">@lang('app.home_welcome_message')</h6>
-    <br>
-
-
-
-    <div class="row">
-        <div class="col-sm col-md text-center">
-
-            <ul class="list-group p-0 ">
-                <li class="list-group-item bg-dark text-light titre-liste"><h4>@lang('app.overview_accounts')</h4></li>
-
-                <li class="list-group-item bg-dark titre-liste text-left">
-
-                    @forelse(Auth::user()->comptes as $compte)
-
-                        <div class="card d-inline-block m-1 p-2 comptes-card" style="width: 16rem;line-height: 25px" onclick="window.location='{{route('afficherCompte',['id'=>$compte->id])}}'">
-
-                            <div class=""> <a href="{{route('afficherCompte',['id'=>$compte->id])}}">{{$compte->nom}}</a></div>
-                            <div class="float-left">@lang('app.type') : {{__('types_compte.'.$compte->type_compte->type)}}</div>
-
-                            <div class="float-right">@money($compte->getMontant()) $</div>
-
-                        </div>
+        <th scope="col">@lang('app.role')</th>
 
 
-                    @empty
-                                <span style="font-size: smaller; color:gray"> @lang('app.no_account')</span>
-                    @endforelse
-                </li>
-            </ul>
-        </div>
+        @if(Gate::check('modifier-utilisateurs') || Gate::check('effacer-utilisateurs'))
+            <th scope="col"></th>
+        @endif
+
+    </tr>
+    </thead>
+    <tbody>
+    @forelse($utilisateurs as $utilisateur)
+        <tr>
+            <td>{{$utilisateur->nom}}</td>
+            <td>{{$utilisateur->courriel}}</td>
+            <td>
+                @foreach($utilisateur->roles as $roles)
+                    {{__('types_role.' . $roles->type)}}
+                    @if(!$loop->last)
+                        ,
+                    @endif
+                @endforeach
+            </td>
+            @can('modifier-utilisateurs') <td class="text-right"><a class="btn-sm btn-primary" href="{{route('modifier', ['id'=>$utilisateur->id])}}">@lang('app.edit')</a>@endcan
+                @can('effacer-utilisateurs')<a class="btn-sm btn-secondary">@lang('app.erase')</a> @endcan </td>
+
+        </tr>
+        @empty
+            @endforelse
+    </tbody>
+</table>
+
+
+
 
 
 @endsection

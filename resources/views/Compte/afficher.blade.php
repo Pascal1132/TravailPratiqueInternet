@@ -26,7 +26,7 @@
         @forelse($compte->transactions as $transaction)
         <tr>
             <td>{{$transaction->created_at}}</td>
-            <td>{{$transaction->type_transaction->type}}</td>
+            <td>{{__('types_transaction.'.$transaction->type_transaction->type)}}</td>
             <td>{{$transaction->description}}</td>
             <td>@money($transaction->montant) $</td>
         </tr>
