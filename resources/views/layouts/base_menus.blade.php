@@ -53,19 +53,23 @@
 
         }
         .menu-item-selected{
-            background: #343a40;
-            color: white;
+            background: darkgray;
+            color: black;
+            font-weight: bold;
             border-color: black;
             border-left-color: cornflowerblue;
-            -webkit-box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.75);
-            -moz-box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.75);
-            box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.75);
+            -webkit-box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);
+            -moz-box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);
+            box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);
         }
         .menu-item-selected:hover{
-            background: #343a40;
-            color: white;
+            background: darkgray;
+            color: black;
             border-color: black;
-            border-left:4px solid cornflowerblue;
+            border-left-color: cornflowerblue;
+            -webkit-box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);
+            -moz-box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);
+            box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);
 
         }
 

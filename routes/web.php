@@ -42,6 +42,8 @@ Route::group(['middleware'=>'all'], function (){
     Route::get('/compte/supprimer', 'CompteController@supprimer')->name('compte.supprimer');
 
     Route::get('/transaction/ajouter', 'TransactionController@ajouter')->name('ajouterTransaction');
+    Route::get('/admin/transaction/ajouter/', 'TransactionController@ajouterAdmin')->name('admin.transaction.ajouter');
+    Route::post('/admin/transaction/ajouter/', 'TransactionController@validerAjouterAdmin')->name('transaction.ajouter.admin');
     Route::post('/transaction/ajouter', 'TransactionController@validationAjouter')->name('validationAjouterTransaction');
     Route::get('/transaction/index', 'TransactionController@index')->name('transaction.index');
     Route::get('/transaction/modifier', 'TransactionController@modifier')->name('transaction.modifier');
@@ -63,4 +65,6 @@ Route::group(['middleware'=>'all'], function (){
     Route::get("/apropos", function(){
        return View("apropos");
     })->name("apropos");
+    Route::post('/api/getCompteByUtilisateur', 'CompteController@getCompteByUtilisateur');
+    Route::get('/api/autocomplete_nomCompte', 'CompteController@autocompleteNomCompte');
 });

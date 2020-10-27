@@ -6,7 +6,8 @@
     @endcomponent
 @endsection
 
-@section('titre_page') @lang('app.transactions')@endsection
+@section('titre_page') @lang('app.transactions') <span class="float-right h5" style="padding-top: 7px;"><a href="{{route('admin.transaction.ajouter')}}" class=" mb-1" >
+        @lang('app.new_operation') <span class="iconify" data-icon="ant-design:file-add-outlined" data-inline="false"></span></a></span>@endsection
 @section('content_page')
     <script>
         $( document ).ready(function() {

@@ -1,3 +1,4 @@
 {
-    "/js/app.js": "/js/app.js"
+    "/js/app.js": "/js/app.js",
+    "/js/nom_compte_autocomplete.js": "/js/nom_compte_autocomplete.js"
 }

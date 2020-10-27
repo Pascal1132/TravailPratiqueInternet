@@ -98,5 +98,36 @@ class CompteController extends Controller
         Compte::find($request->input('id'))->delete();
         return redirect(route('comptes'))->with('succes', __('app.delete_success'));
     }
+    public function autocompleteNomCompte(Request $request){
+
+        if($request->has('term')){
+
+            $resultArray  = array();
+
+            foreach(RefTypeCompte::get() as $type){
+                if($this::like_match('%'.strtolower($request->input('term')).'%',__('types_compte.'.$type['type'])) !== false){
+                    $nbCompte = Auth::user()->comptes->where('type_compte_id', $type['id'])->count();
+                    $resultArray[] = array('label'=>__('types_compte.'.$type['type']), 'value'=>__('types_compte.'.$type['type']) . ' '. $nbCompte, 'type' => $type['type']);
+                }
+
+            }
+            return json_encode($resultArray);
+        }
+
+    }
+    public static function like_match($pattern, $subject)
+    {
+        $pattern = str_replace('%', '.*', preg_quote($pattern, '/'));
+        return (bool) preg_match("/^{$pattern}$/i", $subject);
+    }
+    public function getCompteByUtilisateur(Request $request){
+
+
+           $resultArray = Compte::where('utilisateur_id', $request->input('id'))->get();
+
+        return response()->json($resultArray);
+
+    }
+
 
 }

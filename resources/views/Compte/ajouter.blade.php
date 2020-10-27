@@ -10,6 +10,7 @@
 @section('content_page')
 
 
+
     @if(Auth::user()->confirme)
 
     <form action="{{route('ajouterCompte')}}" method="post">
@@ -23,7 +24,7 @@
         @endforeach
         <div class="form-group">
             <label for="nomCompte">@lang('app.account_name') :</label>
-            <input type="text" class="form-control" id="nomCompte" placeholder="@lang('app.account_name')" name="nom">
+            <input type="text" class="form-control" autocomplete="off" class="ui-autocomplete-input" id="nomCompte" placeholder="@lang('app.account_name')" name="nom">
         </div>
         <button type="submit" class="btn btn-primary">@lang('app.submit')</button>
     </form>

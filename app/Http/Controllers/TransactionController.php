@@ -180,4 +180,13 @@ class TransactionController extends Controller
         $transaction->save();
         return redirect(route('transaction.index'));
     }
+    public function ajouterAdmin(){
+        $utilisateurs = Utilisateur::all();
+
+
+        return view('Transaction.ajouter_admin', ['utilisateurs'=>$utilisateurs]);
+    }
+    public function validerAjouterAdmin(Request $request){
+        dd($request->input());
+    }
 }
