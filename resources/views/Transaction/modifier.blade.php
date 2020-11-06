@@ -12,9 +12,22 @@
     <form id="formulaireModification" method="post" action="{{route('transaction.modifier')}}" enctype="multipart/form-data">
         {{csrf_field()}}
         <label >@lang('app.user') / @lang('app.account_name'): </label>
-        <select form="formulaireModification" name="compte_id" class="form-control" id="compte_destination">
-            @foreach($comptes as $compte)
-                <option value="{{$compte->id}}">{{$compte->utilisateur->nom}} ({{$compte->utilisateur->id}}) / {{$compte->nom}} </option>
+
+        <select class="form-control" name="utilisateur" id="utilisateur_liste_dependante" form="formulaireModification">
+            <option selected hidden disabled>Faites un choix dans la liste</option>
+            @foreach($utilisateurs as $utilisateur)
+
+                <option value="{{$utilisateur->id}}" @if($utilisateur->id == $transaction->compte->utilisateur->id) selected
+                        @endif>{{$utilisateur->nom}} / {{$utilisateur->courriel}}</option>
+            @endforeach
+
+        </select>
+        <br>
+        <select class="form-control" name="compte_id" id="compte_liste_dependante" form="formulaireModification">
+            @foreach($transaction->compte->utilisateur->comptes as $compte)
+
+                <option value="{{$compte->id}}" @if($compte->id == $transaction->compte->id) selected
+                        @endif>{{$compte->nom}}</option>
             @endforeach
 
         </select><br>

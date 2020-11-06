@@ -135,7 +135,8 @@ class TransactionController extends Controller
         }
         $comptes = Compte::all();
         $transaction = Transaction::find($request->input('id'));
-        return View('Transaction.modifier',['transaction'=>$transaction, 'comptes'=>$comptes]);
+        $utilisateurs = Utilisateur::all();
+        return View('Transaction.modifier',['transaction'=>$transaction, 'comptes'=>$comptes, 'utilisateurs'=>$utilisateurs]);
     }
     public function supprimer(Request $request)
     {

@@ -29,7 +29,7 @@
         <thead class="thead-dark">
         <tr class=" font-weight-bold">
             <th>Nom client</th>
-            <th>No. compte / type</th>
+            <th>Nom compte / type</th>
             <th>Date</th>
             <th>@lang('app.type')</th>
             <th>Description</th>
@@ -42,7 +42,7 @@
         @forelse($transactions as $transaction)
             <tr class="transaction-row">
                 <td>{{$transaction->compte->utilisateur->nom}}</td>
-                <td>{{$transaction->compte->id}}, {{$transaction->compte->type_compte->type}}</td>
+                <td>{{$transaction->compte->nom}} / <span class="font-italic">{{__('types_compte.'.$transaction->compte->type_compte->type)}}</span></td>
                 <td>{{$transaction->created_at}}</td>
                 <td>{{__('types_transaction.'.$transaction->type_transaction->type)}}</td>
                 <td>{{$transaction->description}}</td>
