@@ -47,8 +47,8 @@ class CompteController extends Controller
     }
     public function adminIndex(Request $request){
         if(Gate::denies('gerer-tous-comptes'))return redirect(route('comptes'))->withErrors([__('app.unauthorized')]);
-
-        return view('Compte.Admin.comptes', ['comptes'=>Compte::orderBy('utilisateur_id')->get()]);
+        $typesCompte = RefTypeCompte::all();
+        return view('Compte.Admin.comptes', ['comptes'=>Compte::orderBy('utilisateur_id')->get(), "typesCompte"=>$typesCompte]);
 
     }
 
@@ -111,7 +111,9 @@ class CompteController extends Controller
 
             foreach(RefTypeCompte::get() as $type){
                 if($this::like_match('%'.strtolower($request->input('term')).'%',__('types_compte.'.$type['type'])) !== false){
+
                     $nbCompte = Auth::user()->comptes->where('type_compte_id', $type['id'])->count();
+                    if($request->has('id'))$nbCompte = Compte::find($request->input('id'))->utilisateur->comptes->where('type_compte_id', $type['id'])->count();
                     $resultArray[] = array('label'=>__('types_compte.'.$type['type']), 'value'=>__('types_compte.'.$type['type']) . ' '. $nbCompte, 'type' => $type['type']);
                 }
 

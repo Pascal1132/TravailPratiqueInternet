@@ -6,12 +6,16 @@
     @endcomponent
 
 @endsection
+@push('script')
+    <script src="{{asset('resources/assets/js/crud_comptes.js')}}"></script>
+@endpush
 
-@section('titre_page')@lang('app.users_list') <span class="float-right h5" style="padding-top: 7px;">
-       </span><span class="float-right h5" style="padding-top: 7px;"><a href="" class=" mb-1" >
+@section('titre_page')@lang('app.accounts') <span id="titre-action"></span> <span class="float-right h5" style="padding-top: 7px;"><a class="btn-add mb-1" >
         @lang('app.new_operation') <span class="iconify" data-icon="ant-design:file-add-outlined" data-inline="false"></span></a></span>@endsection
 @section('content_page')
-    <table class="table">
+
+    <div id="table-comptes" >
+    <table class="table" >
         <thead class="thead-dark">
         <tr>
             <th scope="col">@lang('app.user')</th>
@@ -39,10 +43,10 @@
 
                 @if(Gate::check('modifier-tous-comptes')|| Gate::check('effacer-tous-comptes'))
                     <td class="text-right">
-                        @can('modifier-tous-comptes') <a class="btn-sm btn-primary" href=""
-                                                         >@lang('app.edit')</a>@endcan
-                        @can('effacer-tous-comptes')<a class="btn-sm btn-secondary"
-                                                       href="">@lang('app.erase')</a> @endcan
+                        @can('modifier-tous-comptes') <button class="btn btn-sm btn-primary btn-edit"
+                                                         >@lang('app.edit')</button>@endcan
+                        @can('effacer-tous-comptes')<button class="btn btn-sm btn-secondary btn-erase"
+                                                       >@lang('app.erase')</button> @endcan
                     </td>@endif
             </tr>
 
@@ -50,7 +54,28 @@
         @endforelse
         </tbody>
     </table>
+    </div>
+    <div style="display: none" id="div-add-edit">
+        <a class="btn btn-sm btn-outline-success btn-back" > @lang('app.back') <span class="iconify " style="padding-bottom: 2px" data-icon="ri:arrow-go-back-line" data-inline="false"></span></a>
 
+        <form class="pt-3" action="{{route('compte.modifier')}}" method="post">
+            {{csrf_field()}}
+            <label>@lang('app.type') : </label>
+            @foreach($typesCompte as $typeCompte)
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" id="input-{{$typeCompte->type}}" name="type" value="{{$typeCompte->id}}" >
+                    <label class="custom-control-label" for="input-{{$typeCompte->type}}">{{__('types_compte.'.$typeCompte->type)}}</label>
+                </div>
+            @endforeach
+            <input type="hidden" value="{{$compte->id}}" name="id">
+            <div class="form-group">
+                <label for="nomCompte">@lang('app.account_name') :</label>
+                <input type="text" class="form-control" id="nomCompte" placeholder="@lang('app.account_name')" name="nom" value="">
+            </div>
+            <button type="submit" class="btn btn-primary">@lang('translation::translation.save')</button>
+        </form>
+    </div>
+    </div>
 
 
 
