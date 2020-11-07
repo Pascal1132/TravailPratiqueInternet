@@ -1,9 +1,14 @@
 <?php
 
 return array (
-  'about' => 'A propos',
+  '\'' => 
+  array (
+    '\'updated' => '',
+  ),
+  'about' => 'À propos',
   'account_name' => 'Nom du compte',
   'account_transfer' => 'Virement entre comptes',
+  'accounts' => 'Comptes',
   'accounts_list' => 'Liste de vos comptes',
   'amount' => 'Montant',
   'app_name' => 'Banque',
@@ -14,6 +19,7 @@ return array (
   'check_deposit' => 'Dépot par chèque',
   'choose_file' => 'Choisir un fichier',
   'create_new_account' => 'Créer un nouveau compte',
+  'delete_account' => 'Supprimer le compte',
   'delete_success' => 'La suppression a bien été effectuée',
   'destination_account' => 'Compte de destination',
   'edit' => 'Modifier',
@@ -48,8 +54,11 @@ return array (
   'type' => 'Type',
   'unauthorized' => 'Non permis',
   'update' => 'Mettre à jour',
+  'update_check_picture' => 'Ajouter une photo du chèque pour écraser l\'ancienne',
   'updated' => 'Mise à jour effectuée',
   'upload' => 'Téléverser',
+  'user' => 'Utilisateur',
+  'user_no_account' => 'L\'utilisateur n\'a pas de compte',
   'users' => 'Utilisateurs',
   'users_list' => 'Liste des utilisateurs',
   'welcome' => 'Bienvenue',

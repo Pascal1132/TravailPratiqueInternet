@@ -20,7 +20,7 @@
     <h1>Pascal Parent</h1>
     <h3>420-5B7 MO Applications internet</h3>
     <h3>Automne 2020, College Montmorency</h3>
-    <h5>À noter que le site internet est fait avec laravel 5.8.</h5>
+    <h5>À noter que le site internet est fait avec laravel 8 <span class="text-danger">Mise à jour récente</span></h5>
     <br>
 
 

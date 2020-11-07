@@ -1,9 +1,14 @@
 <?php
 
 return array (
+  '\'' => 
+  array (
+    '\'updated' => '',
+  ),
   'about' => 'About',
   'account_name' => 'Account name',
   'account_transfer' => 'Transfer between accounts',
+  'accounts' => 'Accounts',
   'accounts_list' => 'List of your accounts',
   'amount' => 'Amount',
   'app_name' => 'Bank',
@@ -14,6 +19,7 @@ return array (
   'check_deposit' => 'Deposit by check',
   'choose_file' => 'Choose a file',
   'create_new_account' => 'Create new account',
+  'delete_account' => 'Delete the account',
   'delete_success' => 'The deletion was successful',
   'destination_account' => 'Destination account',
   'edit' => 'Edit',
@@ -48,8 +54,11 @@ return array (
   'type' => 'Type',
   'unauthorized' => 'Unauthorized',
   'update' => 'Update',
+  'update_check_picture' => 'Add a photo of the check to overwrite the old one',
   'updated' => 'Updated',
   'upload' => 'Upload',
+  'user' => 'User',
+  'user_no_account' => 'The user doesn\'t have any account',
   'users' => 'Users',
   'users_list' => 'Users list',
   'welcome' => 'Welcome',
