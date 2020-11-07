@@ -33,6 +33,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('gerer-tous-comptes', function ($utilisateur){
             return $utilisateur->hasAnyRoles(['admin']);
         });
+        Gate::define('modifier-tous-comptes', function ($utilisateur){
+            return $utilisateur->hasAnyRoles(['admin']);
+        });
+        Gate::define('effacer-tous-comptes', function ($utilisateur){
+            return $utilisateur->hasAnyRoles(['admin']);
+        });
         Gate::define('gerer-toutes-transactions', function ($utilisateur){
             return $utilisateur->hasAnyRoles(['admin', 'cashier']);
         });

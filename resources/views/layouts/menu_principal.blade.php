@@ -6,3 +6,6 @@
 @can('afficher-utilisateurs')
     <a class="menu-item w-100 @stack('utilisateurs')" href="{{route('utilisateur.index')}}" >@lang('app.users')</a>
 @endcan
+@can('gerer-tous-comptes')
+    <a class="menu-item w-100 @stack('admin.comptes')" href="{{route('admin.comptes')}}" >@lang('app.accounts')</a>
+@endcan

@@ -45,7 +45,12 @@ class CompteController extends Controller
         $typesCompte =  RefTypeCompte::all();
         return view('Compte.ajouter', ['typesCompte'=>$typesCompte]);
     }
+    public function adminIndex(Request $request){
+        if(Gate::denies('gerer-tous-comptes'))return redirect(route('comptes'))->withErrors([__('app.unauthorized')]);
 
+        return view('Compte.Admin.comptes', ['comptes'=>Compte::orderBy('utilisateur_id')->get()]);
+
+    }
 
     public function validationAjouter(Request $request){
         $typeCompte =  RefTypeCompte::where('id',$request->input('type'))->firstOrFail();
