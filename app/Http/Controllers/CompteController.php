@@ -7,7 +7,7 @@ use App\Models\RefRoleUtilisateur;
 use App\Models\RefTypeCompte;
 use App\Models\Utilisateur;
 use Hamcrest\Util;
-use http\Client\Curl\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -22,7 +22,7 @@ class CompteController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**

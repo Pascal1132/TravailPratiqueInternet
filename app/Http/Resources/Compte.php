@@ -14,6 +14,11 @@ class Compte extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id'=>$this->id,
+            'nom'=>$this->nom,
+            'type_compte_id'=>$this->type_compte_id,
+            'utilisateur_id'=>$this->utilisateur_id
+        ];
     }
 }

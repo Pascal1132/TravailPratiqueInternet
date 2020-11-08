@@ -41,7 +41,10 @@ class LoginController extends Controller
     {
         return 'courriel';
     }
+    protected function authenticated(Request $request, $user)
+    {
 
+    }
 
 
 }

@@ -5,22 +5,43 @@ $.ajaxSetup({
 });
 $(function () {
 
+    $(".btn-add").click(function(){
+        changeConteneur("#div-add-edit", "#table-comptes", " > Ajouter le compte");
+    });
 
     $(".btn-edit").click(function(){
+        var id = $(this).attr('compteId');
+        editCompte(id);
         changeConteneur("#div-add-edit", "#table-comptes", " > Modifier le compte");
+
+        $("#idCompte").val();
+
     });
+
     $(".btn-back").click(function(){
        changeConteneur("#table-comptes", "#div-add-edit");
-
-
     });
 
     function changeConteneur(nouvelElement, ancienElement, titreAction=""){
-        $(ancienElement).toggle("fade", 300, function(){
-            $(nouvelElement).toggle("fade", 300);
+        $(ancienElement).toggle("slide", 500, function(){
+            $(nouvelElement).toggle("slide",{}, 500);
         });
-
         $("#titre-action").text(titreAction);
+    }
+
+    //Remplir les données de la modification du compte
+    function editCompte(id){
+        $.ajax({
+            type: 'GET',
+            url: APP_URL+'/api/comptes/'+id,
+            dataType: "JSON",
+
+            data: {_token: $('meta[name="csrf-token"]').attr('content'), 'id':id},
+            success: function (data) {
+                $("#nomCompte").val(data.data.nom);
+            }
+
+        });
 
     }
 });

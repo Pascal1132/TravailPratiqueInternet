@@ -43,9 +43,9 @@
 
                 @if(Gate::check('modifier-tous-comptes')|| Gate::check('effacer-tous-comptes'))
                     <td class="text-right">
-                        @can('modifier-tous-comptes') <button class="btn btn-sm btn-primary btn-edit"
+                        @can('modifier-tous-comptes') <button compteId="{{$compte->id}}" class="btn btn-sm btn-primary btn-edit"
                                                          >@lang('app.edit')</button>@endcan
-                        @can('effacer-tous-comptes')<button class="btn btn-sm btn-secondary btn-erase"
+                        @can('effacer-tous-comptes')<button compteId="{{$compte->id}}" class="btn btn-sm btn-secondary btn-erase"
                                                        >@lang('app.erase')</button> @endcan
                     </td>@endif
             </tr>
@@ -67,7 +67,7 @@
                     <label class="custom-control-label" for="input-{{$typeCompte->type}}">{{__('types_compte.'.$typeCompte->type)}}</label>
                 </div>
             @endforeach
-            <input type="hidden" value="{{$compte->id}}" name="id">
+            <input type="hidden" value="{{$compte->id}}" name="id" id="idCompte">
             <div class="form-group">
                 <label for="nomCompte">@lang('app.account_name') :</label>
                 <input type="text" class="form-control" id="nomCompte" placeholder="@lang('app.account_name')" name="nom" value="">

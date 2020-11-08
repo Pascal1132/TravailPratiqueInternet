@@ -6,10 +6,13 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
+
 
 class Utilisateur extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
+
     public $table="utilisateurs";
     /**
      * Les attributs pouvants être assignés en masse

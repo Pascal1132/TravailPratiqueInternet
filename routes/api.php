@@ -15,8 +15,8 @@ use Illuminate\Http\Request;
 */
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
-Route::middleware('auth:api')->group(function(){
-    Route::get('/comptes', 'Api\CompteController@index');
-});
+
+
+Route::resource('comptes', 'Api\CompteController');
 
 
