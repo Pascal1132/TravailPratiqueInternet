@@ -39,10 +39,30 @@ $(function () {
             data: {_token: $('meta[name="csrf-token"]').attr('content'), 'id':id},
             success: function (data) {
                 $("#nomCompte").val(data.data.nom);
+                $("#input-"+data.data.type_compte).prop('checked', true);
             }
 
         });
+        listeUtilisateurs();
 
     }
+
+    function listeUtilisateurs(){
+        $.ajax({
+            type: 'GET',
+            url: APP_URL+'/api/utilisateurs',
+            dataType: "JSON",
+
+            data: {_token: $('meta[name="csrf-token"]').attr('content')},
+            success: function (data) {
+                data.data.forEach(function(item){
+                    console.debug(item);
+                });
+            }
+
+        });
+    }
+
+
 });
 

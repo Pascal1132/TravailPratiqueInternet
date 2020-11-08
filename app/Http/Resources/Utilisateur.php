@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Compte extends JsonResource
+class Utilisateur extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,7 @@ class Compte extends JsonResource
         return [
             'id'=>$this->id,
             'nom'=>$this->nom,
-            'type_compte_id'=>$this->type_compte_id,
-            'utilisateur_id'=>$this->utilisateur_id,
-            'type_compte'=>$this->type_compte->type,
+
         ];
     }
 }
