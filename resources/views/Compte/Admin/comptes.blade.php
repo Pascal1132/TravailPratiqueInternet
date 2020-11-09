@@ -10,7 +10,7 @@
     <script src="{{asset('resources/assets/js/crud_comptes.js')}}"></script>
 @endpush
 
-@section('titre_page')@lang('app.accounts') <span id="titre-action"></span> <span class="float-right h5" style="padding-top: 7px;"><a class="btn-add mb-1" >
+@section('titre_page')@lang('app.accounts') <span id="titre-action"></span> <span class="float-right h5" style="padding-top: 7px;"><a role="button" class=" btn-add mb-1" >
         @lang('app.new_account') <span class="iconify" data-icon="ant-design:file-add-outlined" data-inline="false"></span></a></span>@endsection
 @section('content_page')
 
@@ -58,8 +58,11 @@
     <div style="display: none" id="div-add-edit">
         <a class="btn btn-sm btn-outline-success btn-back" > @lang('app.back') <span class="iconify " style="padding-bottom: 2px" data-icon="ri:arrow-go-back-line" data-inline="false"></span></a>
 
-        <form class="pt-3" action="{{route('compte.modifier')}}" method="post">
+        <form class="pt-3" action="{{route('compte.modifier')}}" id="form-add-edit" method="post">
             {{csrf_field()}}
+
+
+
             <label>@lang('app.type') : </label>
             @foreach($typesCompte as $typeCompte)
                 <div class="custom-control custom-radio custom-control-inline">
@@ -67,14 +70,38 @@
                     <label class="custom-control-label" for="input-{{$typeCompte->type}}">{{__('types_compte.'.$typeCompte->type)}}</label>
                 </div>
             @endforeach
+            <div class="form-group">
+                <label for="choixUtilisateur">@lang('app.user') : </label>
+            <select id="choixUtilisateur" class="form-control"></select>
+            </div>
             <input type="hidden" value="{{$compte->id}}" name="id" id="idCompte">
             <div class="form-group">
                 <label for="nomCompte">@lang('app.account_name') :</label>
                 <input type="text" class="form-control" id="nomCompte" placeholder="@lang('app.account_name')" name="nom" value="">
             </div>
-            <button type="submit" class="btn btn-primary">@lang('translation::translation.save')</button>
+            <button type="submit" class="btn btn-primary">@lang('app.submit')</button>
         </form>
     </div>
+
+    <div id="deleteConfirmationModal" class="modal fade" aria-modal="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h4 class="modal-title">Êtes-vous sûr?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Voulez-vous vraiment supprimer ce compte ? Les transactions associées à celui-ci seront,
+                        à leur tour, effacées.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Supprimer</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 
