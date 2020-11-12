@@ -9,6 +9,8 @@ $(function () {
         changeConteneur("#div-add-edit", "#table-comptes", " > Ajouter le compte");
         listeUtilisateurs();
         addCompte();
+        $(".btn-send").attr('action', 'add');
+
     });
 
     $(".btn-edit").click(function(){
@@ -16,7 +18,8 @@ $(function () {
         editCompte(id);
         changeConteneur("#div-add-edit", "#table-comptes", " > Modifier le compte");
 
-        $("#idCompte").val();
+        $(".btn-send").attr('action', 'edit');
+        $("#idCompte").val(id);
 
     });
     $(".btn-erase").click(function(){
@@ -27,12 +30,44 @@ $(function () {
        changeConteneur("#table-comptes", "#div-add-edit");
     });
 
+    $(".btn-send").click(function(){
+        switch($(".btn-send").attr('action')){
+            case 'add':
+                break;
+            case 'edit':
+                $.ajax({
+                    type: 'PUT',
+                    url: APP_URL+'/api/comptes/'+$("#idCompte").val(),
+                    dataType: "JSON",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        'type_compte_id': $("input[name='type']:checked").val(),
+                        'utilisateur_id': $("#choixUtilisateur").val(),
+                        'nom': $('#nomCompte').val(),
+
+                    },
+                    success: function (data) {
+
+                        $("#messages").html(successMessage("Mise à jour effectuée!"));
+                        $("#messages").fadeIn(500);
+                    }
+                });
+                break;
+        }
+    });
+
     function changeConteneur(nouvelElement, ancienElement, titreAction=""){
         $(ancienElement).toggle("drop", 500, function(){
-            $(nouvelElement).toggle("slide",{}, 500);
+            $("#messages").html("");
+            $("#messages").hide();
+            $(nouvelElement).toggle("slide",{}, 500, function () {
+
+            });
         });
+
         $("#titre-action").text(titreAction);
         $(".btn-add").fadeToggle();
+
     }
 
     //Remplir les données de la modification du compte
@@ -53,8 +88,12 @@ $(function () {
     }
 
     function addCompte(){
-        $("#form-add-edit").trigger("reset");
+        $(".custom-control").trigger("reset");
+        $(".form-control").trigger("reset");
+
+
     }
+
 
     function listeUtilisateurs(){
         $.ajax({
@@ -72,6 +111,14 @@ $(function () {
             }
 
         });
+    }
+    function successMessage(str){
+        return "<div style=\"margin-left: -16px; margin-right: -24px;\">\n" +
+        "                            <div class=\"main__content notice-flash\">\n" +
+        "                                <div class=\"notification green\">\n" +
+        "                                    <b>Note: </b> "+str+"</div>\n" +
+        "                            </div>\n" +
+        "                        </div>";
     }
 
 

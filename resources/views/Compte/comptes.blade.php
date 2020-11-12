@@ -58,10 +58,8 @@
     <div style="display: none" id="div-add-edit">
         <a class="btn btn-sm btn-outline-success btn-back" > @lang('app.back') <span class="iconify " style="padding-bottom: 2px" data-icon="ri:arrow-go-back-line" data-inline="false"></span></a>
 
-        <form class="pt-3" action="{{route('compte.modifier')}}" id="form-add-edit" method="post">
-            {{csrf_field()}}
-
-
+        <div class="pt-3" id="form-add-edit" >
+            <div id="messages" style="display: none"></div>
 
             <label>@lang('app.type') : </label>
             @foreach($typesCompte as $typeCompte)
@@ -79,8 +77,8 @@
                 <label for="nomCompte">@lang('app.account_name') :</label>
                 <input type="text" class="form-control" id="nomCompte" placeholder="@lang('app.account_name')" name="nom" value="">
             </div>
-            <button type="submit" class="btn btn-primary">@lang('app.submit')</button>
-        </form>
+            <button type="submit" class="btn-send btn btn-primary" action="">@lang('app.submit')</button>
+        </div>
     </div>
 
     <div id="deleteConfirmationModal" class="modal fade" aria-modal="true">

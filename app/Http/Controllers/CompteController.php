@@ -48,7 +48,7 @@ class CompteController extends Controller
     public function adminIndex(Request $request){
         if(Gate::denies('gerer-tous-comptes'))return redirect(route('comptes'))->withErrors([__('app.unauthorized')]);
         $typesCompte = RefTypeCompte::all();
-        return view('Compte.Admin.comptes', ['comptes'=>Compte::orderBy('utilisateur_id')->get(), "typesCompte"=>$typesCompte]);
+        return view('Compte.comptes', ['comptes'=>Compte::orderBy('utilisateur_id')->get(), "typesCompte"=>$typesCompte]);
 
     }
 

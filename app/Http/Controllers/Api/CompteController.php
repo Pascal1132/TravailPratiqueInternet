@@ -46,7 +46,8 @@ class CompteController extends BaseController
         return $this->sendResponse(new CompteResource($compte), 'Compte correctement récupéré');
     }
 
-    public function update(Request $request, Compte $compte){
+    public function update(Request $request, $id){
+        $compte = Compte::find($id);
         $compte->update($request->all());
         return response()->json($compte, 200);
     }
