@@ -14,6 +14,7 @@
         @lang('app.new_account') <span class="iconify" data-icon="ant-design:file-add-outlined" data-inline="false"></span></a></span>@endsection
 @section('content_page')
 
+    <div class="messages" style="display: none"></div>
     <div id="table-comptes" >
     <table class="table" >
         <thead class="thead-dark">
@@ -59,7 +60,7 @@
         <a class="btn btn-sm btn-outline-success btn-back" > @lang('app.back') <span class="iconify " style="padding-bottom: 2px" data-icon="ri:arrow-go-back-line" data-inline="false"></span></a>
 
         <div class="pt-3" id="form-add-edit" >
-            <div id="messages" style="display: none"></div>
+            <div class="messages" style="display: none"></div>
 
             <label>@lang('app.type') : </label>
             @foreach($typesCompte as $typeCompte)
@@ -91,12 +92,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
                     <p>Voulez-vous vraiment supprimer ce compte ? Les transactions associées à celui-ci seront,
                         à leur tour, effacées.</p>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Supprimer</button>
+                    <button type="button" class="btn-send btn btn-danger " data-dismiss="modal" aria-label="Close" action="delete">Supprimer</button>
                 </div>
             </div>
         </div>

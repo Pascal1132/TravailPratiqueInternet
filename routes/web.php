@@ -25,7 +25,7 @@ Route::group(['middleware'=>'all'], function (){
         })->name('vueConnexion');
 
 //Validations de connexion
-        Route::post('/insc/', 'Auth\RegisterController@register')->name('inscription');
+        Route::post('/insc/', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('inscription');
         Route::post('/conn/', 'Auth\LoginController@login')->name('connexion');
 
     });

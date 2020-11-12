@@ -24,6 +24,9 @@ $(function () {
     });
     $(".btn-erase").click(function(){
         $("#deleteConfirmationModal").modal('show');
+        var id = $(this).attr('compteId');
+        $("#idCompte").val(id);
+        $(".btn-send").attr('action', 'delete');
     });
 
     $(".btn-back").click(function(){
@@ -31,9 +34,29 @@ $(function () {
     });
 
     $(".btn-send").click(function(){
+
         switch($(".btn-send").attr('action')){
+
             case 'add':
+                $.ajax({
+                    type: 'POST',
+                    url: APP_URL+'/api/comptes',
+                    dataType: "JSON",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        'type_compte_id': $("input[name='type']:checked").val(),
+                        'utilisateur_id': $("#choixUtilisateur").val(),
+                        'nom': $('#nomCompte').val(),
+
+                    },
+                    success: function (data) {
+
+                        $(".messages").html(successMessage("Ajout effectué!"));
+                        $(".messages").fadeIn(500);
+                    }
+                });
                 break;
+
             case 'edit':
                 $.ajax({
                     type: 'PUT',
@@ -48,8 +71,23 @@ $(function () {
                     },
                     success: function (data) {
 
-                        $("#messages").html(successMessage("Mise à jour effectuée!"));
-                        $("#messages").fadeIn(500);
+                        $(".messages").html(successMessage("Mise à jour effectuée!"));
+                        $(".messages").fadeIn(500);
+                    }
+                });
+                break;
+            case 'delete':
+                $.ajax({
+                    type: 'DELETE',
+                    url: APP_URL+'/api/comptes/'+$("#idCompte").val(),
+                    dataType: "JSON",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    success: function (data) {
+
+                        $(".messages").html("<div class='pl-2'>"+successMessage("Données supprimées!")+"</div>");
+                        $(".messages").fadeIn(500);
                     }
                 });
                 break;
@@ -58,8 +96,8 @@ $(function () {
 
     function changeConteneur(nouvelElement, ancienElement, titreAction=""){
         $(ancienElement).toggle("drop", 500, function(){
-            $("#messages").html("");
-            $("#messages").hide();
+            $(".messages").html("");
+            $(".messages").hide();
             $(nouvelElement).toggle("slide",{}, 500, function () {
 
             });

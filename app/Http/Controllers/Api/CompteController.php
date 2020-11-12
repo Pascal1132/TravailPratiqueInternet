@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Compte;
+
 use App\Models\RefTypeCompte;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class CompteController extends BaseController
     }
     public function store(Request $request){
 
-        $typeCompte =  RefTypeCompte::where('id',$request->input('type'))->firstOrFail();
+        $typeCompte =  RefTypeCompte::where('id',$request->input('type_compte_id'))->firstOrFail();
         $nomType = $typeCompte->type;
         $nbCompteType = Utilisateur::find($request->input('utilisateur_id'))->comptes->where('type_compte_id', $request->input('type'))->count();
         if( empty($request->input('nom'))) {
@@ -31,10 +32,11 @@ class CompteController extends BaseController
             $nomCompte = $request->input('nom');
         }
         $compte = Compte::create([
-            'type_compte_id'=> $request->input('type'),
+            'type_compte_id'=> $request->input('type_compte_id'),
             'utilisateur_id'=> $request->input('utilisateur_id'),
             'nom'=>$nomCompte,
         ]);
+
 
         return $this->sendResponse(new CompteResource($compte), 'Compte correctement créé');
     }
@@ -51,10 +53,8 @@ class CompteController extends BaseController
         $compte->update($request->all());
         return response()->json($compte, 200);
     }
-    public function destroy(Request $request){
-        $compte = Compte::where('id',$request->input('id'))->first();
-        if(!Auth::user()->hasCompte($request->input('id')) && Gate::denies('gerer-tous-comptes'))return $this->sendError(__('app.unauthorized'));
-        Compte::find($request->input('id'))->delete();
+    public function destroy(Request $request, $id){
+        Compte::find($id)->delete();
         return $this->sendResponse([],  __('app.delete_success'));
     }
 }
