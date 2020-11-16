@@ -14,9 +14,11 @@ class Utilisateur extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             'id'=>$this->id,
             'nom'=>$this->nom,
+            'role_id'=>$this->getFirstRole()
 
         ];
     }

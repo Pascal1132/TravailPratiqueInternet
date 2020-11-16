@@ -33,7 +33,7 @@
 
         </tr>
         </thead>
-        <tbody>
+        <tbody id="liste-compte-tbody">
         @forelse($comptes as $compte)
             <tr>
                 <td>@can('modifier-utilisateurs') <a class=""
@@ -60,7 +60,6 @@
         <a class="btn btn-sm btn-outline-success btn-back" > @lang('app.back') <span class="iconify " style="padding-bottom: 2px" data-icon="ri:arrow-go-back-line" data-inline="false"></span></a>
 
         <div class="pt-3" id="form-add-edit" >
-            <div class="messages" style="display: none"></div>
 
             <label>@lang('app.type') : </label>
             @foreach($typesCompte as $typeCompte)

@@ -27,6 +27,12 @@
         a{
             text-decoration: none!important;
         }
+        @media only screen and (max-width: 845px) {
+            #navbar-menu-left{
+                display: none;
+            }
+
+        }
 
     </style>
     <!-- Style pour la sidebar -->
@@ -72,12 +78,31 @@
             box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);
 
         }
+        @media only screen and (max-width: 845px) {
+            .menu-item{
+                border-radius: 15px;
+                margin-bottom: 5px;
+                border-left: 0px ;
+                -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,255,0.75);
+                -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,255,0.75);
+                box-shadow: 0px 0px 5px 0px rgba(0,0,255,0.75);
+
+            }
+            .menu-item-selected:hover{
+                -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,255,0.75);
+                -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,255,0.75);
+                box-shadow: 0px 0px 5px 0px rgba(0,0,255,0.75);
+            }
+
+        }
 
     </style>
 
 
-    <nav class="navbar navbar-fixed-top navbar-dark bg-dark text-light position-relative" style="border-bottom: 2px solid lightgray">
-        <span><span class="iconify" style="margin-bottom: 1px" data-icon="mdi:bank" data-inline="true"></span> <a class="text-light" href="{{route("apropos")}}">{{ config('app.name', 'TheBankOfShawinigan') }}</a></span>
+    <nav class="navbar navbar-fixed-top navbar-dark bg-dark text-light position-relative"  style="border-bottom: 2px solid lightgray">
+
+
+        <span><button class="ml-0 pb-0 btn text-light d-inline d-md-none" id="btn-collapse-menu"><span class="iconify mb-1" data-icon="radix-icons:hamburger-menu" data-width="25" data-height="25" data-inline="false"></span></button><span class="iconify d-none d-md-inline" style="margin-bottom: 1px" data-icon="mdi:bank" data-inline="true"></span> <a class="text-light d-none d-md-inline" href="{{route("apropos")}}">{{ config('app.name', 'TheBankOfShawinigan') }}</a></span>
         <span>@if(Auth::check() && !Auth::user()->confirme) <a class="btn btn-sm btn-danger font-weight-bold pl-2 pr-2" href="{{route('utilisateur.confirmer')}}"> @lang('email.confirm_needed')</a> @endif</span>
         <div class="dropdown">
             <a class="text-light text-decoration-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -124,12 +149,12 @@
     </nav>
     <div class="container-fluid">
         <div class="row flex-xl-nowrap sidebar-row">
-            <div class="col-12 col-md-2 col-xl-2 bd-sidebar text-center p-md-0" style="border-right: 1px solid lightgray; overflow:hidden;overflow-y: auto">
+            <div class="col-12 col-md-2 col-xl-2 bd-sidebar text-center p-md-0 d-md-block" id="navbar-menu-left" style="border-right: 1px solid lightgray; overflow:hidden;overflow-y: auto">
                 <span class="d-flex title-sidebar justify-content-center" style="font-weight: bold">@yield('sidebar_titre', 'Menu')</span>
                 <div >
                     @yield('sidebar_contenu')
                 </div>
-                <div class="d-flex fixed-bottom">...</div>
+
 
 
 
@@ -162,7 +187,13 @@
         </div>
 
     </div>
-
+    <script>
+        $(document).ready(function(){
+           $("#btn-collapse-menu").on('click', function(){
+                $("#navbar-menu-left").fadeToggle(400);
+           });
+        });
+    </script>
 
 
 

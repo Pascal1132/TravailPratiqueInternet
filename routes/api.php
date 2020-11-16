@@ -19,5 +19,5 @@ Route::post('login', [RegisterController::class, 'login']);
 
 Route::resource('comptes', 'Api\CompteController');
 Route::resource('utilisateurs', 'Api\UtilisateurController');
-Route::post('/getCompteByUtilisateur', 'CompteController@getCompteByUtilisateur');
-Route::get('/autocomplete_nomCompte', 'CompteController@autocompleteNomCompte');
+
+

@@ -45,7 +45,7 @@
     <!-- JavaScript -->
     <script src="{{asset('resources/assets/js/nom_compte_autocomplete.js')}}"></script>
     <script src="{{asset('resources/assets/js/admin_liste_dependante_ajouter_transaction.js')}}"></script>
-    <script src="{{asset('js/app.js')}}"></script>
+
     @stack('script')
 
 </head>

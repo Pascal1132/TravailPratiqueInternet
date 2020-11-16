@@ -20,10 +20,11 @@
 
         </select>
         <br>
-        <select class="form-control" name="compte" id="compte_liste_dependante" form="formulaireAjoutOperation">
-
-
+        <select class="form-control" name="compte_id" id="compte_liste_dependante" form="formulaireAjoutOperation">
         </select><br>
+
+        <input type="text" class="form-control" name="montant" placeholder="@lang('app.amount')" />
+        <br>
 
         <input type="submit" class="btn btn-primary" value="@lang('app.submit')" />
     </form>

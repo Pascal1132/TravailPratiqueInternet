@@ -19,7 +19,10 @@ class Compte extends JsonResource
             'nom'=>$this->nom,
             'type_compte_id'=>$this->type_compte_id,
             'utilisateur_id'=>$this->utilisateur_id,
-            'type_compte'=>$this->type_compte->type,
+            'utilisateur'=>$this->utilisateur,
+            'type_compte'=>$this->type_compte,
+            'type_compte_nom'=>__('types_compte.'.$this->type_compte->type),
+            'montant'=>$this->getMontant(),
         ];
     }
 }

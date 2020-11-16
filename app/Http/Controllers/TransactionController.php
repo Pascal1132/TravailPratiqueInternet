@@ -188,6 +188,15 @@ class TransactionController extends Controller
         return view('Transaction.ajouter_admin', ['utilisateurs'=>$utilisateurs]);
     }
     public function validerAjouterAdmin(Request $request){
-        dd($request->input());
+
+        if($request->input('montant')<0)$type_transaction = 3;else $type_transaction=1;
+        $transactionDestination = Transaction::create([
+            'compte_id'=>$request->input('compte_id'),
+            'type_transaction_id'=>$type_transaction,
+            'description'=>"AJOUT ADMIN",
+            'montant'=>abs($request->input('montant'))
+        ]);
+        return redirect(route('transaction.index'));
+
     }
 }
