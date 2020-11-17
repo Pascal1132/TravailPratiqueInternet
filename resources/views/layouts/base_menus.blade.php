@@ -27,9 +27,20 @@
         a{
             text-decoration: none!important;
         }
-        @media only screen and (max-width: 845px) {
+        #navbar-menu-left{
+            color: white;
+
+            background: none;
+
+            padding-bottom: 0px;
+        }
+        @media only screen and (max-width: 768px) {
             #navbar-menu-left{
+                color: white;
                 display: none;
+                background: #343a40;
+
+                padding-bottom: 5px;
             }
 
         }
@@ -78,20 +89,18 @@
             box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);
 
         }
-        @media only screen and (max-width: 845px) {
+        @media only screen and (max-width: 768px) {
             .menu-item{
-                border-radius: 15px;
+                border-radius: 5px;
                 margin-bottom: 5px;
                 border-left: 0px ;
-                -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,255,0.75);
-                -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,255,0.75);
-                box-shadow: 0px 0px 5px 0px rgba(0,0,255,0.75);
+
 
             }
-            .menu-item-selected:hover{
-                -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,255,0.75);
-                -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,255,0.75);
-                box-shadow: 0px 0px 5px 0px rgba(0,0,255,0.75);
+            .menu-item:active{
+                -webkit-box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);
+                -moz-box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);
+                box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);
             }
 
         }
@@ -190,7 +199,7 @@
     <script>
         $(document).ready(function(){
            $("#btn-collapse-menu").on('click', function(){
-                $("#navbar-menu-left").fadeToggle(400);
+                $("#navbar-menu-left").slideToggle(400);
            });
         });
     </script>

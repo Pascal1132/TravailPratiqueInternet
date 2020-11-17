@@ -67,6 +67,9 @@ Route::group(['middleware'=>'all'], function (){
        return View("apropos");
     })->name("apropos");
 
+
+    Route::get('/compte/pdf', 'CompteController@pdf')->name('compte.pdf');
+
     Route::prefix('api')->group(function(){
         Route::post('getCompteByUtilisateur', 'CompteController@getCompteByUtilisateur');
         Route::get('autocomplete_nomCompte', 'CompteController@autocompleteNomCompte');

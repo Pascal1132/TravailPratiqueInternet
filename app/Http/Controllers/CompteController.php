@@ -6,6 +6,7 @@ use App\Models\Compte;
 use App\Models\RefRoleUtilisateur;
 use App\Models\RefTypeCompte;
 use App\Models\Utilisateur;
+use Barryvdh\DomPDF\Facade as PDF;
 use Hamcrest\Util;
 
 use Illuminate\Http\Request;
@@ -134,6 +135,15 @@ class CompteController extends Controller
 
         return response()->json($resultArray);
 
+    }
+    public function pdf(Request $request){
+        $compte = Compte::find($request->input('id'));
+        $titre = 'Sommaire_'.$compte->nom.'('.$compte->id.')_'.date('Y_m_d_h_i_s').'.pdf';
+
+        $data = ['titre'=> $titre, 'compte' => $compte];
+        $pdf = PDF::loadView('Compte.pdf', $data);
+
+        return $pdf->stream($titre);
     }
 
 

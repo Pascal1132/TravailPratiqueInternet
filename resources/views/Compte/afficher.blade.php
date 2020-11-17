@@ -6,13 +6,15 @@
     @endcomponent
 @endsection
 
-@section('titre_page') {{$compte->nom}} <span class="float-right h5" style="padding-top: 17px; font-size: medium"><a href="{{route('compte.modifier',['id'=>$compte->id])}}" class="text-dark " >
+@section('titre_page') {{$compte->nom}} <span class="float-right h5 mt-2 " style="padding-top: 17px; font-size: medium"><a href="{{route('compte.modifier',['id'=>$compte->id])}}" class="text-dark " >
         @lang('app.modify_account') <span class="iconify" data-icon="ant-design:edit-outlined" data-inline="false"></span></a> | <a href="{{route('ajouterTransaction',['id'=>$compte->id])}}" class="text-dark" >
         @lang('app.new_operation') <span class="iconify" data-icon="ant-design:file-add-outlined" data-inline="false"></span></a> | <a class="text-danger" href="{{route('compte.supprimer',['id'=>$compte->id])}}" class="text-dark" >
         @lang('app.delete_account') <span class="iconify " data-icon="carbon:delete" data-inline="false"></span></a></span>@endsection
 @section('content_page')
 
-    <br>
+
+    <a href="{{route('compte.pdf', ['id'=>$compte->id])}}">Télécharger le sommaire du compte [PDF]</a>
+    <br><br>
     <table class="table w-100">
 
         <thead>

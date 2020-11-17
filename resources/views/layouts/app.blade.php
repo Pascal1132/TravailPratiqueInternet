@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'TheBankOfShawinigan') }}</title>
+    <title>@yield('title', config('app.name', 'TheBankOfShawinigan')) </title>
 
     <!-- Bootstrap core CSS -->
 
@@ -41,6 +41,7 @@
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <!-- Styles -->
     <link rel="stylesheet" href="{{ URL::asset('public/css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <!-- JavaScript -->
     <script src="{{asset('resources/assets/js/nom_compte_autocomplete.js')}}"></script>

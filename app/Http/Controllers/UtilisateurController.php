@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Mail\ConfirmationCourriel;
 use App\Models\RefRoleUtilisateur;
 use App\Models\Utilisateur;
+use Barryvdh\DomPDF\Facade as PDF;
 use Hamcrest\Util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -138,6 +139,7 @@ class UtilisateurController extends Controller
         RefRoleUtilisateur::where('utilisateur_id', $request->input('id'))->delete();
         return back()->with('succes', __('app.delete_success'));
     }
+
 
 
 }
