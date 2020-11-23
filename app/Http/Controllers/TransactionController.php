@@ -193,7 +193,7 @@ class TransactionController extends Controller
         $transactionDestination = Transaction::create([
             'compte_id'=>$request->input('compte_id'),
             'type_transaction_id'=>$type_transaction,
-            'description'=>"AJOUT ADMIN",
+            'description'=>"Effectué par la banque",
             'montant'=>abs($request->input('montant'))
         ]);
         return redirect(route('transaction.index'));

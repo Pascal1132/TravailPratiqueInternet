@@ -89,6 +89,9 @@
             box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);
 
         }
+        .title-sidebar{
+            color: black;
+        }
         @media only screen and (max-width: 768px) {
             .menu-item{
                 border-radius: 5px;
@@ -96,6 +99,9 @@
                 border-left: 0px ;
 
 
+            }
+            .title-sidebar{
+                color: white;
             }
             .menu-item:active{
                 -webkit-box-shadow: inset 0px 0px 9px 0px rgba(0,0,0,0.25);

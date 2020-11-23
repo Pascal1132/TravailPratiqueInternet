@@ -20,7 +20,7 @@
     <h1>Pascal Parent</h1>
     <h3>420-5B7 MO Applications internet</h3>
     <h3>Automne 2020, College Montmorency</h3>
-    <h5>À noter que le site internet est fait avec laravel 8 <span class="text-danger">Mise à jour récente</span></h5>
+    <h5>À noter que le site internet est fait avec laravel 8</h5>
     <br>
 
 
@@ -30,6 +30,32 @@
 
 
     <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingUpdates">
+                <h5 class="mb-0">
+                    <button class="btn collapsed font-weight-bold" type="button" data-toggle="collapse" data-target="#collapseUpdates" aria-expanded="true" aria-controls="collapseUpdates">
+                        Informations importantes concernant le TP2
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseUpdates" class="collapse" aria-labelledby="headingcollapseUpdates" data-parent="#accordionExample">
+                <div class="card-body">
+                    <br>
+                    <dl class="row">
+                        <dt class="col-sm-3">Listes liées</dt>
+                        <dd class="col-sm-9">Transactions / Nouvelle opération </dd>
+                        <dt class="col-sm-3 text-truncate">Autocomplétion</dt>
+                        <dd class="col-sm-9">Vos comptes / Nouveau compte (Le champ du nom du compte [ Chèque, Épargne, RÉER, CELI ])</dd>
+                        <dt class="col-sm-3">CRUD en <span style="font-style: italic">Single Page Application</span></dt>
+                        <dd class="col-sm-9">Comptes /</dd>
+                        <dt class="col-sm-3 text-truncate">PDF</dt>
+                        <dd class="col-sm-9">(Deux chemins) : <span class="text-info">Vos comptes / [ Sélectionner un compte ] / Télécharger le sommaire du compte [PDF]</span> OU  <span class="text-info">Utilisateurs / Comptes / Modifier / Télécharger le sommaire du compte [PDF] </span></dd>
+                    </dl>
+                    <p>La base de données se trouve dans le dossier docs à la racine du projet.</p>
+                </div>
+            </div>
+        </div>
         <div class="card">
             <div class="card-header" id="headingOne">
                 <h5 class="mb-0">
@@ -167,14 +193,14 @@
                         <dt class="col-sm-3">Docs</dt>
                         <dd class="col-sm-9">Contient la sauvegarde de la base de données</dd>
                         <dt class="col-sm-3">Autres questions ?</dt>
-                        <dd class="col-sm-9"><a href="https://laravel.com/docs/5.8/structure">https://laravel.com/docs/5.8/structure</a></dd>
+                        <dd class="col-sm-9"><a href="https://laravel.com/docs/8.x/structure">https://laravel.com/docs/8.x/structure</a></dd>
 
                     </dl>
                     </p>
                 </div>
             </div>
         </div>
-            <div class="card">
+        <div class="card">
                 <div class="card-header" id="headingFive">
                     <h5 class="mb-0">
                         <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
@@ -195,7 +221,7 @@
                     </div>
                 </div>
         </div>
-            <div class="card">
+        <div class="card">
                 <div class="card-header" id="headingSix">
                     <h5 class="mb-0">
                         <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseFive">

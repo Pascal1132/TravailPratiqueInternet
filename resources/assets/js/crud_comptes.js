@@ -90,9 +90,10 @@ $(function () {
                         _token: $('meta[name="csrf-token"]').attr('content'),
                     },
                     success: function (data) {
-
+                        getComptes();
                         $(".messages").html("<div class='pl-2'>"+successMessage("Données supprimées!")+"</div>");
                         $(".messages").fadeIn(500);
+
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         $(".messages").html(errorMessage("Erreur dans la suppression du compte. "));

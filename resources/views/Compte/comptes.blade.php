@@ -72,7 +72,7 @@
                 <label for="choixUtilisateur">@lang('app.user') : </label>
             <select id="choixUtilisateur" class="form-control"></select>
             </div>
-            <input type="hidden" value="{{$compte->id}}" name="id" id="idCompte">
+            <input type="hidden" value="" name="id" id="idCompte">
             <div class="form-group">
                 <label for="nomCompte">@lang('app.account_name') :</label>
                 <input type="text" class="form-control" id="nomCompte" placeholder="@lang('app.account_name')" name="nom" value="">
