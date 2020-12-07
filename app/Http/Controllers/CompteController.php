@@ -75,12 +75,12 @@ class CompteController extends Controller
         $compte = Compte::where('id',$request->input('id'))->first();
         if(!Auth::user()->hasCompte($request->input('id')) && Gate::denies('gerer-tous-comptes'))return redirect(route('comptes'))->withErrors([__('app.bad_id')]);
 
-        $compte = Compte::find($request->input('id'))->first();
+        $compte = Compte::find($request->input('id'));
         return view('Compte.modifier',['compte'=>$compte, 'typesCompte'=>$typesCompte]);
     }
     public function validationModifier(Request $request){
         $id = $request->input('id');
-        $compte = Compte::where('id',$request->input('id'))->first();
+
         if(!Auth::user()->hasCompte($request->input('id')) && Gate::denies('gerer-tous-comptes'))return redirect(route('comptes'))->withErrors([__('app.bad_id')]);
 
         $typeCompte =  RefTypeCompte::where('id',$request->input('type'))->firstOrFail();
@@ -92,7 +92,7 @@ class CompteController extends Controller
         }else {
             $nomCompte = $request->input('nom');
         }
-        $compte = Compte::find($id)->first();
+        $compte = Compte::find($id);
         $compte->type_compte_id = $typeCompte->id;
         $compte->nom = $nomCompte;
         $compte->save();

@@ -101,8 +101,8 @@ class TransactionController extends Controller
     public function ajouterVirementCompte($req){
 
 
-        $typeTransactionProvenance = (RefTypeTransaction::getIdFromType("Retrait")->first())->id;
-        $typeTransactionDestination = (RefTypeTransaction::getIdFromType("Dépot")->first())->id;
+        $typeTransactionProvenance = (RefTypeTransaction::getIdFromType("withdrawal")->first())->id;
+        $typeTransactionDestination = (RefTypeTransaction::getIdFromType("deposit")->first())->id;
         if(Auth::user()->hasCompte($req->input('compte_destination'))){
             $validatedData = $req->validate([
                 'montant' => 'required|numeric',
