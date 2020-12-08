@@ -182,7 +182,7 @@ class TransactionController extends Controller
         return redirect(route('transaction.index'));
     }
     public function ajouterAdmin(){
-        $utilisateurs = Utilisateur::all();
+        $utilisateurs = Utilisateur::select('id','nom', 'courriel')->get();
 
 
         return view('Transaction.ajouter_admin', ['utilisateurs'=>$utilisateurs]);

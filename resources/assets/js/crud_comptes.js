@@ -105,10 +105,10 @@ $(function () {
     });
 
     function changeConteneur(nouvelElement, ancienElement, titreAction=""){
-        $(ancienElement).toggle("drop", 500, function(){
+        $(ancienElement).slideToggle( 500, function(){
             $(".messages").html("");
             $(".messages").hide();
-            $(nouvelElement).toggle("slide",{}, 500, function () {
+            $(nouvelElement).slideToggle( 500, function () {
 
             });
         });

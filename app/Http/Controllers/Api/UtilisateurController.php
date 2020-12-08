@@ -59,4 +59,6 @@ class UtilisateurController extends BaseController
         return $this->sendResponse([],  __('app.delete_success'));*/
         return null;
     }
+
+
 }

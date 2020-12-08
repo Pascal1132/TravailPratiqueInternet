@@ -9,6 +9,7 @@ use App\Models\Utilisateur;
 use Barryvdh\DomPDF\Facade as PDF;
 use Hamcrest\Util;
 
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -129,7 +130,6 @@ class CompteController extends Controller
         return (bool) preg_match("/^{$pattern}$/i", $subject);
     }
     public function getCompteByUtilisateur(Request $request){
-
 
            $resultArray = Compte::where('utilisateur_id', $request->input('id'))->get();
 
