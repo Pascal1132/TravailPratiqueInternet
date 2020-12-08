@@ -37436,6 +37436,7 @@ var ListesLieesReact = function (_React$Component) {
             comptes: []
 
         };
+        _this.recupererComptes = _this.recupererComptes.bind(_this);
         return _this;
     }
 
@@ -37449,7 +37450,7 @@ var ListesLieesReact = function (_React$Component) {
             }).then(function (response) {
                 return response.json();
             }).then(function (response) {
-                console.debug(response.data);
+
                 _this2.setState({ utilisateurs: response.data });
             }).catch(function (error) {
                 console.log('ERREUR : ' + error.message);
@@ -37458,18 +37459,19 @@ var ListesLieesReact = function (_React$Component) {
     }, {
         key: 'recupererComptes',
         value: function recupererComptes(e) {
+            var _this3 = this;
+
             var requestsOptions = {
                 method: 'POST',
                 data: { '_token': CSRF_TOKEN, id: e.target.value }
             };
-            console.log('Changement de la sélection : ' + e.target.value);
+
             var post = axios(APP_URL + '/api/getCompteByUtilisateur', requestsOptions).then(function (response) {
 
-                console.debug(response);
+                _this3.setState({ comptes: response.data });
             }).catch(function (error) {
                 console.log('ERREUR : ' + error.message);
             });
-            console.log(post);
         }
     }, {
         key: 'render',
@@ -37496,15 +37498,12 @@ var ListesLieesReact = function (_React$Component) {
                         'Faites un choix dans la liste'
                     ),
                     this.state.utilisateurs.map(function (item, i) {
-                        console.log("Entered");
-                        console.debug(item.nom);
+
                         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'option',
                             { value: item.id, key: item.id },
                             item.nom
                         );
-                        // Return the element. Also pass key
-                        //return (<option id='utilisateur-"+item.id+"' value='"+item.id+"'>"+item.nom+"</option>)
                     })
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
@@ -37513,16 +37512,12 @@ var ListesLieesReact = function (_React$Component) {
                     { defaultValue: '-1', className: 'form-control', name: 'utilisateur', id: 'utilisateur_liste_dependante',
                         form: 'formulaireAjoutOperation' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('option', { hidden: true, disabled: true, value: '-1' }),
-                    this.state.utilisateurs.map(function (item, i) {
-                        console.log("Entered");
-                        console.debug(item.nom);
+                    this.state.comptes.map(function (item, i) {
                         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'option',
                             { value: item.id, key: item.id },
                             item.nom
                         );
-                        // Return the element. Also pass key
-                        //return (<option id='utilisateur-"+item.id+"' value='"+item.id+"'>"+item.nom+"</option>)
                     })
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),

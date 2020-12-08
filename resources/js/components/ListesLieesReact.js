@@ -11,34 +11,38 @@ class ListesLieesReact extends React.Component{
             comptes: [],
 
         }
+        this.recupererComptes = this.recupererComptes.bind(this);
     }
     componentDidMount(){
         fetch(APP_URL+'/api/utilisateurs', {
             method:'GET'
         }).then(response => response.json())
             .then(response => {
-                console.debug(response.data);
+                
+
                 this.setState({utilisateurs: response.data});
             }).catch(function(error){
                 console.log('ERREUR : '+ error.message);
         });
     }
 
+
     recupererComptes(e){
         const requestsOptions={
             method: 'POST',
             data: {'_token':CSRF_TOKEN, id: e.target.value}
         }
-        console.log('Changement de la sélection : '+e.target.value);
+
         var post = axios(APP_URL+'/api/getCompteByUtilisateur', requestsOptions)
 
             .then(response=>{
 
-                console.debug(response);
+                this.setState({comptes: response.data});
+
             }).catch(function(error){
                 console.log('ERREUR : '+ error.message);
         })
-        console.log(post);
+
     }
 
     render(){
@@ -50,25 +54,20 @@ class ListesLieesReact extends React.Component{
                                     form="formulaireAjoutOperation">
                                 <option hidden disabled value="-1">Faites un choix dans la liste</option>
                                 {this.state.utilisateurs.map((item, i) => {
-                                    console.log("Entered");
-                                    console.debug(item.nom);
+
                                     return <option value={item.id} key={item.id}>{item.nom}</option>
-                                    // Return the element. Also pass key
-                                    //return (<option id='utilisateur-"+item.id+"' value='"+item.id+"'>"+item.nom+"</option>)
+
                                 })}
                             </select>
                 <br />
-                <select defaultValue="-1" className="form-control" name="utilisateur" id="utilisateur_liste_dependante"
+                    <select defaultValue="-1" className="form-control" name="utilisateur" id="utilisateur_liste_dependante"
                         form="formulaireAjoutOperation">
-                    <option hidden disabled value="-1"></option>
-                    {this.state.utilisateurs.map((item, i) => {
-                        console.log("Entered");
-                        console.debug(item.nom);
-                        return <option value={item.id} key={item.id}>{item.nom}</option>
-                        // Return the element. Also pass key
-                        //return (<option id='utilisateur-"+item.id+"' value='"+item.id+"'>"+item.nom+"</option>)
-                    })}
-                </select>
+                        <option hidden disabled value="-1"/>
+                        {this.state.comptes.map((item, i) => {
+                            return <option value={item.id} key={item.id}>{item.nom}</option>
+
+                        })}
+                    </select>
                 <br/>
                             <button className="btn btn-primary" onClick={()=>{
                                 alert('envoyé');
