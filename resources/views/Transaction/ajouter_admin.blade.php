@@ -14,7 +14,7 @@
         {{csrf_field()}}
         <select class="form-control" name="utilisateur" id="utilisateur_liste_dependante" form="formulaireAjoutOperation">
             <option selected hidden disabled>Faites un choix dans la liste</option>
-            @foreach($utilisateurs as $utilisateur)
+             @foreach($utilisateurs as $utilisateur)
                 <option value="{{$utilisateur->id}}">{{$utilisateur->nom}} / {{$utilisateur->courriel}}</option>
             @endforeach
 
@@ -28,7 +28,9 @@
 
         <input type="submit" class="btn btn-primary" value="@lang('app.submit')" />
     </form>
-
+    <!-- React root DOM -->
+    <div id="listes-liees-react" data-utilisateurs="{{$utilisateurs}}">
+    </div>
 
 
 

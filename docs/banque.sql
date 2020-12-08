@@ -1107,7 +1107,7 @@ INSERT INTO `translations` (`id`, `language_id`, `group`, `key`, `value`, `creat
 (842, 3, 'translation::translation', 'add_language', '', '2020-10-17 22:47:28', '2020-10-17 22:47:28'),
 (843, 3, 'translation::translation', 'search', '', '2020-10-17 22:47:28', '2020-10-17 22:47:28'),
 (844, 1, 'app', 'user', 'Utilisateur', '2020-10-18 03:40:32', '2020-10-18 03:40:32'),
-(845, 2, 'app', 'user', 'User', '2020-10-18 03:41:09', '2020-10-18 03:41:09'),
+(845, 2, 'app', 'user', 'ListesLieesReact', '2020-10-18 03:41:09', '2020-10-18 03:41:09'),
 (846, 3, 'app', 'user', 'Usuario', '2020-10-18 03:41:33', '2020-10-18 03:41:33'),
 (847, 1, 'app', 'update_check_picture', 'Ajouter une photo du chèque pour écraser l\'ancienne', '2020-10-18 03:45:01', '2020-10-18 03:45:01'),
 (848, 2, 'app', 'update_check_picture', 'Add a photo of the check to overwrite the old one', '2020-10-18 03:46:14', '2020-10-18 03:46:14'),

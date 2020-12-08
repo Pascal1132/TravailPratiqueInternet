@@ -7,6 +7,7 @@
 
 @section('titre_page', __('app.about'))
 @section('content_page')
+
     <style>
         [data-toggle="collapse"] .fa:before {
             content: "\f139";
@@ -248,4 +249,6 @@
             <br>
             <input class="form-control btn-outline-primary" type="submit" />
         </form>
+
+
 @endsection
