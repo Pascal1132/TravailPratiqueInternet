@@ -135,8 +135,10 @@ class UtilisateurController extends Controller
         if(Gate::denies('modifier-utilisateurs')){
             return redirect('/')->withErrors([ __('app.unauthorized') . " !"]);
         }
-        Utilisateur::find($request->input('id'))->delete();
-        RefRoleUtilisateur::where('utilisateur_id', $request->input('id'))->delete();
+        $utilisateur =  Utilisateur::find($request->input('id'));
+
+        $utilisateur->delete();
+
         return back()->with('succes', __('app.delete_success'));
     }
 

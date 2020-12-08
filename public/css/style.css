@@ -44,6 +44,10 @@
 .transaction-row:hover{
     background: #eeeeee;
 }
+.transaction-row{
+   height: 60px;
+
+}
 .comptes-card{
     transition: box-shadow 0.3s ease-in-out;
 

@@ -19,5 +19,8 @@ Route::post('login', [RegisterController::class, 'login']);
 
 Route::resource('comptes', 'Api\CompteController');
 Route::resource('utilisateurs', 'Api\UtilisateurController');
+Route::get('routeur/{nom}', function($nom){
+   return response()->json(route($nom));
+});
 
 

@@ -14729,16 +14729,11 @@ module.exports = __webpack_require__(48);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes React and other helpers. It's a great starting point while
  * building robust, powerful web applications using React + Laravel.
  */
-
-window.$ = window.jQuery = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
 
 __webpack_require__(17);
 
@@ -37432,9 +37427,9 @@ var ListesLieesReact = function (_React$Component) {
 
         _this.state = {
             title: "Titre",
+            url_envoi: "",
             utilisateurs: [],
             comptes: []
-
         };
         _this.recupererComptes = _this.recupererComptes.bind(_this);
         return _this;
@@ -37452,6 +37447,11 @@ var ListesLieesReact = function (_React$Component) {
             }).then(function (response) {
 
                 _this2.setState({ utilisateurs: response.data });
+            }).catch(function (error) {
+                console.log('ERREUR : ' + error.message);
+            });
+            axios(APP_URL + '/api/routeur/' + 'transaction.ajouter.admin', { method: 'GET', data: { '_token': CSRF_TOKEN } }).then(function (response) {
+                _this2.setState({ url_envoi: response.data });
             }).catch(function (error) {
                 console.log('ERREUR : ' + error.message);
             });
@@ -37480,53 +37480,52 @@ var ListesLieesReact = function (_React$Component) {
                 'div',
                 { className: 'mt-2' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'mt-3 mb-3' },
+                    'form',
+                    { id: 'formulaireAjoutOperation', action: this.state.url_envoi, method: 'post' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'hidden', name: '_token', value: CSRF_TOKEN }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'h2',
-                        null,
-                        '[En construction] avec React'
-                    )
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'select',
-                    { defaultValue: '-1', onChange: this.recupererComptes, className: 'form-control', name: 'utilisateur', id: 'utilisateur_liste_dependante',
-                        form: 'formulaireAjoutOperation' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'option',
-                        { hidden: true, disabled: true, value: '-1' },
-                        'Faites un choix dans la liste'
-                    ),
-                    this.state.utilisateurs.map(function (item, i) {
+                        'select',
+                        { defaultValue: '-1', onChange: this.recupererComptes, className: 'form-control', name: 'utilisateur',
 
-                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            form: 'formulaireAjoutOperation' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'option',
-                            { value: item.id, key: item.id },
-                            item.nom
-                        );
-                    })
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'select',
-                    { defaultValue: '-1', className: 'form-control', name: 'utilisateur', id: 'utilisateur_liste_dependante',
-                        form: 'formulaireAjoutOperation' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('option', { hidden: true, disabled: true, value: '-1' }),
-                    this.state.comptes.map(function (item, i) {
-                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'option',
-                            { value: item.id, key: item.id },
-                            item.nom
-                        );
-                    })
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'button',
-                    { className: 'btn btn-primary', onClick: function onClick() {
-                            alert('envoyé');
-                        } },
-                    this.props.value
+                            { hidden: true, disabled: true, value: '-1' },
+                            'Faites un choix dans la liste'
+                        ),
+                        this.state.utilisateurs.map(function (item, i) {
+
+                            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'option',
+                                { value: item.id, key: item.id },
+                                item.nom
+                            );
+                        })
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'select',
+                        { defaultValue: '-1', className: 'form-control', name: 'compte_id',
+                            form: 'formulaireAjoutOperation' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('option', { hidden: true, disabled: true, value: '-1' }),
+                        this.state.comptes.map(function (item, i) {
+                            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'option',
+                                { value: item.id, key: item.id },
+                                item.nom
+                            );
+                        })
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control', name: 'montant', placeholder: 'Montant' }),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'button',
+                        { role: 'submit', className: 'btn btn-primary', onClick: function onClick() {
+                                alert('envoyé');
+                            } },
+                        this.props.value
+                    )
                 )
             );
         }
@@ -37539,7 +37538,8 @@ var ListesLieesReact = function (_React$Component) {
 
 // DOM element
 if (document.getElementById('listes-liees-react')) {
-    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ListesLieesReact, { name: 'PASCAL', value: 'Bouton bizarre' }), document.getElementById('listes-liees-react'));
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ListesLieesReact, { name: 'PASCAL',
+        value: 'Bouton bizarre' }), document.getElementById('listes-liees-react'));
 }
 
 /***/ }),
