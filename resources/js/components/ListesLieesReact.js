@@ -59,7 +59,7 @@ class ListesLieesReact extends React.Component {
             <div className="mt-2">
                 <form id="formulaireAjoutOperation" action={this.state.url_envoi} method="post">
                     <input type="hidden" name="_token" value={CSRF_TOKEN}></input>
-               
+
 
                 <select defaultValue="-1" onChange={this.recupererComptes} className="form-control" name="utilisateur"
 
@@ -84,9 +84,9 @@ class ListesLieesReact extends React.Component {
                     <input type="text" className="form-control" name="montant" placeholder="Montant" ></input>
                 <br />
                 <button role="submit" className="btn btn-primary" onClick={() => {
-                    alert('envoyé');
+
                 }}>
-                    {this.props.value}
+                    Ajouter
                 </button>
                 </form>
 
@@ -100,6 +100,6 @@ export default ListesLieesReact;
 
 // DOM element
 if (document.getElementById('listes-liees-react')) {
-    ReactDOM.render(<ListesLieesReact name="PASCAL"
-                                      value="Bouton bizarre"/>, document.getElementById('listes-liees-react'));
+    ReactDOM.render(<ListesLieesReact
+                                      />, document.getElementById('listes-liees-react'));
 }

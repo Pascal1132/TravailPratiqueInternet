@@ -37521,10 +37521,8 @@ var ListesLieesReact = function (_React$Component) {
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'button',
-                        { role: 'submit', className: 'btn btn-primary', onClick: function onClick() {
-                                alert('envoyé');
-                            } },
-                        this.props.value
+                        { role: 'submit', className: 'btn btn-primary', onClick: function onClick() {} },
+                        'Ajouter'
                     )
                 )
             );
@@ -37538,8 +37536,7 @@ var ListesLieesReact = function (_React$Component) {
 
 // DOM element
 if (document.getElementById('listes-liees-react')) {
-    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ListesLieesReact, { name: 'PASCAL',
-        value: 'Bouton bizarre' }), document.getElementById('listes-liees-react'));
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ListesLieesReact, null), document.getElementById('listes-liees-react'));
 }
 
 /***/ }),
