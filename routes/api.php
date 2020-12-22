@@ -18,6 +18,7 @@ Route::post('login', [RegisterController::class, 'login']);
 
 
 Route::resource('comptes', 'Api\CompteController');
+Route::resource('types_compte', 'Api\RefTypeCompteController');
 Route::resource('utilisateurs', 'Api\UtilisateurController');
 Route::get('routeur/{nom}', function($nom){
    return response()->json(route($nom));

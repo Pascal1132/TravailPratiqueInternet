@@ -43,6 +43,7 @@
     <!-- JavaScript -->
     <script src="{{asset('resources/assets/js/nom_compte_autocomplete.js')}}"></script>
     <script src="{{asset('resources/assets/js/admin_liste_dependante_ajouter_transaction.js')}}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script type="text/javascript">
         var CSRF_TOKEN = '{{csrf_token()}}';
     </script>
@@ -63,7 +64,7 @@
             integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 

@@ -83,9 +83,7 @@ class ListesLieesReact extends React.Component {
                 <br/>
                     <input type="text" className="form-control" name="montant" placeholder="Montant" ></input>
                 <br />
-                <button role="submit" className="btn btn-primary" onClick={() => {
-
-                }}>
+                <button role="submit" className="btn btn-primary" >
                     Ajouter
                 </button>
                 </form>

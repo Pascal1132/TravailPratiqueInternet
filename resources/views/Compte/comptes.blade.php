@@ -7,14 +7,14 @@
 
 @endsection
 @push('script')
-    <script src="{{asset('resources/assets/js/crud_comptes.js')}}"></script>
+
 @endpush
 
-@section('titre_page')@lang('app.accounts') <span id="titre-action"></span> <span class="float-right h5" style="padding-top: 7px;"><a role="button" class=" btn-add mb-1" >
-        @lang('app.new_account') <span class="iconify" data-icon="ant-design:file-add-outlined" data-inline="false"></span></a></span>@endsection
+@section('titre_page')@lang('app.accounts') <span id="titre-action"></span> <span class="float-right h5" style="padding-top: 7px;"></span>@endsection
 @section('content_page')
 
-    <div class="messages" style="display: none"></div>
+    <div id="crud-comptes"></div>
+    {{--<div class="messages" style="display: none"></div>
     <div id="table-comptes" >
     <table class="table" >
         <thead class="thead-dark">
@@ -102,7 +102,7 @@
             </div>
         </div>
     </div>
-
+--}}
 
 
 

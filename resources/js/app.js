@@ -15,3 +15,4 @@ require('./bootstrap');
  */
 
 require('./components/ListesLieesReact');
+require('./components/CrudComptes');
