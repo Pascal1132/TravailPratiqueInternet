@@ -65824,16 +65824,18 @@ var CrudComptes = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (CrudComptes.__proto__ || Object.getPrototypeOf(CrudComptes)).call(this));
 
         _this.state = {
-
             url_envoi: "",
-
             utilisateurs: [],
             comptes: null,
             typesCompte: [],
             conteneur: 0,
             idCompte: -1,
-            compte: null
-
+            compte: null,
+            bearerToken: null,
+            courriel: '',
+            mdp: '',
+            reponseMessageUtilisateur: "",
+            reponseMessage: ""
         };
         _this.handleOnClickModifier = _this.handleOnClickModifier.bind(_this);
         _this.getTableAfficher = _this.getTableAfficher.bind(_this);
@@ -65850,14 +65852,55 @@ var CrudComptes = function (_React$Component) {
         _this.handleRadioChange = _this.handleRadioChange.bind(_this);
         _this.handleUtilisateurChange = _this.handleUtilisateurChange.bind(_this);
         _this.handleOnClickSupprimer = _this.handleOnClickSupprimer.bind(_this);
+        _this.getFormConnexion = _this.getFormConnexion.bind(_this);
+        _this.handleOnClickConnexion = _this.handleOnClickConnexion.bind(_this);
+        _this.handleOnClickDeconnexion = _this.handleOnClickDeconnexion.bind(_this);
+        _this.handleOnClickChangerMdp = _this.handleOnClickChangerMdp.bind(_this);
 
         return _this;
     }
 
     _createClass(CrudComptes, [{
+        key: 'handleOnClickConnexion',
+        value: function handleOnClickConnexion() {
+            var _this2 = this;
+
+            var dataOptions = void 0;
+            dataOptions = {
+                '_token': CSRF_TOKEN,
+                'courriel': this.state.courriel,
+                'password': this.state.mdp
+            };
+
+            var self = this;
+
+            axios(APP_URL + '/api/auth/login', { method: 'POST', data: dataOptions }).then(function (response) {
+                console.debug(response);
+
+                _this2.setState({ reponseMessageUtilisateur: "Vous êtes maintenant connecté!" });
+                _this2.setState({ bearerToken: response.data.access_token });
+            }).catch(function (error) {
+                console.log('ERREUR : ' + error.message + ' CODE:' + error.response.status);
+                if (error.response && error.response.status == 401) {
+                    self.setState({ reponseMessageUtilisateur: "Les informations d'identification ne correspondent pas!" });
+                }
+            });
+        }
+    }, {
+        key: 'handleOnClickDeconnexion',
+        value: function handleOnClickDeconnexion() {
+            this.setState({
+                bearerToken: null
+
+            });
+        }
+    }, {
+        key: 'handleOnClickChangerMdp',
+        value: function handleOnClickChangerMdp() {}
+    }, {
         key: 'handleOnClickSupprimer',
         value: function handleOnClickSupprimer(id) {
-            var _this2 = this;
+            var _this3 = this;
 
             if (confirm('Êtes-vous certain de vouloir supprimer cette ligne ?')) {
                 var dataOptions = void 0;
@@ -65868,7 +65911,7 @@ var CrudComptes = function (_React$Component) {
                 };axios(APP_URL + '/api/comptes/' + id, { method: 'DELETE', data: dataOptions }).then(function (response) {
 
                     alert("Suppression effectuée");
-                    _this2.getComptes();
+                    _this3.getComptes();
                 }).catch(function (error) {
                     console.log('ERREUR : ' + error.message);
                 });
@@ -65895,7 +65938,7 @@ var CrudComptes = function (_React$Component) {
     }, {
         key: 'getCompte',
         value: function getCompte(id) {
-            var _this3 = this;
+            var _this4 = this;
 
             fetch(APP_URL + '/api/comptes/' + id, {
                 method: 'GET'
@@ -65903,7 +65946,7 @@ var CrudComptes = function (_React$Component) {
                 return response.json();
             }).then(function (response) {
 
-                _this3.setState({ compte: response.data });
+                _this4.setState({ compte: response.data });
             }).catch(function (error) {
                 console.log('ERREUR : ' + error.message);
             }).catch(function (error) {
@@ -65938,7 +65981,7 @@ var CrudComptes = function (_React$Component) {
     }, {
         key: 'getFormModifier',
         value: function getFormModifier() {
-            var _this4 = this;
+            var _this5 = this;
 
             if (this.state.compte !== null) {
                 console.log('COMPTE:');
@@ -65963,7 +66006,7 @@ var CrudComptes = function (_React$Component) {
                             'div',
                             { className: 'custom-control custom-radio custom-control-inline', key: item.id },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'radio', className: 'custom-control-input', id: "input-" + item.type, name: 'type',
-                                value: item.id, defaultChecked: _this4.state.compte.type_compte_id === item.id, onChange: _this4.handleRadioChange }),
+                                value: item.id, defaultChecked: _this5.state.compte.type_compte_id === item.id, onChange: _this5.handleRadioChange }),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'label',
                                 { className: 'custom-control-label', htmlFor: "input-" + item.type },
@@ -66021,7 +66064,7 @@ var CrudComptes = function (_React$Component) {
     }, {
         key: 'getTableAfficher',
         value: function getTableAfficher() {
-            var _this5 = this;
+            var _this6 = this;
 
             if (this.state.comptes !== null) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -66090,13 +66133,13 @@ var CrudComptes = function (_React$Component) {
                                     { className: 'float-right' },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'button',
-                                        { className: 'btn btn-success btn-sm ', onClick: _this5.handleOnClickModifier.bind(_this5, item.id) },
+                                        { className: 'btn btn-success btn-sm ', onClick: _this6.handleOnClickModifier.bind(_this6, item.id) },
                                         'Modifier'
                                     ),
                                     '\xA0',
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'button',
-                                        { className: 'ml-1 btn btn-danger btn-sm', onClick: _this5.handleOnClickSupprimer.bind(_this5, item.id) },
+                                        { className: 'ml-1 btn btn-danger btn-sm', onClick: _this6.handleOnClickSupprimer.bind(_this6, item.id) },
                                         'Supprimer'
                                     )
                                 )
@@ -66128,7 +66171,7 @@ var CrudComptes = function (_React$Component) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this6 = this;
+            var _this7 = this;
 
             fetch(APP_URL + '/api/types_compte', {
                 method: 'GET'
@@ -66136,13 +66179,13 @@ var CrudComptes = function (_React$Component) {
                 return response.json();
             }).then(function (response) {
 
-                _this6.setState({ typesCompte: response.data });
+                _this7.setState({ typesCompte: response.data });
             }).catch(function (error) {
                 console.log('ERREUR : ' + error.message);
             });
             this.getComptes();
             axios(APP_URL + '/api/routeur/' + 'transaction.ajouter.admin', { method: 'GET', data: { '_token': CSRF_TOKEN } }).then(function (response) {
-                _this6.setState({ url_envoi: response.data });
+                _this7.setState({ url_envoi: response.data });
             }).catch(function (error) {
                 console.log('ERREUR : ' + error.message);
             });
@@ -66151,7 +66194,7 @@ var CrudComptes = function (_React$Component) {
     }, {
         key: 'getComptes',
         value: function getComptes() {
-            var _this7 = this;
+            var _this8 = this;
 
             fetch(APP_URL + '/api/comptes', {
                 method: 'GET'
@@ -66159,7 +66202,7 @@ var CrudComptes = function (_React$Component) {
                 return response.json();
             }).then(function (response) {
 
-                _this7.setState({ comptes: response.data });
+                _this8.setState({ comptes: response.data });
             }).catch(function (error) {
                 console.log('ERREUR : ' + error.message);
             });
@@ -66167,7 +66210,7 @@ var CrudComptes = function (_React$Component) {
     }, {
         key: 'getUtilisateurs',
         value: function getUtilisateurs() {
-            var _this8 = this;
+            var _this9 = this;
 
             fetch(APP_URL + '/api/utilisateurs/', {
                 method: 'GET'
@@ -66175,7 +66218,7 @@ var CrudComptes = function (_React$Component) {
                 return response.json();
             }).then(function (response) {
 
-                _this8.setState({ utilisateurs: response.data });
+                _this9.setState({ utilisateurs: response.data });
             }).catch(function (error) {
                 console.log('ERREUR : ' + error.message);
             }).catch(function (error) {
@@ -66195,7 +66238,7 @@ var CrudComptes = function (_React$Component) {
         value: function handleOnClickRetour() {
             console.log('Retour');
             this.getComptes();
-            this.setState({ conteneur: CONTENEUR_AFFICHER });
+            this.setState({ conteneur: CONTENEUR_AFFICHER, reponseMessage: '' });
         }
     }, {
         key: 'handleOnClickAjouter',
@@ -66211,13 +66254,20 @@ var CrudComptes = function (_React$Component) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'mt-2' },
-                this.afficherConteneur()
+                this.getFormConnexion(),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('hr', null),
+                this.afficherConteneur(),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    { className: "text-danger" },
+                    this.state.reponseMessage
+                )
             );
         }
     }, {
         key: 'getFormAjouter',
         value: function getFormAjouter() {
-            var _this9 = this;
+            var _this10 = this;
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
@@ -66238,7 +66288,7 @@ var CrudComptes = function (_React$Component) {
                         'div',
                         { className: 'custom-control custom-radio custom-control-inline', key: item.id },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'radio', className: 'custom-control-input', id: "input-" + item.type, name: 'type',
-                            value: item.id, onChange: _this9.handleRadioChange }),
+                            value: item.id, onChange: _this10.handleRadioChange }),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'label',
                             { className: 'custom-control-label', htmlFor: "input-" + item.type },
@@ -66291,6 +66341,78 @@ var CrudComptes = function (_React$Component) {
             );
         }
     }, {
+        key: 'getFormConnexion',
+        value: function getFormConnexion() {
+            var _this11 = this;
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    { className: 'text-secondary' },
+                    this.state.bearerToken === null ? 'Vous n\'êtes pas connecté' : "Vous êtes connecté"
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: "form-inline" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group m-2' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            { htmlFor: 'courriel', className: 'm-1' },
+                            'Courriel'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: '' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'form-control ', id: 'courriel',
+                                placeholder: 'Courriel', onChange: function onChange(e) {
+                                    _this11.setState({ courriel: e.target.value });
+                                } })
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group m-2' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            { htmlFor: 'mdp', className: 'm-1' },
+                            'Mot de passe'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: '' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'password', className: 'form-control ', id: 'mdp', placeholder: 'Mot de passe', onChange: function onChange(e) {
+                                    _this11.setState({ mdp: e.target.value });
+                                } })
+                        )
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'button',
+                    { className: "btn-sm btn-success m-1", onClick: this.handleOnClickConnexion },
+                    'Se connecter'
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'button',
+                    { className: "btn-sm btn-danger m-1", onClick: this.handleOnClickDeconnexion },
+                    'Se d\xE9connecter'
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'button',
+                    { className: "btn-sm btn-warning m-1" },
+                    'Changer le mot de passe'
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    { className: "text-danger" },
+                    this.state.reponseMessageUtilisateur
+                )
+            );
+        }
+    }, {
         key: 'handleOnClickAjouterModifierForm',
         value: function handleOnClickAjouterModifierForm() {
 
@@ -66302,24 +66424,35 @@ var CrudComptes = function (_React$Component) {
                 'nom': this.state.compte.nom
 
             };
+            var self = this;
 
             if (this.state.compte.id > 0) {
                 //Alors on modifie
-                axios(APP_URL + '/api/comptes/' + this.state.compte.id, { method: 'PUT', data: dataOptions }).then(function (response) {
+                axios(APP_URL + '/api/comptes/' + this.state.compte.id, { method: 'PUT', data: dataOptions, headers: {
+                        'Authorization': 'Bearer ' + this.state.bearerToken
+                    } }).then(function (response) {
 
                     alert("Modification sauvegardée");
                 }).catch(function (error) {
                     console.log('ERREUR : ' + error.message);
+                    if (error.response && error.response.status === 401) {
+                        self.setState({ reponseMessage: "Vous n'êtes pas connecté: Refusé!" });
+                    }
                 });
             } else {
 
                 //Alors on ajoute
-                axios(APP_URL + '/api/comptes', { method: 'POST', data: dataOptions }).then(function (response) {
+                axios(APP_URL + '/api/comptes', { method: 'POST', data: dataOptions, headers: {
+                        'Authorization': 'Bearer ' + this.state.bearerToken
+                    } }).then(function (response) {
 
                     alert("Ajout effectué");
                     console.debug(response);
                 }).catch(function (error) {
                     console.log('ERREUR : ' + error.message);
+                    if (error.response && error.response.status === 401) {
+                        self.setState({ reponseMessage: "Vous n'êtes pas connecté: Refusé!" });
+                    }
                 });
             }
         }

@@ -24,7 +24,7 @@ class CompteController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except (['adminIndex']);
     }
 
     /**
@@ -48,7 +48,6 @@ class CompteController extends Controller
         return view('Compte.ajouter', ['typesCompte'=>$typesCompte]);
     }
     public function adminIndex(Request $request){
-        if(Gate::denies('gerer-tous-comptes'))return redirect(route('comptes'))->withErrors([__('app.unauthorized')]);
         $typesCompte = RefTypeCompte::all();
         return view('Compte.comptes', ['comptes'=>Compte::orderBy('utilisateur_id')->get(), "typesCompte"=>$typesCompte]);
 

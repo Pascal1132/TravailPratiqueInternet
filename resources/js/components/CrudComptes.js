@@ -13,18 +13,18 @@ class CrudComptes extends React.Component {
     constructor() {
         super();
         this.state = {
-
             url_envoi: "",
-
-
             utilisateurs: [],
             comptes: null,
             typesCompte:[],
             conteneur: 0,
             idCompte: -1,
             compte: null,
-
-
+            bearerToken:null,
+            courriel:'',
+            mdp:'',
+            reponseMessageUtilisateur: "",
+            reponseMessage:"",
         };
         this.handleOnClickModifier = this.handleOnClickModifier.bind(this);
         this.getTableAfficher = this.getTableAfficher.bind(this);
@@ -41,7 +41,50 @@ class CrudComptes extends React.Component {
         this.handleRadioChange = this.handleRadioChange.bind(this);
         this.handleUtilisateurChange = this.handleUtilisateurChange.bind(this);
         this.handleOnClickSupprimer = this.handleOnClickSupprimer.bind(this);
+        this.getFormConnexion = this.getFormConnexion.bind(this);
+        this.handleOnClickConnexion = this.handleOnClickConnexion.bind(this);
+        this.handleOnClickDeconnexion = this.handleOnClickDeconnexion.bind(this);
+        this.handleOnClickChangerMdp = this.handleOnClickChangerMdp.bind(this);
 
+
+    }
+
+    handleOnClickConnexion(){
+        let dataOptions;
+        dataOptions= {
+            '_token': CSRF_TOKEN,
+            'courriel': this.state.courriel,
+            'password': this.state.mdp,
+        }
+
+            var self = this;
+
+            axios(APP_URL + '/api/auth/login', {method: 'POST', data:dataOptions})
+
+                .then(response => {
+                    console.debug(response);
+
+                    this.setState({reponseMessageUtilisateur: "Vous êtes maintenant connecté!"});
+                    this.setState({bearerToken: response.data.access_token});
+
+                }).catch(function (error) {
+                console.log('ERREUR : ' + error.message + ' CODE:'+error.response.status);
+                if(error.response && error.response.status == 401){
+                    self.setState({reponseMessageUtilisateur: "Les informations d'identification ne correspondent pas!"});
+                }
+            })
+
+
+
+    }
+
+    handleOnClickDeconnexion(){
+        this.setState({
+            bearerToken:null,
+
+        })
+    }
+    handleOnClickChangerMdp(){
 
     }
     handleOnClickSupprimer(id){
@@ -269,7 +312,7 @@ class CrudComptes extends React.Component {
     handleOnClickRetour(){
         console.log('Retour');
         this.getComptes()
-        this.setState({conteneur:CONTENEUR_AFFICHER});
+        this.setState({conteneur:CONTENEUR_AFFICHER, reponseMessage:''});
     }
 
     handleOnClickAjouter() {
@@ -281,7 +324,10 @@ class CrudComptes extends React.Component {
     render() {
         return (
             <div className="mt-2">
+                {this.getFormConnexion()}
+                <hr/>
                 {this.afficherConteneur()}
+                <p className={"text-danger"}>{this.state.reponseMessage}</p>
 
             </div>
         );
@@ -328,6 +374,39 @@ class CrudComptes extends React.Component {
         </div>;
     }
 
+    getFormConnexion(){
+        return <div >
+            <p className="text-secondary">{(this.state.bearerToken === null) ? 'Vous n\'êtes pas connecté': "Vous êtes connecté"}</p>
+                <div className={"form-inline"}>
+                <div className="form-group m-2">
+                    <label htmlFor="courriel" className="m-1">Courriel</label>
+                    <div className="">
+                        <input type="text" className="form-control " id="courriel"
+                               placeholder="Courriel" onChange={(e)=>{
+                            this.setState({courriel:e.target.value});
+                        }} />
+                    </div>
+                </div>
+                <div className="form-group m-2">
+                    <label htmlFor="mdp" className="m-1">Mot de passe</label>
+                    <div className="">
+                        <input type="password" className="form-control " id="mdp" placeholder="Mot de passe" onChange={(e)=>{
+                            this.setState({mdp:e.target.value});
+                        }}/>
+                    </div>
+                </div>
+
+
+                </div>
+            <button className={"btn-sm btn-success m-1"} onClick={this.handleOnClickConnexion}>Se connecter</button>
+            <button className={"btn-sm btn-danger m-1"} onClick={this.handleOnClickDeconnexion}>Se déconnecter</button>
+            <button className={"btn-sm btn-warning m-1"}>Changer le mot de passe</button>
+
+            <p className={"text-danger"}>{this.state.reponseMessageUtilisateur}</p>
+
+        </div>;
+    }
+
 
     handleOnClickAjouterModifierForm() {
 
@@ -338,11 +417,15 @@ class CrudComptes extends React.Component {
                 'utilisateur_id': this.state.compte.utilisateur_id,
                 'nom': this.state.compte.nom,
 
+
             }
+            var self = this;
 
         if(this.state.compte.id>0){
             //Alors on modifie
-            axios(APP_URL + '/api/comptes/'+this.state.compte.id, {method: 'PUT', data:dataOptions})
+            axios(APP_URL + '/api/comptes/'+this.state.compte.id, {method: 'PUT', data:dataOptions, headers:{
+                    'Authorization': 'Bearer '+this.state.bearerToken
+                }})
 
                 .then(response => {
 
@@ -350,11 +433,16 @@ class CrudComptes extends React.Component {
 
                 }).catch(function (error) {
                     console.log('ERREUR : ' + error.message);
+                if(error.response && error.response.status === 401){
+                    self.setState({reponseMessage: "Vous n'êtes pas connecté: Refusé!"});
+                }
                 })
         }else{
 
             //Alors on ajoute
-            axios(APP_URL + '/api/comptes', {method: 'POST', data:dataOptions})
+            axios(APP_URL + '/api/comptes', {method: 'POST', data:dataOptions, headers:{
+                    'Authorization': 'Bearer '+this.state.bearerToken
+                }})
 
                 .then(response => {
 
@@ -363,6 +451,9 @@ class CrudComptes extends React.Component {
 
                 }).catch(function (error) {
                     console.log('ERREUR : ' + error.message);
+                    if(error.response && error.response.status === 401){
+                        self.setState({reponseMessage: "Vous n'êtes pas connecté: Refusé!"});
+                    }
                 })
         }
 
