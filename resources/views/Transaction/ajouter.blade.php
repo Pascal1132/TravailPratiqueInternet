@@ -7,6 +7,7 @@
 @endsection
 
 @section('titre_page') @lang('app.new_operation') | <a href="{{ route('afficherCompte', ['id'=>$compte->id]) }}">@lang('app.back')</a>@endsection
+
 @section('content_page')
     <script>
         $( document ).ready(function() {
@@ -18,8 +19,27 @@
         });
 
     </script>
+    <script>
+        Dropzone.autoDiscover = false;
+        jQuery(document).ready(function() {
 
-    <form id="formulaireAjoutOperation" method="post" action="{{route('validationAjouterTransaction')}}" enctype="multipart/form-data">
+
+            var myDropzone = new Dropzone("div#my-awesome-dropzone", {
+                url: "{{route ('dropzone')}}",
+                headers: {
+                    'x-csrf-token':CSRF_TOKEN
+                },
+                success: function( file, response ) {
+                    console.debug(response);
+                    $("#image_cheque_nom").val( response.success);
+                }
+            });
+
+        });
+
+    </script>
+
+    <form id="formulaireAjoutOperation"  method="post" action="{{route('validationAjouterTransaction')}}" enctype="multipart/form-data" >
         {{csrf_field()}}
         <label for="type_operation">@lang('app.operation_type') : </label>
         <br>
@@ -49,8 +69,8 @@
 
         <label class="input-cheque">@lang('app.check') : </label>
 
-        <div class="input-cheque input-group">
-            <div class="input-group-prepend">
+        <div class="input-cheque input-group " >
+            <!-- <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupFileAddon01">@lang('app.upload')</span>
             </div>
             <div class="custom-file">
@@ -58,7 +78,13 @@
                        aria-describedby="inputGroupFileAddon01" value="@lang('app.browse')">
                 <label class="custom-file-label" for="inputGroupFile01">@lang('app.choose_file')</label>
             </div>
-            <br>
+
+            <br> !-->
+                <input type="hidden" name="image_cheque" id="image_cheque_nom"/>
+            <div class="dropzone dropzone-previews" id="my-awesome-dropzone">
+                <div class="dz-default dz-message">Vous pouvez glisser déposer l'image</div>
+
+            </div>
         </div>
         <br class="input-cheque">
         <label >Description : </label>

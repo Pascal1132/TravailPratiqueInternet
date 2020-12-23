@@ -48,6 +48,9 @@
         var CSRF_TOKEN = '{{csrf_token()}}';
     </script>
     @stack('script')
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css"  rel="stylesheet">
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+
 
 
 </head>
@@ -60,6 +63,7 @@
 
 
     <!-- React JS -->
+
     <script src="{{ asset('public/js/app.js') }}" ></script>
 
     <script

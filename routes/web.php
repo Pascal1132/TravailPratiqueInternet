@@ -57,6 +57,9 @@ Route::group(['middleware'=>'all'], function (){
 //Changement de langue
     Route::get('/chgLang', 'LangueController@chgLang')->name('changer_langue');
 
+    //DROPZONE
+    Route::post('/file/dropzone', 'FichierController@dropzone')->name('dropzone');
+
 //Admin
 
 

@@ -81,7 +81,7 @@ class TransactionController extends Controller
         $typeTransaction = "check_deposit";
         $typeTransactionId = (RefTypeTransaction::getIdFromType($typeTransaction))->id;
         $validatedData = $req->validate([
-            'image_cheque' => 'required|mimes:jpeg,jpg,png,gif|max:100000',
+            'image_cheque' => 'required|string',
             'montant' => 'required|numeric',
             'description'=> 'required|string',
         ]);
@@ -94,9 +94,9 @@ class TransactionController extends Controller
         ]);
         $image = Image::create([
             'transaction_id'=>$transaction->id,
-            'fichier'=>$transaction->id.".".$req->file('image_cheque')->extension()
+            'fichier'=>$validatedData['image_cheque'],
         ]);
-        $req->file('image_cheque')->storeAs('cheques', $image->fichier);
+        $image->save();
     }
     public function ajouterVirementCompte($req){
 

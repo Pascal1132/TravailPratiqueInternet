@@ -50,7 +50,7 @@ class LoginController extends Controller
 
         // POUR VÉRIFIER LES CAPTCHA
         $secretKey = "6LfXGxIaAAAAAIC7G9TTt0lG2S4h-3xlBhJnfMyf";
-        
+
 
         // post request to server
         $url = 'https://www.google.com/recaptcha/api/siteverify';
