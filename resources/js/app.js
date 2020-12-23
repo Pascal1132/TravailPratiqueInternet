@@ -16,3 +16,4 @@ require('./bootstrap');
 
 require('./components/ListesLieesReact');
 require('./components/CrudComptes');
+require('./components/ReCaptchaConnexion');

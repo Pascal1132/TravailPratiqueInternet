@@ -21,14 +21,14 @@
                     <input type="password" id="pwd" name="password" placeholder="@lang('app.password')"/>
                 </div>
 
-                <div class="text-danger mb-1">
+                <div class="mb-1" id="recaptcha">
 
                 </div>
 
 
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-
 
 
 

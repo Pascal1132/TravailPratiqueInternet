@@ -49,8 +49,10 @@
     </script>
     @stack('script')
 
+
 </head>
 <body>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
     <div id="app">
         @yield('content')
 
@@ -59,6 +61,7 @@
 
     <!-- React JS -->
     <script src="{{ asset('public/js/app.js') }}" ></script>
+
     <script
             src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
             integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
