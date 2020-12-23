@@ -16,7 +16,7 @@ class CompteController extends BaseController
 {
     public function __construct()
     {
-        //$this->middleware('auth');
+
     }
     public function index(){
         return $this->sendResponse(CompteResource::collection(Compte::all()), 'Comptes correctement récupérés');

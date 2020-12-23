@@ -15,7 +15,7 @@ class UtilisateurController extends BaseController
 {
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth:api')->only (['store', 'update', 'destroy']);
     }
     public function index(){
         return $this->sendResponse(UtilisateurResource::collection(Utilisateur::all()), 'Utilisateurs correctement récupérés');
