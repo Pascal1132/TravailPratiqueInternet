@@ -34,33 +34,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(Request $request){
-       /*$mot_de_passe= $request->input('mot_de_passe');
-       $courriel = $request->input('courriel');
 
-       $utilisateur = Utilisateur::where('courriel', $courriel)->firstOrFail();
-
-       $utilisateur->courriel = $courriel;
-        $validator = Validator::make($request->all(), [
-            'courriel' => 'required|email',
-            'mot_de_passe' => 'required|string',
-        ]);
-
-      if($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-
-
-
-
-        if(Hash::check($mot_de_passe, $utilisateur->mot_de_passe)){
-            //Si le mot de passe correspond à celui dans la bd
-            return $this->createNewToken($utilisateur);
-        }
-
-
-
-        return response()->json(['error' => 'Unauthorized', 'courriel '=>$courriel, 'mot_de_passe'=>$mot_de_passe], 401);
-*/
         $credentials = $request->only(['courriel', 'password']);
 
         if (! $token = auth('api')->attempt($credentials)) {
@@ -123,7 +97,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'utilisateur' => auth('api')->user()
         ]);
     }
 

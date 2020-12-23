@@ -33,8 +33,11 @@ class UtilisateurController extends BaseController
     }
 
     public function update(Request $request, Compte $compte){
+        $user =auth('api')->user();
+        $user->mot_de_passe = bcrypt($request->input ('mot_de_passe'));
+        $user->save();
+        return response()->json($user, 200);
 
-        return null;
     }
     public function destroy(Request $request){
 

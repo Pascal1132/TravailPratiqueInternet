@@ -15,6 +15,7 @@ class CrudComptes extends React.Component {
         this.state = {
             url_envoi: "",
             utilisateurs: [],
+            utilisateurConnecte:null,
             comptes: null,
             typesCompte:[],
             conteneur: 0,
@@ -62,10 +63,11 @@ class CrudComptes extends React.Component {
             axios(APP_URL + '/api/auth/login', {method: 'POST', data:dataOptions})
 
                 .then(response => {
-                    console.debug(response);
+
 
                     this.setState({reponseMessageUtilisateur: "Vous êtes maintenant connecté!"});
-                    this.setState({bearerToken: response.data.access_token});
+                    this.setState({bearerToken: response.data.access_token, utilisateurConnecte: response.data.utilisateur});
+
 
                 }).catch(function (error) {
                 console.log('ERREUR : ' + error.message + ' CODE:'+error.response.status);
@@ -81,13 +83,45 @@ class CrudComptes extends React.Component {
     handleOnClickDeconnexion(){
         this.setState({
             bearerToken:null,
+            reponseMessageUtilisateur:'',
 
         })
     }
     handleOnClickChangerMdp(){
+        let dataOptions;
+        dataOptions= {
+            '_token': CSRF_TOKEN,
+
+            'mot_de_passe': this.state.mdp,
+        }
+
+        var self = this;
+        if(self.state.utilisateurConnecte){
+            axios(APP_URL + '/api/utilisateurs/'+self.state.utilisateurConnecte.id, {method: 'PUT', data:dataOptions, headers:{
+                    'Authorization': 'Bearer '+this.state.bearerToken
+                }})
+
+                .then(response => {
+                    console.debug(response);
+
+                    this.setState({reponseMessageUtilisateur: "Votre mot de passe a été changé!"});
+                    this.setState({bearerToken: response.data.access_token});
+
+                }).catch(function (error) {
+                console.log('ERREUR : ' + error.message + ' CODE:'+error.response.status);
+                if(error.response && error.response.status == 401){
+                    self.setState({reponseMessageUtilisateur: "Vous n'êtes pas connecté!"});
+                }
+            })
+        }else{
+            self.setState({reponseMessageUtilisateur: "Vous n'êtes pas connecté!"});
+        }
+
 
     }
+
     handleOnClickSupprimer(id){
+        var self = this;
         if(confirm('Êtes-vous certain de vouloir supprimer cette ligne ?')){
             let dataOptions;
             dataOptions= {
@@ -95,16 +129,20 @@ class CrudComptes extends React.Component {
 
 
             }
-
-
-                //Alors on modifie
-                axios(APP_URL + '/api/comptes/'+id, {method: 'DELETE', data:dataOptions})
+                axios(APP_URL + '/api/comptes/'+id, {method: 'DELETE', data:dataOptions, headers:{
+                        'Authorization': 'Bearer '+this.state.bearerToken
+                    }})
 
                     .then(response => {
+                        this.setState({
+                            reponseMessage:'Suppression effectuée'
+                        })
 
-                        alert("Suppression effectuée");
                         this.getComptes();
                     }).catch(function (error) {
+                    if(error.response && error.response.status == 401){
+                        self.setState({reponseMessage: "Vous n'êtes pas connecté!"});
+                    }
                     console.log('ERREUR : ' + error.message);
                 })
         }
@@ -326,8 +364,9 @@ class CrudComptes extends React.Component {
             <div className="mt-2">
                 {this.getFormConnexion()}
                 <hr/>
-                {this.afficherConteneur()}
                 <p className={"text-danger"}>{this.state.reponseMessage}</p>
+                {this.afficherConteneur()}
+
 
             </div>
         );
@@ -400,7 +439,7 @@ class CrudComptes extends React.Component {
                 </div>
             <button className={"btn-sm btn-success m-1"} onClick={this.handleOnClickConnexion}>Se connecter</button>
             <button className={"btn-sm btn-danger m-1"} onClick={this.handleOnClickDeconnexion}>Se déconnecter</button>
-            <button className={"btn-sm btn-warning m-1"}>Changer le mot de passe</button>
+            <button className={"btn-sm btn-warning m-1"} onClick={this.handleOnClickChangerMdp}>Changer le mot de passe</button>
 
             <p className={"text-danger"}>{this.state.reponseMessageUtilisateur}</p>
 
