@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 4.9.7deb1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : lun. 19 oct. 2020 à 18:01
+-- Généré le : mer. 23 déc. 2020 à 20:21
 -- Version du serveur :  10.3.24-MariaDB-2
--- Version de PHP : 7.4.10
+-- Version de PHP : 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -42,7 +42,9 @@ CREATE TABLE `comptes` (
 --
 
 INSERT INTO `comptes` (`id`, `type_compte_id`, `utilisateur_id`, `nom`, `created_at`, `updated_at`) VALUES
-(9, 1, 4, 'Chèque 0', '2020-10-20 01:59:10', '2020-10-20 01:59:10');
+(23, 1, 5, 'Hellow', '2020-11-24 00:25:05', '2020-12-23 19:57:36'),
+(29, 4, 5, 'NomCompte', '2020-12-22 19:27:04', '2020-12-22 19:32:35'),
+(30, 1, 5, 'test', '2020-12-23 20:01:22', '2020-12-24 06:20:20');
 
 -- --------------------------------------------------------
 
@@ -56,13 +58,6 @@ CREATE TABLE `images` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `images`
---
-
-INSERT INTO `images` (`transaction_id`, `fichier`, `created_at`, `updated_at`) VALUES
-(6, '6.jpeg', '2020-10-20 02:00:27', '2020-10-20 02:00:27');
 
 -- --------------------------------------------------------
 
@@ -114,7 +109,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2020_09_04_183237_create_transactions_table', 1),
 (9, '2020_09_04_183238_create_images_table', 1),
 (10, '2020_09_04_183310_create_password_resets_table', 1),
-(11, '2020_09_29_181103_create_roles_assignations_table', 1);
+(11, '2020_09_29_181103_create_roles_assignations_table', 1),
+(17, '2016_06_01_000001_create_oauth_auth_codes_table', 2),
+(18, '2016_06_01_000002_create_oauth_access_tokens_table', 2),
+(19, '2016_06_01_000003_create_oauth_refresh_tokens_table', 2),
+(20, '2016_06_01_000004_create_oauth_clients_table', 2),
+(21, '2016_06_01_000005_create_oauth_personal_access_clients_table', 2);
 
 -- --------------------------------------------------------
 
@@ -215,7 +215,8 @@ CREATE TABLE `roles_assignations` (
 --
 
 INSERT INTO `roles_assignations` (`id`, `ref_role_utilisateur_id`, `utilisateur_id`, `created_at`, `updated_at`) VALUES
-(5, 3, 4, NULL, NULL);
+(6, 3, 5, NULL, NULL),
+(7, 3, 6, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -238,7 +239,9 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id`, `compte_id`, `type_transaction_id`, `description`, `montant`, `created_at`, `updated_at`) VALUES
-(6, 9, 2, 'Dépot par chèque', 515.15, '2020-10-20 02:00:27', '2020-10-20 02:00:27');
+(25, 23, 1, 'Virement entre comptes', 50, '2020-11-26 20:42:03', '2020-11-26 20:42:03'),
+(27, 23, 1, 'Effectué par la banque', 123, '2020-12-09 04:38:13', '2020-12-09 04:38:13'),
+(28, 23, 1, 'Effectué par la banque', 111, '2020-12-09 04:45:37', '2020-12-09 04:45:37');
 
 -- --------------------------------------------------------
 
@@ -1107,7 +1110,7 @@ INSERT INTO `translations` (`id`, `language_id`, `group`, `key`, `value`, `creat
 (842, 3, 'translation::translation', 'add_language', '', '2020-10-17 22:47:28', '2020-10-17 22:47:28'),
 (843, 3, 'translation::translation', 'search', '', '2020-10-17 22:47:28', '2020-10-17 22:47:28'),
 (844, 1, 'app', 'user', 'Utilisateur', '2020-10-18 03:40:32', '2020-10-18 03:40:32'),
-(845, 2, 'app', 'user', 'ListesLieesReact', '2020-10-18 03:41:09', '2020-10-18 03:41:09'),
+(845, 2, 'app', 'user', 'User', '2020-10-18 03:41:09', '2020-10-18 03:41:09'),
 (846, 3, 'app', 'user', 'Usuario', '2020-10-18 03:41:33', '2020-10-18 03:41:33'),
 (847, 1, 'app', 'update_check_picture', 'Ajouter une photo du chèque pour écraser l\'ancienne', '2020-10-18 03:45:01', '2020-10-18 03:45:01'),
 (848, 2, 'app', 'update_check_picture', 'Add a photo of the check to overwrite the old one', '2020-10-18 03:46:14', '2020-10-18 03:46:14'),
@@ -1146,7 +1149,8 @@ CREATE TABLE `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`id`, `no_carte`, `nom`, `mot_de_passe`, `courriel`, `confirme`, `confirmation_token`, `remember_token`, `created_at`, `updated_at`) VALUES
-(4, '7489058389729078', 'Pascal Parent', '$2y$10$4OOoDJ9kbzTRkzXKHliDhek9UABsiqYsIfxikxTOx6EDmN5Pj64xC', 'pas.parent@outlook.com', 1, '$2y$10$99nZJTyWN8y8HqvpkpGB5ON.T4zjOj5AnI5Zr4uzMxsXvzlwjuXV6', NULL, '2020-10-20 01:58:40', '2020-10-20 01:58:54');
+(5, '7489182951579117', 'test', '$2y$10$VZJ5dHbZN78DTedANdW6A./Sadi1D53imGUsJaKnY6mn42p7tR1KW', 'test@test.test', 1, '$2y$10$9NRmKOU7Ex6RpI.tAdOVWuNM6vCKmBonrK9Vf40da4R1uvK1NnJmO', NULL, '2020-10-28 02:53:35', '2020-12-23 21:08:57'),
+(6, '7489296569421392', 'apilon', '$2y$10$hmOv6G03juDNtyNhlsxG9.H7Ibv3tKHWowcJONy2mhrmbyvj/YH1G', 'apilon@cmontmorency.qc.ca', 1, '$2y$10$xK1AH.YoKcFDM5M6PsPXne4Chc43Vb0WjXRrlbsb18nzZDcjTd4Yu', NULL, '2020-11-14 20:55:35', '2020-11-14 20:56:05');
 
 --
 -- Index pour les tables déchargées
@@ -1241,7 +1245,7 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `comptes`
 --
 ALTER TABLE `comptes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT pour la table `languages`
@@ -1253,7 +1257,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT pour la table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `ref_roles_utilisateur`
@@ -1277,13 +1281,13 @@ ALTER TABLE `ref_types_transaction`
 -- AUTO_INCREMENT pour la table `roles_assignations`
 --
 ALTER TABLE `roles_assignations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT pour la table `translations`
@@ -1295,7 +1299,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Contraintes pour les tables déchargées
